@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./reset.css">
+  <link rel="stylesheet" href="./layout.css">
+  <link rel="stylesheet" href="./lists_pane.css">
+  <link rel="stylesheet" href="./tasks_pane.css">
+  <title>Milk Mockup</title>
+</head>
+<body>
+  <nav class='nav-bar'>
+    <button class='lists-pane-button'>Lists</button>
+    <form action="">
+      <input type="text" placeholder="Search">
+    </form>
+    <button class='settings-dropdown'>Cog</button>
+  </nav>
+
+  <main>
+    
+    <section class='lists-pane'>
+      <ul class='list-of-lists inbox'>
+        <li class='ul-header'>Inbox</li>
+        <li><div>All Tasks</div> <div class='list-count'>3</div></li>
+        <li>Today</li>
+        <li>This Week</li>
+        <li>Trash</li>
+      </ul>
+
+      <ul class='list-of-lists categories'>
+        <li class="ul-header">Lists</li>
+        <li>Unsorted</li>
+        <li>Personal</li>
+        <li>Work</li>
+        <li>Habits</li>
+      </ul>
+    </section>
+
+    <section class='tasks-pane'>
+      <div class='property-buttons'>
+        <div class='button selector'>box</div>
+
+        <div class='property-group-1'>
+          <div class='button complete'>V</div>
+          <div class='button postpone'>+</div>
+        </div>
+
+        <div class='property-group-2'>
+          <div class='button priority'>!</div>
+          <div class='button move'>move</div>
+          <div class="button delete">trash</div>
+        </div>
+      </div>
+
+      <form action="">
+        <input type="hidden" name="form-authenticity-token" value="authenticity-token"> 
+        <input type="text" name="task[title]" placeholder="Add a task...">
+        <input type="submit" class="add-task-button" value="Add Task">
+      </form>
+
+      <ul class="tasks-list">
+        <li class="task">
+          <a href="">
+            <p class="task-title">Floss</p>
+            <p class="due-date">Today</p>
+          </a>
+        </li>
+        
+        <li class="task">
+          <a href="">
+            <p class="task-title">Tutor</p>
+            <p class="due-date">Tuesday</p>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class='list-details-pane'>
+      <h2 class='list-details-header'>All Tasks</h2>
+
+      <div class="task-total">3 Tasks</div>
+      <div class="task-due-today">1 Due Today</div>
+      <div class="task-due-tomorrow">1 Due Tomorrow</div>
+      <div class="task-completed">2 Completed</div>
+    </section>
+
+    <section class='task-details-pane'>
+      <table class='class-properties'>
+        <caption class='task-details-header'>Floss</caption>
+          <tr>
+            <th class="property-name">due</th>
+            <td class="property-value">Saturday, March 27, 2021</td>
+          </tr>
+          
+          <tr>
+            <th class="property-name">repeats</th>
+            <td class="property-value">every day</td>
+          </tr>
+
+          <tr>
+            <th class="property-name">estimate</th>
+            <td class="property-value">2 minutes</td>
+          </tr>
+
+          <tr>
+            <th class="property-name">list</th>
+            <td class="property-value">Personal</td>
+          </tr>
+        </table>
+
+        <button class='add-property-button'>Add property</button>
+
+    </section>
+  </main>
+</body>
+</html>

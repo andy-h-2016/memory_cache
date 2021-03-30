@@ -1,0 +1,27 @@
+.lists-pane {
+  margin: 20px;
+  width: 140px;
+  height: 100vh;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.list-of-lists {
+  border-bottom: 1px solid lightblue;
+  padding-block: 7px;
+}
+
+.list-of-lists li {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 7px;
+}
+
+
+.list-count {
+  padding: 2px 4px; 
+  border-radius: 2px;
+  font-size: 11px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(193, 213, 250);
+}
