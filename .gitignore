@@ -53,7 +53,8 @@ bower.json
 
 # Ignore node_modules
 node_modules/
-
+bundle.js
+bundle.js.map
 # Ignore precompiled javascript packs
 /public/packs
 /public/packs-test
