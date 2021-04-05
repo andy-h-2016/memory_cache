@@ -1,0 +1,11 @@
+<% if logged_in?%>
+<script type="text/javascript">
+  window.currentUser = <%= render(
+    template: "api/users/show.json.jbuilder", 
+    user: current_user
+  ).html_safe %>
+</script>
+<% end %>
+
+
+<div id="root">React is not working!</div>
