@@ -6,7 +6,10 @@ const SessionErrorsReducer = (state = [], action) => {
 
   switch(action.type) {
     case RECEIVE_SESSION_ERRORS:
-      return newState.concat(action.errors);
+      newState = newState.concat(action.errors);
+      return newState.map(error => (
+        `${error.status} ${error.statusText}: ${error.responseText}`
+      ));
     default:
       return []; 
   };

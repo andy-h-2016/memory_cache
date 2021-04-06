@@ -18,7 +18,6 @@ class SessionForm extends React.Component {
     e.preventDefault();
     // console.log("currentTarget:", e.currentTarget)
     // console.log(user);
-    console.log(this.state)
     this.props.submit(this.state);
   }
   

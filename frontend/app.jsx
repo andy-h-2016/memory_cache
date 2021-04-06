@@ -6,16 +6,17 @@ import {AuthRoute, ProtectedRoute} from './util/route_util';
 import SignupFormContainer from './components/session/signup_form_container';
 import LoginFormContainer from './components/session/login_form_container';
 import NavBar from './components/nav_bar/nav_bar';
-import ListSidebar from './components/list_sidebar/list_sidebar';
+import ListSidebar from './components/lists/list_sidebar';
 import TaskViews from './components/tasks/task_views'
 import NotFound from './components/not_found/not_found'
+import ErrorsDisplayContainer from './components/errors/errors_display_container';
 
 const App = ({store}) => (
   <Provider store={store}>
     <HashRouter>
-      <h1>Placeholder: Memory Palace</h1>
       <Route path="/" component={NavBar} />
       <Route path="/" component={ListSidebar} />
+      <Route component={ErrorsDisplayContainer}/>
 
       <Switch>
         <Route path="/list" component={TaskViews} />
