@@ -1,4 +1,6 @@
 import React from 'react';
+import GreetingsContainer from './greetings_container';
+import SearchBar from './search_bar';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -8,10 +10,13 @@ class NavBar extends React.Component {
   render() {
 
     return (
-      <div></div>
-      // <GreetingsContainer />
-      // <SearchBar />
+      <nav>
+        <GreetingsContainer />
+        <SearchBar />
+      </nav>
 
     )
   }
 }
+
+export default NavBar;

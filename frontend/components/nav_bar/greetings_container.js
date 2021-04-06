@@ -9,6 +9,6 @@ const mapSTP = ({entities, session}, ownProps) => ({
 
 const mapDTP = dispatch => ({
   logout: () => dispatch(logout())
-})
+});
 
 export default connect(mapSTP, mapDTP)(Greeting)
