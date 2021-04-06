@@ -13,8 +13,7 @@ class Api::SessionsController < ApplicationController
     @user = current_user
     if @user
       logout
-      # render home page
-      render template: "users/show"
+      render template: "api/users/show"
     else
       render json: 'No one was logged in', status: 422
     end
