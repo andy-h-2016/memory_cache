@@ -1,9 +1,6 @@
 <% if logged_in?%>
 <script type="text/javascript">
-  window.currentUser = <%= render(
-    template: "api/users/show.json.jbuilder", 
-    user: current_user
-  ).html_safe %>
+  window.currentUser = <%= render(partial: "api/users/user.json.jbuilder", locals: {user: current_user}).html_safe %>
 </script>
 <% end %>
 

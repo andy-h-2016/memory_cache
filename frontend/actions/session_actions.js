@@ -7,11 +7,17 @@ export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"
 
 export const login = credentials => dispatch => {
   return SessionAPIUtil.login(credentials)
-    .then(user => dispatch({
-        type: RECEIVE_CURRENT_USER,
-        userID: user.id
-      })
-    );
+    .then(user => {
+      console.log('ajax output', user)
+      dispatch({
+          type: RECEIVE_CURRENT_USER,
+          user
+        })},
+        errors => dispatch({
+          type: RECEIVE_SESSION_ERRORS,
+          errors
+        })
+      )
 };
 
 export const logout = () => dispatch => {

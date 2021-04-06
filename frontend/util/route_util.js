@@ -1,4 +1,4 @@
-import {Route, withRouter} from 'react-router-dom';
+import {Route, withRouter, Redirect} from 'react-router-dom';
 import React from 'react';
 import {connect} from 'react-redux';
 // /frontend/util/route_util.jsx
