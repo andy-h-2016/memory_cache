@@ -7,7 +7,7 @@ class ErrorsDisplay extends React.Component {
 
 
   render() {
-    let errorLIs = <div></div>;
+    let errorLIs = null;
     if (this.props.errors.length > 0) {
       errorLIs = this.props.errors.map(error => <li>{error}</li>);
     }
