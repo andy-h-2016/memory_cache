@@ -5,6 +5,8 @@ import App from './app';
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  //setting preloadedState that is loaded into the store
   let preloadedState;
   if (window.currentUser) {
     preloadedState = {
@@ -16,8 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
       session: {id: window.currentUser.id}
     };
   }
+
+  //ensure the state's currentUser is used instead of the window's
+  delete window.currentUser; 
+
   let store = configureStore(preloadedState);
   window.getState = store.getState;
+
+  //grab the root element from root.html.erb
   let root = document.getElementById('root');
   ReactDOM.render(<App store={store} />, root);
 });
