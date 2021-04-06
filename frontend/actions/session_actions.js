@@ -33,3 +33,7 @@ export const logout = () => dispatch => {
       })  
     );
 };
+
+export const demoLogin = () => dispatch => {
+  return SessionAPIUtil.login({username: 'hagrid', password: 'nevermore'})
+}

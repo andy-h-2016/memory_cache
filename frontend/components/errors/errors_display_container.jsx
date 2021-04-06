@@ -10,5 +10,9 @@ const mapSTP = (state, ownProps) => {
   return {errors}
 }
 
+const mapDTP = dispatch => ({
+  clearErrors: () => dispatch(clearErrors)
+});
+
 export default connect(mapSTP)(ErrorsDisplay)
 

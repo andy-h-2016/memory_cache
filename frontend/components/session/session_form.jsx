@@ -8,6 +8,13 @@ class SessionForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
+    this.clearErrors = this.clearErrors.bind(this);
+  }
+
+  clearErrors() {
+    console.log('clear')
+    this.props.clearErrors();
   }
 
   handleChange(e, field) {
@@ -20,13 +27,18 @@ class SessionForm extends React.Component {
     // console.log(user);
     this.props.submit(this.state);
   }
+
+  demoLogin(e) {
+    e.preventDefault;
+    this.props.submit({username: 'hagrid', password: 'nevermore'});
+  }
   
 
   render() {
-    let emailField = <div></div>;
+    let emailField = null;
     let sessionLink;
     if (this.props.formType === "Sign Up") {
-      sessionLink = <Link to="/login" className="login-link">Login</Link>
+      sessionLink = <Link onClick={this.clearErrors} to="/login" className="alt-link">Login</Link>
 
       emailField = (
         <input 
@@ -38,12 +50,12 @@ class SessionForm extends React.Component {
         />
       );
     } else {
-      sessionLink = <Link to="signup" className="signup-link">Sign up for free</Link>
+      sessionLink = <Link onClick={this.clearErrors} to="signup" className="alt-link">Sign up for free</Link>
     }
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className='session-page'>
+        <form className='session-form' onSubmit={this.handleSubmit}>
           <input
             onChange={e => this.handleChange(e, "username")}
             type="text" 
@@ -67,6 +79,7 @@ class SessionForm extends React.Component {
         </form>
 
         {sessionLink}
+        <button onClick={this.demoLogin}>Demo Login</button>
       </div>
     )
   }

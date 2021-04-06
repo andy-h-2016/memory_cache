@@ -10,16 +10,19 @@ import ListSidebar from './components/lists/list_sidebar';
 import TaskViews from './components/tasks/task_views'
 import NotFound from './components/not_found/not_found'
 import ErrorsDisplayContainer from './components/errors/errors_display_container';
+import Splash from './components/splash/splash';
 
 const App = ({store}) => (
   <Provider store={store}>
     <HashRouter>
-      <Route path="/" component={NavBar} />
-      <Route path="/" component={ListSidebar} />
+      <ProtectedRoute path="/list" component={NavBar} />
+      <ProtectedRoute path="/list" component={ListSidebar} />
       <Route component={ErrorsDisplayContainer}/>
+      
 
       <Switch>
-        <Route path="/list" component={TaskViews} />
+        <AuthRoute exact path="/" component={Splash} />
+        <ProtectedRoute path="/list" component={TaskViews} />
         <AuthRoute path="/login" component={LoginFormContainer}/>
         <AuthRoute path="/signup" component={SignupFormContainer}/>
         <Route component={NotFound} />

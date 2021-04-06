@@ -8,6 +8,7 @@ class TaskViews extends React.Component {
   render() {
     return (
       <div>
+        Here's your tasks!
         {/* <Route path="/list/:listId" component={TasksIndex}/>
         <Route path="/list/:listId/:taskId" component={TaskDetails}/> */}
       </div>
@@ -16,3 +17,4 @@ class TaskViews extends React.Component {
   }
 }
 
+export default TaskViews;
