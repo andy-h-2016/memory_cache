@@ -5,7 +5,17 @@ import App from './app';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  let preloadedState = {};
+  let preloadedState;
+  if (window.currentUser) {
+    preloadedState = {
+      entities: {
+        users: {
+          [window.currentUser.id]: window.currentUser
+        }
+      },
+      session: {id: window.currentUser.id}
+    };
+  }
   let store = configureStore(preloadedState);
   window.getState = store.getState;
   let root = document.getElementById('root');
