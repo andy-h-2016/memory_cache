@@ -5,7 +5,7 @@ const mapSTP = (state, ownProps) => {
   let errorTypes = Object.keys(state.errors);
   let errors = [];
   for (let type of errorTypes) {
-    errors = errors.concat(state.errors[type]);
+    errors.push(...state.errors[type]);
   }
   return {errors}
 }
