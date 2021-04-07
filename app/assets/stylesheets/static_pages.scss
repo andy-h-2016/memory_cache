@@ -5,6 +5,7 @@ body {
 	position: relative;
 }
 
-// #root {
-// 	display: flex;
-// }
+.app {
+	display: flex;
+	flex-wrap: wrap;
+}

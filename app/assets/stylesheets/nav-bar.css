@@ -1,0 +1,11 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  width: 100%;
+}
+
+.greeting {
+  display: flex;
+  align-items: center;
+}
