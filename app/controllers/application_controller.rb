@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
   before_action :underscore_params!
-
-
   helper_method :current_user, :logged_in?
 
   def current_user
