@@ -25,6 +25,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     // console.log("currentTarget:", e.currentTarget)
     // console.log(user);
+    console.log('state', this.state)
     this.props.submit(this.state);
   }
 
@@ -36,9 +37,31 @@ class SessionForm extends React.Component {
 
   render() {
     let emailField = null;
+    let firstNameField = null;
+    let lastNameField = null;
     let sessionLink;
     if (this.props.formType === "Sign Up") {
       sessionLink = <Link onClick={this.clearErrors} to="/login" className="alt-link">Login</Link>
+
+      firstNameField = (
+        <input 
+          onChange={e => this.handleChange(e, "firstName")}
+          type="text"
+          className="first-name-field"
+          placeholder="First Name"
+          value={this.state.firstName}
+        />
+        )
+
+       lastNameField = (
+          <input 
+            onChange={e => this.handleChange(e, "lastName")}
+            type="text"
+            className="last-name-field"
+            placeholder="Last Name"
+            value={this.state.lastName}
+          />
+        )
 
       emailField = (
         <input 
@@ -56,6 +79,9 @@ class SessionForm extends React.Component {
     return (
       <div className='session-page'>
         <form className='session-form' onSubmit={this.handleSubmit}>
+          {firstNameField}
+          {lastNameField}
+
           <input
             onChange={e => this.handleChange(e, "username")}
             type="text" 

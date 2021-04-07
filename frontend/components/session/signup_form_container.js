@@ -5,7 +5,7 @@ import {clearErrors} from '../../actions/error_actions';
 
 
 const mapSTP = (state, ownProps) => ({
-  user: {username: '', password: '', email: ''},
+  user: {username: '', password: '', email: '', firstName: '', lastName: ''},
   formType: 'Sign Up'
 });
 
