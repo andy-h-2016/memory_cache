@@ -13,7 +13,6 @@ class SessionForm extends React.Component {
   }
 
   clearErrors() {
-    console.log('clear')
     this.props.clearErrors();
   }
 
@@ -23,7 +22,6 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('state', this.state)
     this.props.submit(this.state);
   }
 
