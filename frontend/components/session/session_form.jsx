@@ -23,8 +23,6 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log("currentTarget:", e.currentTarget)
-    // console.log(user);
     console.log('state', this.state)
     this.props.submit(this.state);
   }
@@ -40,6 +38,8 @@ class SessionForm extends React.Component {
     let firstNameField = null;
     let lastNameField = null;
     let sessionLink;
+    let demoButton = null;
+
     if (this.props.formType === "Sign Up") {
       sessionLink = <Link onClick={this.clearErrors} to="/login" className="alt-link">Login</Link>
 
@@ -74,6 +74,7 @@ class SessionForm extends React.Component {
       );
     } else {
       sessionLink = <Link onClick={this.clearErrors} to="signup" className="alt-link">Sign up for free</Link>
+      demoButton = <button onClick={this.demoLogin}>Demo Login</button>
     }
 
     return (
@@ -105,7 +106,7 @@ class SessionForm extends React.Component {
         </form>
 
         {sessionLink}
-        <button onClick={this.demoLogin}>Demo Login</button>
+        {demoButton}
       </div>
     )
   }

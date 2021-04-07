@@ -64,10 +64,5 @@ a, button {
 	cursor: pointer;
 }
 
-::placeholder {
 
-}
 
-body {
-	display: relative;
-}
