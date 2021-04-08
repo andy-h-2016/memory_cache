@@ -39,7 +39,7 @@ export const createList = list => dispatch => {
 export const renameList = list => dispatch => {
   return ListAPIUtil.renameList(list)
     .then(
-      newList => dispatch(receiveList(newList)),
+      editedList => dispatch(receiveList(editedList)),
       errors => dispatch(receiveListErrors(errors))
     );
 };

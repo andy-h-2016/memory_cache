@@ -14,14 +14,14 @@ class ListSidebar extends React.Component {
     this.props.fetchAllLists();
   }
 
-  handleRename(list, e) {
+  handleRename(listId, e) {
     e.preventDefault();
     e.stopPropagation();
     this.props.clearDropdown();
-    this.props.renameList({id: list.id, title:'New title'})
+    this.props.openModal('renameListForm', listId)
   }
 
-  handleDelete(list, e) {
+  handleDelete(list, e) { 
     e.preventDefault();
     e.stopPropagation();
     this.props.clearDropdown();
@@ -48,7 +48,7 @@ class ListSidebar extends React.Component {
             <i className="far fa-caret-square-down" onClick={(e) => this.handleDropdown(list.id, e)}>
               <ul className={`dropdown list-actions ${dropdownStatus}`}>
                 <li>
-                  <a onClick={(e) => this.handleRename(list, e)}>Rename list</a>
+                  <a onClick={(e) => this.handleRename(list.id, e)}>Rename list</a>
                 </li>
 
                 <li>

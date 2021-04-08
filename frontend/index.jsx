@@ -16,7 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       session: {id: window.currentUser.id},
       ui: {
-        dropdown: null
+        dropdown: null,
+        modal: {
+          modalType: null,
+          props: null
+        }
       }
     };
   }
