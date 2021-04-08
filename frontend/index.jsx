@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
+import {clearDropdown} from './actions/dropdown_actions'
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,11 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.currentUser) {
     preloadedState = {
       entities: {
-        users: {
-          [window.currentUser.id]: window.currentUser
-        }
+        users: { [window.currentUser.id]: window.currentUser }
       },
-      session: {id: window.currentUser.id}
+      session: {id: window.currentUser.id},
+      ui: {
+        dropdown: null
+      }
     };
   }
 

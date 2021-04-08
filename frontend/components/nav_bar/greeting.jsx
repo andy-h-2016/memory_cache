@@ -7,7 +7,7 @@ const Greeting = (props) => {
 
     return (
       <div className="greeting">
-        <p>{`Welcome ${currentUser.username}!`} </p>
+        <span>{`Welcome ${currentUser.username}!`} </span>
         <button onClick={handleLogout}>Logout</button>
       </div>
     )

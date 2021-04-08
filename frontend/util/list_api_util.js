@@ -2,18 +2,18 @@ export const fetchAllLists = () => (
   $.ajax({url: 'api/lists'})
 );
 
-export const createList = list => (
+export const createList = title => (
   $.ajax({
     url: 'api/lists',
     method: 'POST',
-    data: {list}
+    data: {title}
   })
 );
 
-export const updateList = list => (
+export const renameList = list => (
   $.ajax({
     url: `api/lists/${list.id}`,
-    method: 'POST',
+    method: 'PATCH',
     data: {list}
   })
 );
@@ -24,4 +24,3 @@ export const deleteList = listId => (
     method: 'DELETE'
   })
 );
-

@@ -8,4 +8,9 @@ body {
 .app {
 	display: flex;
 	flex-wrap: wrap;
+	background-color: #d7e7f5;
+}
+
+.hidden {
+	display: none;
 }

@@ -5,8 +5,7 @@ class Api::ListsController < ApplicationController
   end
 
   def create
-    full_params = list_params.to_hash.symbolize_keys.merge({user_id: current_user.id})
-    @list = List.new(full_params)
+    @list = List.new(list_params)
     if @list.save
       render :show
     else
@@ -17,7 +16,7 @@ class Api::ListsController < ApplicationController
   def update
     @list = List.find_by(id: params[:id])
     if @list
-      if @list.update(params[:list][:title])
+      if @list.update(list_params)
         render :show
       else
         render json: @list.errors.full_messages, status: 422
@@ -41,6 +40,6 @@ class Api::ListsController < ApplicationController
 
   private
   def list_params
-    params.require(:list).permit(:user_id, :title)
+    params.require(:list).permit(:title).with_defaults(user_id: current_user.id)
   end
 end

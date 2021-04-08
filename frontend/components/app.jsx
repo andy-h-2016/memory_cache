@@ -6,7 +6,7 @@ import ListSidebarContainer from './lists/list_sidebar_container';
 import TaskViews from './tasks/task_views'
 
 const App = (props) => (
-  <div className="app">
+  <div className="app" onClick={props.clearDropdown}>
     <NavBar />
     <ListSidebarContainer/>
     <ProtectedRoute path="/list/:listId" component={TaskViews} />

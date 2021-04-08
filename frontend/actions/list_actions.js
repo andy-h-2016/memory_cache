@@ -36,6 +36,14 @@ export const createList = list => dispatch => {
     );
 };
 
+export const renameList = list => dispatch => {
+  return ListAPIUtil.renameList(list)
+    .then(
+      newList => dispatch(receiveList(newList)),
+      errors => dispatch(receiveListErrors(errors))
+    );
+};
+
 export const deleteList = list => dispatch => {
   return ListAPIUtil.deleteList(list.id)
     .then(

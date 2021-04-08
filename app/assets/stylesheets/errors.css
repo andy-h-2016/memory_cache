@@ -1,9 +1,11 @@
 .errors-display {
   position: absolute;
-  margin: auto;
-  padding: 2px 5px;
+  top: 3px;
+  left: 50%;
 }
 
 .errors-display li {
   background-color: lemonchiffon;
+  border-radius: 1px;
+  padding: 2px 5px;
 }
