@@ -47,7 +47,9 @@ export const renameList = list => dispatch => {
 export const deleteList = list => dispatch => {
   return ListAPIUtil.deleteList(list.id)
     .then(
-      removedList => dispatch(removeList(removedList)),
+      removedList => {
+        console.log(removedList)
+        return dispatch(removeList(removedList.id))},
       errors => dispatch(receiveListErrors(errors))
     );
 };

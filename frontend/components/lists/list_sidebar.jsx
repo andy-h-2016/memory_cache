@@ -6,6 +6,7 @@ class ListSidebar extends React.Component {
     super(props);
 
     this.handleRename = this.handleRename.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleDropdown = this.handleDropdown.bind(this);
   }
 
@@ -15,7 +16,16 @@ class ListSidebar extends React.Component {
 
   handleRename(list, e) {
     e.preventDefault();
+    e.stopPropagation();
+    this.props.clearDropdown();
     this.props.renameList({id: list.id, title:'New title'})
+  }
+
+  handleDelete(list, e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.clearDropdown();
+    this.props.deleteList(list);
   }
 
   handleDropdown(dropdown, e) {
@@ -39,6 +49,10 @@ class ListSidebar extends React.Component {
               <ul className={`dropdown list-actions ${dropdownStatus}`}>
                 <li>
                   <a onClick={(e) => this.handleRename(list, e)}>Rename list</a>
+                </li>
+
+                <li>
+                  <a onClick={(e) => this.handleDelete(list, e)}>Delete list</a>
                 </li>
               </ul>
             </i>
