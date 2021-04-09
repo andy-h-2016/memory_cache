@@ -5,7 +5,8 @@ class ListSidebar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleRename = this.handleRename.bind(this);
+    this.openRenameListForm = this.openRenameListForm.bind(this);
+    this.openCreateListForm = this.openCreateListForm.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleDropdown = this.handleDropdown.bind(this);
   }
@@ -14,11 +15,17 @@ class ListSidebar extends React.Component {
     this.props.fetchAllLists();
   }
 
-  handleRename(listId, e) {
+  openRenameListForm(listId, e) {
     e.preventDefault();
     e.stopPropagation();
     this.props.clearDropdown();
     this.props.openModal('renameListForm', listId)
+  }
+
+  openCreateListForm(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.openModal('createListForm')
   }
 
   handleDelete(list, e) { 
@@ -43,18 +50,27 @@ class ListSidebar extends React.Component {
 
   render() {
     
-    let listLinks = this.props.lists.map(list => {
+    //HELPER CONSTRUCTOR FOR USER GENERATED LISTS
+
+    //ITERATE (MAP) THROUGH EACH LIST IN THE PROPS
+    const listLinks = this.props.lists.map(list => {
       let dropdownStatus = this.props.dropdown === list.id ? "" : "hidden" 
 
+      //RETURN VALUE FOR THE MAP ITERATOR
       return (
         <li className="list-link-container" key={list.id}>
-          <NavLink className="list-link" to={`/list/${list.id}`}
+
+          {/* THE ACTUAL LINK */}
+          <NavLink 
+            className="list-link" 
+            to={`/list/${list.id}`} 
             activeClassName='selected'>{list.title}</NavLink>
 
-            <i className="far fa-caret-square-down" onClick={(e) => this.handleDropdown(list.id, e)}></i>
+            {/* DROPDOWN MENU ATTACHED TO EACH LIST LINK */}
+            <i className="far fa-caret-square-down dropdown-button down-arrow-button" onClick={(e) => this.handleDropdown(list.id, e)}></i>
             <ul className={`dropdown list-actions ${dropdownStatus}`}>
               <li>
-                <a onClick={(e) => this.handleRename(list.id, e)}>Rename list</a>
+                <a onClick={(e) => this.openRenameListForm(list.id, e)}>Rename list</a>
               </li>
 
               <li>
@@ -65,6 +81,7 @@ class ListSidebar extends React.Component {
       );
     });
 
+    //ACTUAL RETURN OF RENDER METHOD
     return (
       <div className="lists-sidebar">
         <div className="logo">PLACE LOGO HERE</div>
@@ -75,7 +92,14 @@ class ListSidebar extends React.Component {
           </ul>
 
           <ul className="lists-index user-generated-lists">
-            <li className="list-link-container lists-header" key="list-header">Lists</li>
+            <li className="list-link-container lists-header" key="list-header">
+              Lists
+
+              <i className="far fa-plus-square plus-button" onClick={this.openCreateListForm}></i>
+              {/* <i className="far fa-caret-square-down dropdown-button down-arrow-button" onClick={(e) => preventDefault()}></i> */}
+
+
+            </li>
             {listLinks}
           </ul>
         </section>

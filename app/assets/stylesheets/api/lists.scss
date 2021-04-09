@@ -47,15 +47,22 @@
   background-color: var(--hover-highlight-blue);
 }
 
-.fa-caret-square-down {
+.dropdown-button {
   position: absolute;
   top: 50%;
-  right: 3px;
   transform: translateY(-50%);
   z-index: 50;
 
   color: #7ab2e0;
   cursor: pointer;
+}
+
+.down-arrow-button {
+  right: 3px;
+}
+
+.plus-button {
+  right: 10px;
 }
 
 .list-actions {

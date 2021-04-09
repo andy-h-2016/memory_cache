@@ -11,7 +11,7 @@ const mapSTP = ({entities, ui}) => ({
 })
 
 const mapDTP = dispatch => ({
-  createList: list => dispatch(createList(list)),
+  submit: list => dispatch(createList(list)),
   closeModal: () => dispatch(closeModal())
 
 })

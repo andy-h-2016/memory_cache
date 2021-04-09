@@ -2,11 +2,11 @@ export const fetchAllLists = () => (
   $.ajax({url: 'api/lists'})
 );
 
-export const createList = title => (
+export const createList = list => (
   $.ajax({
     url: 'api/lists',
     method: 'POST',
-    data: {title}
+    data: {list}
   })
 );
 
