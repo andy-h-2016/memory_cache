@@ -29,14 +29,13 @@
   padding-left: 15px;
   padding-right: 7px;
   padding-block: 5px;
-}
-
-.list-link a * {
-  width: 60%;
+  
+  width: 95%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 
 .lists-header {
   width: 100%;
@@ -47,7 +46,7 @@
   background-color: var(--hover-highlight-blue);
 }
 
-.dropdown-button {
+.list-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -62,7 +61,7 @@
 }
 
 .plus-button {
-  right: 10px;
+  right: 18px;
 }
 
 .list-actions {
