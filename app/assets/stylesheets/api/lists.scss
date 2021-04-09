@@ -29,22 +29,22 @@
   padding-left: 15px;
   padding-right: 7px;
   padding-block: 5px;
-  
-  width: 95%;
+
+}
+
+.list-link p {
+  width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-
-.lists-header {
-  width: 100%;
-  padding-block: 5px;
-}
-
 .list-link:hover {
   background-color: var(--hover-highlight-blue);
 }
+
+
+
 
 .list-button {
   position: absolute;

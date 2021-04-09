@@ -64,7 +64,7 @@ class ListSidebar extends React.Component {
           <NavLink 
             className="list-link" 
             to={`/list/${list.id}`} 
-            activeClassName='selected'>{list.title}</NavLink>
+            activeClassName='selected'><p>{list.title}</p></NavLink>
 
             {/* DROPDOWN MENU ATTACHED TO EACH LIST LINK */}
             <i className="far fa-caret-square-down list-button down-arrow-button" onClick={(e) => this.handleDropdown(list.id, e)}></i>
@@ -88,11 +88,16 @@ class ListSidebar extends React.Component {
 
         <section className="all-lists">
           <ul className="lists-index standard-lists">
-            <li className="list-link-container lists-header" key="list-header">All Tasks</li>
+            <li className="list-link lists-header" key="lists-header">All Tasks</li>
+            <li className="list-link lists-header" key="lists-header">Inbox</li>
+            <li className="list-link lists-header" key="lists-header">Today</li>
+            <li className="list-link lists-header" key="lists-header">Tomorrow</li>
+            <li className="list-link lists-header" key="lists-header">This Week</li>
           </ul>
 
           <ul className="lists-index user-generated-lists">
-            <li className="list-link-container lists-header" key="list-header">Lists
+            <li className="list-link-container" key="lists-header">
+              <a className="list-link lists-header">Lists</a>
               <i className="far fa-plus-square list-button plus-button" onClick={this.openCreateListForm}></i>
               <i className="far fa-caret-square-down list-button down-arrow-button" onClick={(e) => preventDefault()}></i>
             </li>
