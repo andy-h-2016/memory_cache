@@ -13,7 +13,6 @@ class SessionForm extends React.Component {
   }
 
   clearErrors() {
-    console.log('clear')
     this.props.clearErrors();
   }
 
@@ -23,8 +22,6 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log("currentTarget:", e.currentTarget)
-    // console.log(user);
     this.props.submit(this.state);
   }
 
@@ -36,9 +33,33 @@ class SessionForm extends React.Component {
 
   render() {
     let emailField = null;
+    let firstNameField = null;
+    let lastNameField = null;
     let sessionLink;
+    let demoButton = null;
+
     if (this.props.formType === "Sign Up") {
       sessionLink = <Link onClick={this.clearErrors} to="/login" className="alt-link">Login</Link>
+
+      firstNameField = (
+        <input 
+          onChange={e => this.handleChange(e, "firstName")}
+          type="text"
+          className="first-name-field"
+          placeholder="First Name"
+          value={this.state.firstName}
+        />
+        )
+
+       lastNameField = (
+          <input 
+            onChange={e => this.handleChange(e, "lastName")}
+            type="text"
+            className="last-name-field"
+            placeholder="Last Name"
+            value={this.state.lastName}
+          />
+        )
 
       emailField = (
         <input 
@@ -51,11 +72,15 @@ class SessionForm extends React.Component {
       );
     } else {
       sessionLink = <Link onClick={this.clearErrors} to="signup" className="alt-link">Sign up for free</Link>
+      demoButton = <button onClick={this.demoLogin}>Demo Login</button>
     }
 
     return (
       <div className='session-page'>
         <form className='session-form' onSubmit={this.handleSubmit}>
+          {firstNameField}
+          {lastNameField}
+
           <input
             onChange={e => this.handleChange(e, "username")}
             type="text" 
@@ -79,7 +104,7 @@ class SessionForm extends React.Component {
         </form>
 
         {sessionLink}
-        <button onClick={this.demoLogin}>Demo Login</button>
+        {demoButton}
       </div>
     )
   }

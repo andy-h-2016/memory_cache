@@ -1,14 +1,8 @@
 .splash-page {
-  position: relative;
+  /* position: relative; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px;
 }
 
 .session-links > a {

@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
-import App from './app';
+import Root from './components/root';
+import {clearDropdown} from './actions/dropdown_actions'
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,11 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.currentUser) {
     preloadedState = {
       entities: {
-        users: {
-          [window.currentUser.id]: window.currentUser
-        }
+        users: { [window.currentUser.id]: window.currentUser },
+        lists: {},
+        tasks: {}
       },
-      session: {id: window.currentUser.id}
+      session: {id: window.currentUser.id},
+      ui: {
+        dropdown: null,
+        modal: {
+          modalType: null,
+          props: null
+        }
+      }
     };
   }
 
@@ -27,5 +35,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //grab the root element from root.html.erb
   let root = document.getElementById('root');
-  ReactDOM.render(<App store={store} />, root);
+  ReactDOM.render(<Root store={store} />, root);
 });

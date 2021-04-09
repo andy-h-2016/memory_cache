@@ -1,0 +1,31 @@
+
+
+.app {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #d7e7f5;
+}
+
+.dropdown {
+	position: absolute;
+	/* leave positioning (i.e. top, left, etc.) to the more specific classes (such as .list-actions) */
+
+	background-color: var(--off-white);
+	color: black;
+
+	border-radius: 1px;
+	border: 1px solid transparent;
+	width: max-content;
+	z-index: 9999;
+}
+
+.dropdown a {
+	display: block;
+	padding: 5px 12px 5px 10px;
+	min-height: 20px;
+	border-radius: 0px;
+}
+
+.dropdown a:hover {
+	background-color: var(--hover-highlight-blue);
+}

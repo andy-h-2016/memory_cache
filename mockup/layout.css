@@ -26,11 +26,11 @@ main {
 
 .task-details-pane {
   display: none;
-  background-color: white;
+  background-color: var(--off-white);
 }
 
 .tasks-pane, .list-details-pane, .task-details-pane {
   margin-top: 5px;
-  background-color: white;
+  background-color: var(--off-white);
   border-right: 1px solid grey;
 }

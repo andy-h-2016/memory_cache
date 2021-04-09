@@ -1,7 +1,10 @@
 class User < ApplicationRecord
-  validates :username, :email, :password_digest, :session_token, presence: true
+  validates :username, :email, :password_digest, :session_token, :first_name, :last_name, presence: true
   validates :username, :email, :session_token, uniqueness: true
   validates :password, length: {minimum: 8}, allow_nil: true
+
+  has_many :lists, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   after_initialize :ensure_session_token
 
@@ -35,6 +38,10 @@ class User < ApplicationRecord
 
   def ensure_session_token
     self.session_token = SecureRandom.urlsafe_base64
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
 end

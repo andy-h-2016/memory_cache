@@ -1,0 +1,74 @@
+// Place all the styles related to the api/lists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.lists-sidebar {
+  margin-left: 15px;
+  margin-right: 3px;
+  width: 185px;
+  height: 100vh;
+  font-size: 13px;
+}
+
+.selected {
+  font-weight: 700;
+  color: #0060bf;
+}
+
+.list-link-container {
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+  position: relative;
+  height: 100%;
+  
+  display: block;
+}
+
+.list-link {
+  display: block;
+  padding-left: 15px;
+  padding-right: 7px;
+  padding-block: 5px;
+
+}
+
+.list-link p {
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-link:hover {
+  background-color: var(--hover-highlight-blue);
+}
+
+
+
+
+.list-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+
+  color: #7ab2e0;
+  cursor: pointer;
+}
+
+.down-arrow-button {
+  right: 3px;
+}
+
+.plus-button {
+  right: 18px;
+}
+
+.list-actions {
+  top: 50%;
+  transform: translateY(10%);
+  right: 3px;
+}
+
+
+

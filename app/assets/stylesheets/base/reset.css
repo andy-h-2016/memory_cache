@@ -36,7 +36,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* font-family: 'Roboto', sans-serif; */
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
 
 }
 ol, ul {
@@ -60,14 +63,14 @@ a {
 	color: inherit;
 }
 
-a, button {
+a, button, .clickable {
 	cursor: pointer;
 }
 
-::placeholder {
-
+body {
+	position: relative;
 }
 
-body {
-	display: relative;
+.hidden {
+	display: none;
 }
