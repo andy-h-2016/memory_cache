@@ -1,5 +1,6 @@
 import * as ListAPIUtil from '../util/list_api_util';
-import {RECEIVE_LIST_ERRORS, receiveListErrors} from './error_actions';
+// import {RECEIVE_LIST_ERRORS, receiveListErrors} from './error_actions';
+import {receiveErrors} from './error_actions';
 
 export const RECEIVE_LIST = "RECEIVE_LIST";
 export const RECEIVE_ALL_LISTS = "RECEIVE_ALL_LISTS";
@@ -24,7 +25,7 @@ export const fetchAllLists = () => dispatch => {
   return ListAPIUtil.fetchAllLists()
     .then(
       lists => dispatch(receiveAllLists(lists)),
-      errors => dispatch(receiveListErrors(errors))
+      errors => dispatch(receiveErrors(errors))
     );
 };
 
@@ -32,7 +33,7 @@ export const createList = list => dispatch => {
   return ListAPIUtil.createList(list)
     .then(
       newList => dispatch(receiveList(newList)),
-      errors => dispatch(receiveListErrors(errors))
+      errors => dispatch(receiveErrors(errors))
     );
 };
 
@@ -40,7 +41,7 @@ export const renameList = list => dispatch => {
   return ListAPIUtil.renameList(list)
     .then(
       editedList => dispatch(receiveList(editedList)),
-      errors => dispatch(receiveListErrors(errors))
+      errors => dispatch(receiveErrors(errors))
     );
 };
 
@@ -50,6 +51,6 @@ export const deleteList = list => dispatch => {
       removedList => {
         console.log(removedList)
         return dispatch(removeList(removedList.id))},
-      errors => dispatch(receiveListErrors(errors))
+      errors => dispatch(receiveErrors(errors))
     );
 };

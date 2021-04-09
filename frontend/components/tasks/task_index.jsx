@@ -2,7 +2,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 
 
-class TaskViews extends React.Component {
+class TaskIndex extends React.Component {
   //props: tasks from 
   constructor(props) {
     super(props);

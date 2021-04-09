@@ -7,7 +7,6 @@ const SessionErrorsReducer = (state = [], action) => {
   switch(action.type) {
     case RECEIVE_SESSION_ERRORS:
       return action.errors.responseJSON
-      //fix errors to render for both singular and array form.
     default:
       return []; 
   };

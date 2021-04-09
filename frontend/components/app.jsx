@@ -11,7 +11,7 @@ const App = (props) => (
     <Modal />
     <NavBar />
     <ListSidebarContainer/>
-    <ProtectedRoute path="/list/:listId" component={TaskIndex} ownProps='here props'/>
+    {/* <ProtectedRoute path="/list/:listId" component={TaskIndex} ownProps='here props'/> */}
   </div>
 );
 
