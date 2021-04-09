@@ -3,7 +3,7 @@ import {ProtectedRoute} from '../util/route_util';
 
 import NavBar from './nav_bar/nav_bar';
 import ListSidebarContainer from './lists/list_sidebar_container';
-import TaskViews from './tasks/task_views'
+import TaskViews from './tasks/task_index'
 import Modal from './modal/modal';
 
 const App = (props) => (
@@ -11,7 +11,7 @@ const App = (props) => (
     <Modal />
     <NavBar />
     <ListSidebarContainer/>
-    <ProtectedRoute path="/list/:listId" component={TaskViews} />
+    <ProtectedRoute path="/list/:listId" component={TaskIndex} ownProps='here props'/>
   </div>
 );
 

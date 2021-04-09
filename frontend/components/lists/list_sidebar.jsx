@@ -88,11 +88,11 @@ class ListSidebar extends React.Component {
 
         <section className="all-lists">
           <ul className="lists-index standard-lists">
-            <li className="list-link lists-header" key="lists-header">All Tasks</li>
-            <li className="list-link lists-header" key="lists-header">Inbox</li>
-            <li className="list-link lists-header" key="lists-header">Today</li>
-            <li className="list-link lists-header" key="lists-header">Tomorrow</li>
-            <li className="list-link lists-header" key="lists-header">This Week</li>
+            <li className="list-link lists-header" key="all-tasks">All Tasks</li>
+            <li className="list-link lists-header" key="inbox">Inbox</li>
+            <li className="list-link lists-header" key="today">Today</li>
+            <li className="list-link lists-header" key="tomorrow">Tomorrow</li>
+            <li className="list-link lists-header" key="this-week">This Week</li>
           </ul>
 
           <ul className="lists-index user-generated-lists">
