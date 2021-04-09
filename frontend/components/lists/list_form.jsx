@@ -38,9 +38,9 @@ class ListForm extends React.Component {
         <label className='input-label'>{inputLabel}</label>
         <input onChange={this.update} className="title-field" type="text" value={this.state.title}/>
 
-        <div className="form-buttons">
-          <button onClick={this.handleSubmit}>{submitButtonLabel}</button>
-          <button onClick={this.handleCancel}>Cancel</button>
+        <div className="form-buttons-container">
+          <button className='modal-button action-button' onClick={this.handleSubmit}>{submitButtonLabel}</button>
+          <button className='modal-button cancel-button' onClick={this.handleCancel}>Cancel</button>
         </div>
       </form>
     );

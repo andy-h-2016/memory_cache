@@ -30,7 +30,14 @@ class ListSidebar extends React.Component {
 
   handleDropdown(dropdown, e) {
     e.stopPropagation();
-    this.props.activateDropdown(dropdown);
+
+    if (this.props.dropdown === dropdown) {
+      //if dropdown is already open, close it.
+      this.props.clearDropdown();
+    } else {
+      //after the below operation, this.props.dropdown will = dropdown
+      this.props.activateDropdown(dropdown);
+    }
   }
   
 
@@ -40,25 +47,20 @@ class ListSidebar extends React.Component {
       let dropdownStatus = this.props.dropdown === list.id ? "" : "hidden" 
 
       return (
-        
-        <li className="list-link" key={list.id}>
-          <NavLink to={`/list/${list.id}`}
+        <li className="list-link-container" key={list.id}>
+          <NavLink className="list-link" to={`/list/${list.id}`}
             activeClassName='selected'>{list.title}</NavLink>
 
-            <i className="far fa-caret-square-down" onClick={(e) => this.handleDropdown(list.id, e)}>
-              <ul className={`dropdown list-actions ${dropdownStatus}`}>
-                <li>
-                  <a onClick={(e) => this.handleRename(list.id, e)}>Rename list</a>
-                </li>
+            <i className="far fa-caret-square-down" onClick={(e) => this.handleDropdown(list.id, e)}></i>
+            <ul className={`dropdown list-actions ${dropdownStatus}`}>
+              <li>
+                <a onClick={(e) => this.handleRename(list.id, e)}>Rename list</a>
+              </li>
 
-                <li>
-                  <a onClick={(e) => this.handleDelete(list, e)}>Delete list</a>
-                </li>
-              </ul>
-            </i>
-
-          
-
+              <li>
+                <a onClick={(e) => this.handleDelete(list, e)}>Delete list</a>
+              </li>
+            </ul>
         </li>
       );
     });
@@ -66,9 +68,18 @@ class ListSidebar extends React.Component {
     return (
       <div className="lists-sidebar">
         <div className="logo">PLACE LOGO HERE</div>
-        <ul className="lists-index">
-          {listLinks}
-        </ul>
+
+        <section className="all-lists">
+          <ul className="lists-index standard-lists">
+            <li className="list-link-container lists-header" key="list-header">All Tasks</li>
+          </ul>
+
+          <ul className="lists-index user-generated-lists">
+            <li className="list-link-container lists-header" key="list-header">Lists</li>
+            {listLinks}
+          </ul>
+        </section>
+
       </div>
     );
   };

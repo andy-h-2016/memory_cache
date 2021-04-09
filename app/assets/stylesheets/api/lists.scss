@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .lists-sidebar {
-  margin-left: 20px;
+  margin-left: 15px;
   margin-right: 3px;
   width: 185px;
   height: 100vh;
@@ -14,34 +14,55 @@
   color: #0060bf;
 }
 
-.list-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.list-link-container {
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+  position: relative;
   height: 100%;
-  padding-left: 3px;
-  padding-right: 5px;
+  
+  display: block;
 }
 
-.list-link a {
+.list-link {
+  display: block;
+  padding-left: 15px;
+  padding-right: 7px;
+  padding-block: 5px;
+}
+
+.list-link a * {
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lists-header {
   width: 100%;
   padding-block: 5px;
 }
 
 .list-link:hover {
-  background-color:  #b7d6f1;
+  background-color: var(--hover-highlight-blue);
 }
 
 .fa-caret-square-down {
-  position: relative;
-  margin-left: 3px;
+  position: absolute;
+  top: 50%;
+  right: 3px;
+  transform: translateY(-50%);
+  z-index: 50;
+
   color: #7ab2e0;
   cursor: pointer;
 }
 
-
 .list-actions {
-  position: absolute;
+  top: 50%;
+  transform: translateY(10%);
+  right: 3px;
 }
+
 
 
