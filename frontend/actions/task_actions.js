@@ -1,7 +1,9 @@
+import * as TaskAPIUtil from '../util/task_api_util';
+import {receiveErrors} from './error_actions';
+
 export const RECEIVE_ALL_TASKS = "RECEIVE_ALL_TASKS";
 export const RECEIVE_TASK = "RECEIVE_TASK";
 export const REMOVE_TASK = "REMOVE_TASK";
-import * as TaskAPIUtil from '../util/task_api_util';
 
 
 export const receiveAllTasks = tasks => ({
@@ -23,7 +25,7 @@ export const searchTasks = searchParams => dispatch => {
   return TaskAPIUtil.fetchTasks(searchParams)
     .then(
       tasks => dispatch(receiveAllTasks(tasks)),
-      errors => dispatch(receiveTaskError(errors))
+      errors => dispatch(receiveErrors(errors))
     );
 };
 
@@ -31,7 +33,7 @@ export const createTask = task => dispatch => {
   return TaskAPIUtil.createTask(task)
     .then(
       newTask => dispatch(receiveTask(newTask)),
-      errors => dispatch(receiveTaskError(errors))
+      errors => dispatch(receiveErrors(errors))
     );
 };
 
@@ -39,7 +41,7 @@ export const updateTask = task => dispatch => {
   return TaskAPIUtil.updateTask(task)
     .then(
       editedTask => dispatch(receiveTask(editedTask)),
-      errors => dispatch(receiveTaskError(errors))
+      errors => dispatch(receiveErrors(errors))
     );
 };
 
@@ -47,6 +49,6 @@ export const deleteTask = task => dispatch => {
   return TaskAPIUtil.deleteTask(task)
     .then(
       deletedTask => dispatch(removeTask(deletedTask.id)),
-      errors => dispatch(receiveTaskError(errors))
+      errors => dispatch(receiveErrors(errors))
     );
 };

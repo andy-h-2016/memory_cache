@@ -1,6 +1,6 @@
 import {RECEIVE_TASK, RECEIVE_ALL_TASKS, REMOVE_TASK} from '../actions/task_actions';
 
-const TaskReducer = (state = {}, action) {
+const TasksReducer = (state = {}, action) => {
    Object.freeze(state);
   let newState = Object.assign({}, state);
 
@@ -20,5 +20,4 @@ const TaskReducer = (state = {}, action) {
 
 
  
-export default listsReducer; 
-}
+export default TasksReducer; 

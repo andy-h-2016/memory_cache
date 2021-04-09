@@ -14,6 +14,7 @@ class Api::TasksController < ApplicationController
       render :show
     else
       render json: @task.errors.full_messages, status: 422
+    end
   end
 
   def update

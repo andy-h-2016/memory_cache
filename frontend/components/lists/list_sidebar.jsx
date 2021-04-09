@@ -8,7 +8,7 @@ class ListSidebar extends React.Component {
     this.openRenameListForm = this.openRenameListForm.bind(this);
     this.openCreateListForm = this.openCreateListForm.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleDropdown = this.handleDropdown.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
   componentDidMount() {
@@ -35,7 +35,7 @@ class ListSidebar extends React.Component {
     this.props.deleteList(list);
   }
 
-  handleDropdown(dropdown, e) {
+  toggleDropdown(dropdown, e) {
     e.stopPropagation();
 
     if (this.props.dropdown === dropdown) {
@@ -67,7 +67,7 @@ class ListSidebar extends React.Component {
             activeClassName='selected'><p>{list.title}</p></NavLink>
 
             {/* DROPDOWN MENU ATTACHED TO EACH LIST LINK */}
-            <i className="far fa-caret-square-down list-button down-arrow-button" onClick={(e) => this.handleDropdown(list.id, e)}></i>
+            <i className="far fa-caret-square-down list-button down-arrow-button" onClick={(e) => this.toggleDropdown(list.id, e)}></i>
             <ul className={`dropdown list-actions ${dropdownStatus}`}>
               <li>
                 <a onClick={(e) => this.openRenameListForm(list.id, e)}>Rename list</a>
