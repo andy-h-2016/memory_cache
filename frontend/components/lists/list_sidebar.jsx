@@ -1,6 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
+const STANDARD_LIST_LABELS = ["All Tasks","Inbox", "Today", "Tomorrow", "This Week"];
+
 class ListSidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -88,11 +90,40 @@ class ListSidebar extends React.Component {
 
         <section className="all-lists">
           <ul className="lists-index standard-lists">
-            <li className="list-link lists-header" key="all-tasks">All Tasks</li>
-            <li className="list-link lists-header" key="inbox">Inbox</li>
-            <li className="list-link lists-header" key="today">Today</li>
-            <li className="list-link lists-header" key="tomorrow">Tomorrow</li>
-            <li className="list-link lists-header" key="this-week">This Week</li>
+            <li className="list-link-container lists-header" key="all-tasks">
+              <NavLink 
+                className="list-link" 
+                to={`/list/all`} 
+                activeClassName='selected'><p>All Tasks</p></NavLink>
+            </li>
+            
+            <li className="list-link-container" key="inbox">
+              <NavLink 
+                className="list-link" 
+                to={`/list/inbox`} 
+                activeClassName='selected'><p>Inbox</p></NavLink>
+            </li>
+
+            <li className="list-link-container" key="today">
+              <NavLink 
+                className="list-link" 
+                to={`/list/today`} 
+                activeClassName='selected'><p>Today</p></NavLink>
+            </li>
+
+            <li className="list-link-container" key="tomorrow">
+              <NavLink 
+                className="list-link" 
+                to={`/list/tomorrow`} 
+                activeClassName='selected'><p>Tomorrow</p></NavLink>
+            </li>
+
+            <li className="list-link-container" key="this-week">
+              <NavLink 
+                className="list-link" 
+                to={`/list/this-week`} 
+                activeClassName='selected'><p>This Week</p></NavLink>
+            </li>
           </ul>
 
           <ul className="lists-index user-generated-lists">

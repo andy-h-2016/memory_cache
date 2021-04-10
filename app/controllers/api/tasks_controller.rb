@@ -1,6 +1,13 @@
 class Api::TasksController < ApplicationController
   def index
-    @tasks = Task.where(task_params)
+    inputs = task_params
+    if inputs[:custom]
+      query = inputs[:custom]
+      @tasks = Task.where(query)
+    else
+      @tasks = Task.where(task_params)
+    end
+
     if @tasks
       render :index
     else
@@ -42,9 +49,27 @@ class Api::TasksController < ApplicationController
 
   private
   def task_params
+    if params[:task][:due_date]
+      year, month, day = params[:task][:due_date].map(&:to_i)
+      params[:task][:due_date] = DateTime.new(year, month, day)
+    elsif params[:task][:custom]
+      type = params[:task][:custom][:type] 
+      query = params[:task][:custom][:query]
+      case type
+      when 'this-week'
+        conditions = [];
+        conditions.push(query[:string])
+        conditions.push(DateTime.new(*(query[:param1].map(&:to_i))))
+        conditions.push(DateTime.new(*(query[:param2].map(&:to_i))))
+        params[:task][:custom] = ActiveRecord::Base.send(:sanitize_sql_array, conditions)
+      else
+        params[:task].delete(:custom)
+      end
+    end
+
     params
       .require(:task)
-      .permit(:user_id, :list_id, :title, :due_date, :priority, :complete, :estimate)
-      .with_defaults(user_id: current_user.id)
+      .permit(:user_id, :list_id, :title, :due_date, :priority, :complete, :estimate, :custom)
+      .with_defaults(user_id: current_user.id, complete: false)
   end
 end

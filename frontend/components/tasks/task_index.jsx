@@ -13,31 +13,57 @@ class TaskIndex extends React.Component {
   
   constructSearchParams() {
     let listId = this.props.match.params.listId;
+    console.log('listId', listId)
     let today;
 
     switch(true) {
       case /\d/.test(listId):
         return {listId};
+      case listId === "all":
+        return {complete: false};
       case listId === "today":
         today = new Date();
         return ({
-          dueDate: {
-            year: today.getFullYear(),
-            month: today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
-            day: today.getDate()
-          }
+          dueDate: [
+            today.getFullYear(),
+            today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
+            today.getDate()
+          ]
         });
       case listId === "tomorrow":
         today = new Date();
         return ({
-          dueDate: {
-            year: today.getFullYear(),
-            month: today.getMonth() + 1,
-            day: today.getDate() + 1
-          }
+          dueDate: [
+            today.getFullYear(),
+            today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
+            today.getDate() + 1
+          ]
         });
-        // case "this-week":
-        //   break
+      case listId === "this-week":
+        today = new Date();
+
+        let nextWeek = [
+          today.getFullYear(), 
+          today.getMonth() + 1,
+          today.getDate() +7
+        ];
+
+        today = [
+          today.getFullYear(), 
+          today.getMonth() + 1,
+          today.getDate()
+        ];
+
+        return ({
+          custom: {
+            type: 'this-week',
+            query: {
+              string: 'due_date BETWEEN ? and ?',
+              param1: today,
+              param2: nextWeek
+            }
+          } 
+        });
     }
   }
 
