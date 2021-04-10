@@ -53,15 +53,23 @@ class Api::TasksController < ApplicationController
       year, month, day = params[:task][:due_date].map(&:to_i)
       params[:task][:due_date] = DateTime.new(year, month, day)
     elsif params[:task][:custom]
-      type = params[:task][:custom][:type] 
+      
+      ## query template = {today: [year, month, day], next_week: [year, month, day]}
       query = params[:task][:custom][:query]
+
+      type = params[:task][:custom][:type]
       case type
       when 'this-week'
-        conditions = ['due_date BETWEEN ? and ?']
-        conditions.push(DateTime.new(*(query[:today].map(&:to_i))))
-        conditions.push(DateTime.new(*(query[:next_week].map(&:to_i))))
+        conditions = [
+          'due_date BETWEEN ? and ? AND user_id=?',
+          DateTime.new(*(query[:today].map(&:to_i))),
+          DateTime.new(*(query[:next_week].map(&:to_i))),
+          current_user.id
+        ]
+       
         params[:task][:custom] = ActiveRecord::Base.send(:sanitize_sql_array, conditions)
       else
+        #if custom does not match the above, it is not trustworthy, delete it.
         params[:task].delete(:custom)
       end
     end

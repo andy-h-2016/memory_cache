@@ -21,6 +21,8 @@ class TaskIndex extends React.Component {
         return {listId};
       case listId === "all":
         return {complete: false};
+      case listId === "inbox":
+        return {listId: null};
       case listId === "today":
         today = new Date();
         return ({
