@@ -1,8 +1,8 @@
 class Api::TasksController < ApplicationController
   def index
     if params[:task][:custom]
-      inputs = task_params
-      query = inputs[:custom]
+      query = custom_params
+      # query = inputs[:custom]
       @tasks = Task.where(query)
     else
       @tasks = Task.where(task_params)
@@ -52,37 +52,39 @@ class Api::TasksController < ApplicationController
     if params[:task][:due_date]
       year, month, day = params[:task][:due_date].map(&:to_i)
       params[:task][:due_date] = DateTime.new(year, month, day)
-    elsif params[:task][:custom]
-      
-      type = params[:task][:custom]
-      case type
-      when 'inbox'
-        # finding the uncategorized tasks
-        conditions = [
-          'list_id IS NULL and user_id=?',
-          current_user.id
-        ]
-      when 'this-week'
-        #finding tasks due in the coming week
-        conditions = [
-          'due_date BETWEEN ? and ? AND user_id=?',
-          DateTime.current,
-          DateTime.current.advance(weeks: 1),
-          current_user.id
-        ]
-   
-      else
-        #if custom does not match the above, it is not trustworthy, delete it.
-        conditions = [];
-      end
-
-      #create the query using the conditions created by the case-when block above
-      params[:task][:custom] = ActiveRecord::Base.send(:sanitize_sql_array, conditions)
     end
 
     params
       .require(:task)
-      .permit(:user_id, :list_id, :title, :due_date, :priority, :complete, :estimate, :custom)
+      .permit(:user_id, :list_id, :title, :due_date, :priority, :complete, :estimate)
       .with_defaults(user_id: current_user.id, complete: false)
   end
+
+  def custom_params
+    type = params[:task][:custom]
+    case type
+    when 'inbox'
+      # finding the uncategorized tasks
+      conditions = [
+        'list_id IS NULL and user_id=?',
+        current_user.id
+      ]
+    when 'this-week'
+      #finding tasks due in the coming week
+      conditions = [
+        'due_date BETWEEN ? and ? AND user_id=?',
+        DateTime.current,
+        DateTime.current.advance(weeks: 1),
+        current_user.id
+      ]
+  
+    else
+      #if custom does not match the above, it is not trustworthy, delete it.
+      conditions = [];
+    end
+
+    #create the query using the conditions created by the case-when block above
+    ActiveRecord::Base.send(:sanitize_sql_array, conditions)
+  end
+
 end

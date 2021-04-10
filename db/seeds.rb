@@ -32,7 +32,7 @@ Task.create!(user_id: 1, title: "Track down the niffler that stole my Galleons",
 Task.create!(user_id: 1, title: "Make a stable for Buckbeak", due_date: DateTime.new(2021, 4, 17 ), estimate: nil )
 
 Task.create!(user_id: 2, list_id: 6, title: "Teach Ron how to use an iPhone", due_date: DateTime.new(2021, 4, 13))
-Task.create!(user_id: 2, list_id: 6, title: "Ask Lily how to use an iPhone", due_date: DateTime.new(2021, 4, 12))
+Task.create!(user_id: 2, list_id: 6, title: "Ask Hermione how to use an iPhone", due_date: DateTime.new(2021, 4, 12))
 Task.create!(user_id: 2, title: "Reply to Hagrid's letter", due_date: DateTime.new(2021, 4, 17))
 
 

@@ -8,7 +8,6 @@ class TaskIndex extends React.Component {
     super(props);
 
     this.constructSearchParams = this.constructSearchParams.bind(this);
-
   }
   
   constructSearchParams() {
@@ -18,6 +17,7 @@ class TaskIndex extends React.Component {
 
     switch(true) {
       case /\d/.test(listId):
+        // check if listId is a number
         return {listId};
       case listId === "all":
         return {complete: false};
