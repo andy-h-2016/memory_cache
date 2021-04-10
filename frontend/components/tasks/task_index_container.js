@@ -3,7 +3,8 @@ import TaskIndex from './task_index';
 import {searchTasks, createTask} from '../../actions/task_actions';
 
 const mapSTP = (state, ownProps) => ({
-  tasks: Object.values(state.entities.tasks)
+  tasks: Object.values(state.entities.tasks),
+  lists: Object.values(state.entities.lists)
 });
 
 const mapDTP = dispatch => ({

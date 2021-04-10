@@ -73,12 +73,22 @@ class TaskIndex extends React.Component {
     let title = input.match(/(.+)\s\W/)[1] || String(input);
     let task = {title};
 
-    let dueDateMatch = input.match(/\^(.*)/)[1];
+    let dueDateMatch = input.match(/\^(.*)/);
     if (dueDateMatch) {
-      let dueDate = dueDateMatch.split('-');
+      let dueDate = dueDateString[1].split('-');
       task['dueDate'] = dueDate;
     };
+
+    let listMatch = input.match(/#\((.+)\)/);
+    debugger
+    if (listMatch) {
+      let listTitle = listMatch[1];
+      let listObj = this.props.lists.find(list => list.title === listTitle);
+      let listId = listObj.id;
+      task['listId'] = listId; 
+    }
     
+
     
     this.props.createTask(task);
 
