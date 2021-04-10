@@ -1,7 +1,7 @@
 class Api::TasksController < ApplicationController
   def index
-    inputs = task_params
-    if inputs[:custom]
+    if params[:task][:custom]
+      inputs = task_params
       query = inputs[:custom]
       @tasks = Task.where(query)
     else
@@ -57,10 +57,9 @@ class Api::TasksController < ApplicationController
       query = params[:task][:custom][:query]
       case type
       when 'this-week'
-        conditions = [];
-        conditions.push(query[:string])
-        conditions.push(DateTime.new(*(query[:param1].map(&:to_i))))
-        conditions.push(DateTime.new(*(query[:param2].map(&:to_i))))
+        conditions = ['due_date BETWEEN ? and ?']
+        conditions.push(DateTime.new(*(query[:today].map(&:to_i))))
+        conditions.push(DateTime.new(*(query[:next_week].map(&:to_i))))
         params[:task][:custom] = ActiveRecord::Base.send(:sanitize_sql_array, conditions)
       else
         params[:task].delete(:custom)

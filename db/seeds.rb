@@ -16,6 +16,8 @@ List.create!(user_id: 1, title: "Secrets: Don't tell anyone!")
 
 Task.create!(user_id: 1, list_id: 1, title: "Sweep up Fang's fur", due_date: DateTime.new(2021, 7, 1), estimate: 10)
 Task.create!(user_id: 1, list_id: 1, title: "Replace the teapot the rat hid in", due_date: DateTime.new(2021, 7, 2), estimate: nil)
+Task.create!(user_id: 1, list_id: 1, title: "Compost Norbert's egg shells", due_date: DateTime.new(2021, 4, 10), estimate: nil)
+Task.create!(user_id: 1, list_id: 1, title: "Return Filius' timpani", due_date: DateTime.new(2021, 4, 16), estimate: nil)
 Task.create!(user_id: 1, list_id: 2, title: "Meeting with centaurs about the spiders", due_date: DateTime.new(2021, 7,5), estimate: 120)
 Task.create!(user_id: 1, list_id: 2, title: "Tell Aragog to stop attacking centaurs", due_date: DateTime.new(2021, 6, 30), estimate: 45)
 Task.create!(user_id: 1, list_id: 3, title: "Get saddles for the thestrals so the students can see them", due_date: DateTime.new(2021, 6, 23 ), estimate: nil)

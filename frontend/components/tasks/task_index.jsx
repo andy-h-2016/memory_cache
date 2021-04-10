@@ -58,9 +58,8 @@ class TaskIndex extends React.Component {
           custom: {
             type: 'this-week',
             query: {
-              string: 'due_date BETWEEN ? and ?',
-              param1: today,
-              param2: nextWeek
+              today,
+              nextWeek
             }
           } 
         });
