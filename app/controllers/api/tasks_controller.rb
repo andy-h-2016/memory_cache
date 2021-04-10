@@ -77,7 +77,6 @@ class Api::TasksController < ApplicationController
         DateTime.current.advance(weeks: 1),
         current_user.id
       ]
-  
     else
       #if custom does not match the above, it is not trustworthy, delete it.
       conditions = [];

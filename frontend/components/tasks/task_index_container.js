@@ -1,13 +1,14 @@
 import {connect} from 'react-redux';
 import TaskIndex from './task_index';
-import {searchTasks} from '../../actions/task_actions';
+import {searchTasks, createTask} from '../../actions/task_actions';
 
 const mapSTP = (state, ownProps) => ({
   tasks: Object.values(state.entities.tasks)
 });
 
 const mapDTP = dispatch => ({
-  searchTasks: searchParams => dispatch(searchTasks(searchParams))
+  searchTasks: searchParams => dispatch(searchTasks(searchParams)),
+  createTask: task => dispatch(createTask(task))
 });
 
 export default connect(mapSTP, mapDTP)(TaskIndex);

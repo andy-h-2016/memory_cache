@@ -11,4 +11,9 @@ class Task < ApplicationRecord
   belongs_to :list,
     optional: true
 
+  after_initialize :ensure_due_date
+
+  def ensure_due_date
+    self.due_date ||= DateTime.current
+  end
 end

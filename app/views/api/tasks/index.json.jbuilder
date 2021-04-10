@@ -1,5 +1,6 @@
 @tasks.each do |task|
   json.set! task.id do
-    json.extract! task, :id, :user_id, :list_id, :title, :due_date, :priority, :complete, :estimate
+    json.extract! task, :id, :user_id, :list_id, :title, :priority, :complete, :estimate
+    json.due_date task.due_date.to_date
   end
 end

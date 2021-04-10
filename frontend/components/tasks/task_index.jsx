@@ -6,8 +6,11 @@ class TaskIndex extends React.Component {
   //props: tasks from 
   constructor(props) {
     super(props);
+    this.state = {input: ""};
 
     this.constructSearchParams = this.constructSearchParams.bind(this);
+    this.update = this.update.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   
   constructSearchParams() {
@@ -58,7 +61,29 @@ class TaskIndex extends React.Component {
       this.props.searchTasks(searchParams);
     }
   }
-        
+
+  update(e) {
+    this.setState({input: e.currentTarget.value})
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let input = this.state.input;
+    
+    let title = input.match(/(.+)\s\W/) || String(input);
+    let task = {title};
+
+    let dueDate = input.match(/\^(.*)/);
+    if (dueDate) {task['dueDate'] = dueDate};
+    
+    
+
+
+
+    this.props.createTask(task);
+
+  }
+
   render() {
     if (!this.props.tasks) {
       return <div></div>;
@@ -66,7 +91,7 @@ class TaskIndex extends React.Component {
     const tasksList = this.props.tasks.map(task => {
 
       return (
-        <li key={`task ${task.id}`}>{task.title}</li>
+        <li key={`task ${task.id}`}>{task.title} | {task.dueDate}</li>
       )
     })
 
@@ -76,8 +101,8 @@ class TaskIndex extends React.Component {
         <div className="complete-tabs"></div> {/* Incomplete vs Completed tabs will be NavLinks */}
         <div className="task-buttons"></div> {/* task buttons will be separate component */}
         <form>
-          <input type="text" placeholder="Add a task..." />
-          <button className='modal-button action-button'>Add Task</button>  
+          <input onChange={this.update} type="text" placeholder="Add a task..." value={this.state.title}/>
+          <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
         </form>
 
         <ul className='list-of-tasks'>
