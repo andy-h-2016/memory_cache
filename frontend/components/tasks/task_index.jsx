@@ -70,16 +70,16 @@ class TaskIndex extends React.Component {
     e.preventDefault();
     let input = this.state.input;
     
-    let title = input.match(/(.+)\s\W/) || String(input);
+    let title = input.match(/(.+)\s\W/)[1] || String(input);
     let task = {title};
 
-    let dueDate = input.match(/\^(.*)/);
-    if (dueDate) {task['dueDate'] = dueDate};
+    let dueDateMatch = input.match(/\^(.*)/)[1];
+    if (dueDateMatch) {
+      let dueDate = dueDateMatch.split('-');
+      task['dueDate'] = dueDate;
+    };
     
     
-
-
-
     this.props.createTask(task);
 
   }
