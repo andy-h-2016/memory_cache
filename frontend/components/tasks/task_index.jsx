@@ -6,55 +6,81 @@ class TaskIndex extends React.Component {
   //props: tasks from 
   constructor(props) {
     super(props);
-  } 
 
-  componentDidMount() {
-    let searchParam;
+    this.constructSearchParams = this.constructSearchParams.bind(this);
+
+  }
+  
+  constructSearchParams() {
     let listId = this.props.match.params.listId;
+    console.log('listId', listId)
     let today;
-    this.props.searchTasks({listId});
 
-    if (typeof listId === 'number') {
+    switch(true) {
+      case /\d/.test(listId):
+        return {listId};
+      case listId === "all":
+        return {complete: false};
+      case listId === "inbox":
+        return {listId: null};
+      case listId === "today":
+        today = new Date();
+        return ({
+          dueDate: [
+            today.getFullYear(),
+            today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
+            today.getDate()
+          ]
+        });
+      case listId === "tomorrow":
+        today = new Date();
+        return ({
+          dueDate: [
+            today.getFullYear(),
+            today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
+            today.getDate() + 1
+          ]
+        });
+      case listId === "this-week":
+        today = new Date();
 
-      //listId will be number if it is a custom list or the inbox(aka uncategorized) list
-    } else {
-      // switch(listId) {
-      //   case "all":
-      //     searchParam = {};
-      //     break
-      //   case "today":
-      //     today = new Date();
-      //     searchParam = {
-      //       dueDate: {
-      //         year: today.getFullYear(),
-      //         month: today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
-      //         day: today.getDate()
-      //       }
-      //     }
-      //     break
-      //   case "tomorrow":
-      //     today = new Date();
-      //     searchParam = {
-      //       dueDate: {
-      //         year: today.getFullYear(),
-      //         month: today.getMonth() + 1,
-      //         day: today.getDate() + 1
-      //       }
-      //     }
-      //     break
-      //   case "this-week":
-      //     break
-      // }
+        let nextWeek = [
+          today.getFullYear(), 
+          today.getMonth() + 1,
+          today.getDate() +7
+        ];
+
+        today = [
+          today.getFullYear(), 
+          today.getMonth() + 1,
+          today.getDate()
+        ];
+
+        return ({
+          custom: {
+            type: 'this-week',
+            query: {
+              today,
+              nextWeek
+            }
+          } 
+        });
     }
   }
 
+  componentDidMount() {
+    let searchParams = this.constructSearchParams();
+    this.props.searchTasks(searchParams);
+  } 
+        
   componentDidUpdate(prevProps) {
     let listId = this.props.match.params.listId;
     if (listId !== prevProps.match.params.listId) {
-      this.props.searchTasks({listId});
+      let searchParams = this.constructSearchParams();
+      this.props.searchTasks(searchParams);
     }
   }
-
+        
   render() {
     if (!this.props.tasks) {
       return <div></div>;

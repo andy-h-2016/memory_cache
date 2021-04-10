@@ -15,7 +15,7 @@ const ErrorsReducer = (state = [], action) => {
 
   switch(action.type) {
     case RECEIVE_ERRORS:
-      return action.errors.responseJSON
+      return action.errors.responseJSON || ["500: Internal Server Error"];
     default:
       return []; 
   };
