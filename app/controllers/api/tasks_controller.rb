@@ -54,24 +54,30 @@ class Api::TasksController < ApplicationController
       params[:task][:due_date] = DateTime.new(year, month, day)
     elsif params[:task][:custom]
       
-      ## query template = {today: [year, month, day], next_week: [year, month, day]}
-      query = params[:task][:custom][:query]
-
-      type = params[:task][:custom][:type]
+      type = params[:task][:custom]
       case type
-      when 'this-week'
+      when 'inbox'
+        # finding the uncategorized tasks
         conditions = [
-          'due_date BETWEEN ? and ? AND user_id=?',
-          DateTime.new(*(query[:today].map(&:to_i))),
-          DateTime.new(*(query[:next_week].map(&:to_i))),
+          'list_id IS NULL and user_id=?',
           current_user.id
         ]
-       
-        params[:task][:custom] = ActiveRecord::Base.send(:sanitize_sql_array, conditions)
+      when 'this-week'
+        #finding tasks due in the coming week
+        conditions = [
+          'due_date BETWEEN ? and ? AND user_id=?',
+          DateTime.current,
+          DateTime.current.advance(weeks: 1),
+          current_user.id
+        ]
+   
       else
         #if custom does not match the above, it is not trustworthy, delete it.
-        params[:task].delete(:custom)
+        conditions = [];
       end
+
+      #create the query using the conditions created by the case-when block above
+      params[:task][:custom] = ActiveRecord::Base.send(:sanitize_sql_array, conditions)
     end
 
     params

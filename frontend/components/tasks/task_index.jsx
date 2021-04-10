@@ -22,7 +22,7 @@ class TaskIndex extends React.Component {
       case listId === "all":
         return {complete: false};
       case listId === "inbox":
-        return {listId: null};
+        return {custom: 'inbox'};
       case listId === "today":
         today = new Date();
         return ({
@@ -42,29 +42,7 @@ class TaskIndex extends React.Component {
           ]
         });
       case listId === "this-week":
-        today = new Date();
-
-        let nextWeek = [
-          today.getFullYear(), 
-          today.getMonth() + 1,
-          today.getDate() +7
-        ];
-
-        today = [
-          today.getFullYear(), 
-          today.getMonth() + 1,
-          today.getDate()
-        ];
-
-        return ({
-          custom: {
-            type: 'this-week',
-            query: {
-              today,
-              nextWeek
-            }
-          } 
-        });
+        return {custom: 'this-week'};
     }
   }
 
