@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 // /frontend/util/route_util.jsx
 
 // renders component if logged out, otherwise redirects to the root url
-const Auth = ({ component: Component, path, loggedIn, exact }) => (
+const Auth = ({ component: Component, path, loggedIn, exact, otherProps }) => (
   <Route path={path} exact={exact} render={(props) => (
     !loggedIn ? (
-      <Component {...props} />
+      <Component {...props} otherProps={otherProps} />
     ) : (
       <Redirect to="/list" />
     )
@@ -15,10 +15,10 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => (
 );
 
 // renders component if logged in, otherwise redirects to the login page
-const Protected = ({ component: Component, path, loggedIn, exact, ownProps }) => (
+const Protected = ({ component: Component, path, loggedIn, exact, otherProps }) => (
   <Route path={path} exact={exact} render={(props) => (
      loggedIn ? (
-      <Component {...props} ownProps={ownProps} params={props.match.params}/>
+      <Component {...props} otherProps={otherProps} />
     ) : (
       <Redirect to="/login" />
     )

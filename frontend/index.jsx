@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
       entities: {
         users: { [window.currentUser.id]: window.currentUser },
         lists: {},
-        tasks: {}
+        tasks: {},
       },
       session: {id: window.currentUser.id},
       ui: {

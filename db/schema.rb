@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_220016) do
+ActiveRecord::Schema.define(version: 2021_04_11_005950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_04_10_220016) do
     t.integer "user_id", null: false
     t.integer "list_id"
     t.string "title", null: false
-    t.datetime "due_date", null: false
+    t.datetime "due_date"
     t.integer "priority", default: 4, null: false
     t.boolean "complete", default: false, null: false
     t.integer "estimate"
