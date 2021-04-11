@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 
 class TaskIndex extends React.Component {
@@ -7,7 +7,6 @@ class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {input: ""};
-
     this.constructSearchParams = this.constructSearchParams.bind(this);
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -95,13 +94,19 @@ class TaskIndex extends React.Component {
   }
 
   render() {
+    console.log('TaskIndex', this.props);
+
     if (!this.props.tasks) {
       return <div></div>;
     }
     const tasksList = this.props.tasks.map(task => {
 
       return (
-        <li key={`task ${task.id}`}>{task.title} | {task.dueDate}</li>
+        <li key={`task ${task.id}`}>
+          <NavLink to={`${this.props.match.url}/${task.id}`}>
+            {task.title} | {task.dueDate}
+          </NavLink>
+        </li>
       )
     })
 
