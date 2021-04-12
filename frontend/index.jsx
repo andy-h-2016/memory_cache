@@ -9,6 +9,7 @@ import {fetchAllLists} from './actions/list_actions';
 document.addEventListener('DOMContentLoaded', () => {
 
   //setting preloadedState that is loaded into the store
+  let store;
   let preloadedState;
   if (window.currentUser) {
     preloadedState = {
@@ -26,13 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     };
+
+    store = configureStore(preloadedState);
+    store.dispatch(fetchAllLists());
+    
+  } else {
+    store = configureStore();
   }
 
   //ensure the state's currentUser is used instead of the window's
   delete window.currentUser; 
 
-  let store = configureStore(preloadedState);
-  store.dispatch(fetchAllLists());
   window.getState = store.getState;
 
   //grab the root element from root.html.erb
