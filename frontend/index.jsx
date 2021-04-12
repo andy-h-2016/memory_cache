@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
-import {clearDropdown} from './actions/dropdown_actions'
+import {clearDropdown} from './actions/dropdown_actions';
+import {fetchAllLists} from './actions/list_actions';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   delete window.currentUser; 
 
   let store = configureStore(preloadedState);
+  store.dispatch(fetchAllLists());
   window.getState = store.getState;
 
   //grab the root element from root.html.erb

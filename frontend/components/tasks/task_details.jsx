@@ -6,12 +6,12 @@ class TaskDetails extends React.Component {
     super(props);
   }
 
-  // componentDidMount() {
-  //   if (!this.props.task) {
-  //     let searchParams = constructSearchParams(this.props.match.params.listId);
-  //     this.props.searchTasks(searchParams);
-  //   }
-  // }
+  componentDidMount() {
+    if (!this.props.task) {
+      let searchParams = constructSearchParams(this.props.match.params.listId);
+      this.props.searchTasks(searchParams);
+    }
+  }
 
   render() {
     if (!this.props.task) {

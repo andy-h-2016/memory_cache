@@ -13,9 +13,9 @@ class ListSidebar extends React.Component {
     this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchAllLists();
-  }
+  // componentDidMount() {
+  //   this.props.fetchAllLists();
+  // }
 
   openRenameListForm(listId, e) {
     e.preventDefault();

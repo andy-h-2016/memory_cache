@@ -54,9 +54,10 @@ class TaskIndex extends React.Component {
   } 
         
   componentDidUpdate(prevProps) {
-    let listId = this.props.match.params.listId;
-    if (listId !== prevProps.match.params.listId) {
-      let searchParams = constructSearchParams(listId);
+    console.log('ASDOFIJHSGOIJGIADSG')
+    let urlParams = this.props.match.params.listId;
+    if (urlParams !== prevProps.match.params.listId) {
+      let searchParams = constructSearchParams(urlParams);
       this.props.searchTasks(searchParams);
     }
   }
