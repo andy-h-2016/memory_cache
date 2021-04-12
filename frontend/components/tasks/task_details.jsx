@@ -18,8 +18,7 @@ class TaskDetails extends React.Component {
       return null;
     }
 
-    console.log('taskDetails', this.props);
-    const {task, listTitle} = this.props;
+    const {task, list} = this.props;
     return (
       <div className="task-details-pane">
 
@@ -44,7 +43,7 @@ class TaskDetails extends React.Component {
 
             <tr>
               <th className="property-name list-title-header">list</th>
-              <td className="property-value list-title-value">{listTitle || 'Inbox'}</td>
+              <td className="property-value list-title-value">{list ? list.title : 'Inbox'}</td>
             </tr>
           </tbody>
         </table>

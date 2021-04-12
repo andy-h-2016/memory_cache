@@ -15,7 +15,6 @@ class TaskIndex extends React.Component {
   
   constructSearchParams() {
     let listId = this.props.match.params.listId;
-    console.log('listId', listId)
     let today;
 
     switch(true) {
@@ -55,9 +54,9 @@ class TaskIndex extends React.Component {
   } 
         
   componentDidUpdate(prevProps) {
-    let urlParams = this.props.match.params.listId;
-    if (urlParams !== prevProps.match.params.listId) {
-      let searchParams = constructSearchParams(urlParams);
+    let listId = this.props.match.params.listId;
+    if (listId !== prevProps.match.params.listId) {
+      let searchParams = constructSearchParams(listId);
       this.props.searchTasks(searchParams);
     }
   }
@@ -95,22 +94,19 @@ class TaskIndex extends React.Component {
   }
 
   render() {
-    console.log('TaskIndex', this.props);
-
     if (!this.props.tasks) {
       return <div></div>;
     }
-    const tasksList = this.props.tasks.map(task => {
 
+    const tasksList = this.props.tasks.map(task => {
       return (
         <li key={`task ${task.id}`}>
           <NavLink to={`${this.props.match.url}/${task.id}`}>
             {task.title} | {task.dueDate}
           </NavLink>
         </li>
-      )
-    })
-
+      );
+    });
 
     return (
       <div className='tasks-index'>
@@ -127,7 +123,7 @@ class TaskIndex extends React.Component {
         {/* <Route path="/list/:listId/:taskId" component={TaskDetails}/> */}
       </div>
 
-    )
+    );
   }
 }
 

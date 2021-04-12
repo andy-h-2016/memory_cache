@@ -3,12 +3,11 @@ import TaskDetails from './task_details';
 import {searchTasks} from '../../actions/task_actions';
 
 const mapSTP = (state, ownProps)  => {
-  console.log('detailsContainer', ownProps)
   const task = state.entities.tasks ? state.entities.tasks[ownProps.match.params.taskId] : '';
-  const listTitle = task ? state.entities.lists[task.listId].title : '';
+  const list = task ? state.entities.lists[task.listId] : '';
   return ({
     task,
-    listTitle
+    list
   });
 }
 

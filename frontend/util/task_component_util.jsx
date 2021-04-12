@@ -6,8 +6,8 @@ export const constructSearchParams = (urlParams) => {
 
   switch(true) {
     case /\d/.test(urlParams):
-      // check if urlParams is a number
-      return {urlParams};
+      // regex check if urlParams is a number
+      return {listId: urlParams};
     case urlParams === "all":
       return {complete: false};
     case urlParams === "inbox":
