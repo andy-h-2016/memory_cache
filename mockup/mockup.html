@@ -40,28 +40,46 @@
     </section>
 
     <section class='tasks-pane'>
-      <div class='property-buttons'>
-        <div class='button selector'>box</div>
-
-        <div class='property-group-1'>
-          <div class='button complete'>V</div>
-          <div class='button postpone'>+</div>
-        </div>
-
-        <div class='property-group-2'>
-          <div class='button priority'>!</div>
-          <div class='button move'>move</div>
-          <div class="button delete">trash</div>
-        </div>
-      </div>
-
-      <form action="">
-        <input type="hidden" name="form-authenticity-token" value="authenticity-token"> 
-        <input type="text" name="task[title]" placeholder="Add a task...">
-        <input type="submit" class="add-task-button" value="Add Task">
-      </form>
-
-      <ul class="tasks-list">
+      <ul class='tasks-list'>
+        <li>
+          <div class='property-buttons'>
+            <!-- <div class='button selector'>box</div> -->
+    
+            <div class='property-group-1'>
+              <button class='button complete left-button'>V</button>
+              <button class='button postpone right-button'>+</button>
+            </div>
+    
+            <ul class='property-group-2'>
+              <li>
+                <button class='button priority left-button'>!</button>
+              </li>
+    
+              <li>
+                <button class='button change-list middle-button'>change list</button>
+              </li>
+    
+              <li>
+                <button class="button delete right-button">trash</button>
+              </li>
+    
+            </ul>
+          </div>
+        </li>
+        <li>
+          <form action="">
+            <input type="hidden" name="form-authenticity-token" value="authenticity-token"> 
+            <input class="new-task-input" type="text" name="task[title]" placeholder="Add a task...">
+            <div>
+              <button class='new-task-properties'>a</button>
+              <button class='new-task-properties'>b</button>
+              <button class='new-task-properties'>c</button>
+              <button class='new-task-properties'>d</button>
+            </div>
+            <input type="submit" class="add-task-button" value="Add Task">
+          </form>
+        </li>
+  
         <li class="task">
           <a href="">
             <p class="task-title">Floss</p>
@@ -75,6 +93,15 @@
             <p class="due-date">Tuesday</p>
           </a>
         </li>
+
+        <li class="task"></li>
+        <li class="task"></li>
+        <li class="task"></li>
+        <li class="task"></li>
+        <li class="task"></li>
+        <li class="task"></li>
+        <li class="task"></li>
+        </ul>
       </ul>
     </section>
 
