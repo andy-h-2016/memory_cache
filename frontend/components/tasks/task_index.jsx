@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import { constructSearchParams } from '../../util/task_component_util';
+import { constructSearchParams, parseInput } from '../../util/task_component_util';
 
 
 class TaskIndex extends React.Component {
@@ -54,7 +54,6 @@ class TaskIndex extends React.Component {
   } 
         
   componentDidUpdate(prevProps) {
-    console.log('ASDOFIJHSGOIJGIADSG')
     let urlParams = this.props.match.params.listId;
     if (urlParams !== prevProps.match.params.listId) {
       let searchParams = constructSearchParams(urlParams);
@@ -68,25 +67,28 @@ class TaskIndex extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let input = this.state.input;
+
+    let task = parseInput(this.state.input)
+    // let input = this.state.input;
     
-    let title = input.match(/(.+)\s\W/)[1] || String(input);
-    let task = {title};
+    // let titleMatch = input.match(/(.+)\s\W/);
+    // let title = titleMatch ? titleMatch[1] : input;
+  
+    // let task = {title};
 
-    let dueDateMatch = input.match(/\^(.*)/);
-    if (dueDateMatch) {
-      let dueDate = dueDateString[1].split('-');
-      task['dueDate'] = dueDate;
-    };
+    // let dueDateMatch = input.match(/\^(.*)/);
+    // if (dueDateMatch) {
+    //   let dueDate = dueDateString[1].split('-');
+    //   task['dueDate'] = dueDate;
+    // };
 
-    let listMatch = input.match(/#\((.+)\)/);
-    debugger
-    if (listMatch) {
-      let listTitle = listMatch[1];
-      let listObj = this.props.lists.find(list => list.title === listTitle);
-      let listId = listObj.id;
-      task['listId'] = listId; 
-    }
+    // let listMatch = input.match(/#\((.+)\)/);
+    // if (listMatch) {
+    //   let listTitle = listMatch[1];
+    //   let listObj = this.props.lists.find(list => list.title === listTitle);
+    //   let listId = listObj.id;
+    //   task['listId'] = listId; 
+    // }
     
 
     

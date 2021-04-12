@@ -36,9 +36,10 @@ export const constructSearchParams = (urlParams) => {
 }
 
 export const parseInput = input => {
-  let title = input.match(/(.+)\s\W/)[1] || String(input);
-  let task = {title};
+  let titleMatch = input.match(/(.+)\s\W/);
+  let title = titleMatch ? titleMatch[1] : input;
 
+  let task = {title};
   let dueDateMatch = input.match(/\^(.*)/);
   if (dueDateMatch) {
     let dueDate = dueDateString[1].split('-');
@@ -46,7 +47,6 @@ export const parseInput = input => {
   };
 
   let listMatch = input.match(/#\((.+)\)/);
-  debugger
   if (listMatch) {
     let listTitle = listMatch[1];
     let listObj = this.props.lists.find(list => list.title === listTitle);
