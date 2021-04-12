@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import { constructSearchParams } from '../../util/task_component_util';
 
 
 class TaskIndex extends React.Component {
@@ -54,9 +55,9 @@ class TaskIndex extends React.Component {
   } 
         
   componentDidUpdate(prevProps) {
-    let listId = this.props.match.params.listId;
-    if (listId !== prevProps.match.params.listId) {
-      let searchParams = this.constructSearchParams();
+    let urlParams = this.props.match.params.listId;
+    if (urlParams !== prevProps.match.params.listId) {
+      let searchParams = constructSearchParams(urlParams);
       this.props.searchTasks(searchParams);
     }
   }

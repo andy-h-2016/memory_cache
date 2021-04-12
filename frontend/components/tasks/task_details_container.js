@@ -4,13 +4,13 @@ import {searchTasks} from '../../actions/task_actions';
 
 const mapSTP = (state, ownProps)  => {
   console.log('detailsContainer', ownProps)
-  // const task = state.tasks ? state.tasks[ownProps.match.params.taskId] : '';
-  task = state.entities.tasks[ownProps.match.params.taskId];
+  const task = state.entities.tasks ? state.entities.tasks[ownProps.match.params.taskId] : '';
+  const listTitle = task ? state.entities.lists[task.listId].title : '';
   return ({
-    task: task,
-    listTitle: state.entities.lists[task.listId]
+    task,
+    listTitle
   });
-};
+}
 
 const mapDTP = dispatch => ({
   searchTasks: searchParams => dispatch(searchTasks(searchParams))

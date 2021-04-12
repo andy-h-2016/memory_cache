@@ -13,7 +13,7 @@ const App = (props) => (
     <NavBar />
     <ListSidebarContainer/>
     <ProtectedRoute path="/list/:listId" component={TaskIndexContainer}/>
-    {/* <ProtectedRoute path="/list/:listId/:taskId" component={TaskDetailsContainer}/> */}
+    <ProtectedRoute path="/list/:listId/:taskId" component={TaskDetailsContainer}/>
   </div>
 );
 
