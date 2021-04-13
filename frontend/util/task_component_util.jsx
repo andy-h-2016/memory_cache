@@ -42,7 +42,7 @@ export const parseInput = input => {
   let task = {title};
   let dueDateMatch = input.match(/\^(.*)/);
   if (dueDateMatch) {
-    let dueDate = dueDateString[1].split('-');
+    let dueDate = dueDateMatch[1].split('-');
     task['dueDate'] = dueDate;
   };
 
@@ -55,4 +55,20 @@ export const parseInput = input => {
   }
 
   return task;
+}
+
+export const parseDate = dateString => {
+  const YYYYMMDD = /(\d{4}[-\/][0-1]?\d[-\/][0-3]?\d)\s*/;
+
+  let match = dateString.match(YYYYMMDD);
+  if (match) {
+    return match[1].split('-');
+  }
+
+  // switch(true) {
+  //   case dateString.match(YYYYMMDD):
+  //     return dateString.match(YYYYMMDD)[1].split('-');
+  //   case dateString === 'never':
+  //     return null
+  // }
 }

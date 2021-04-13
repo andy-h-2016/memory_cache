@@ -1,0 +1,32 @@
+.task-details-pane {
+  width: 42vw;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: var(--off-white);
+  border-left: 2px solid lightgrey;
+
+}
+
+.task-details-header {
+  font-size: 28px;
+}
+
+.property-name {
+  padding-left: 43px;
+  padding-right: 5px;
+  padding-block: 1px;
+  width: 110px;
+  
+  color: #999;
+  text-align: left;
+  font-size: 13px;
+}
+
+.hidden-submit-button {
+  display: none;
+}
+
+.task-detail-edit-form {
+  border: transparent;
+  font-size: 16px; 
+}
