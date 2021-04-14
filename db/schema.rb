@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_11_005950) do
+ActiveRecord::Schema.define(version: 2021_04_13_221751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_005950) do
     t.datetime "due_date"
     t.integer "priority", default: 4, null: false
     t.boolean "complete", default: false, null: false
-    t.integer "estimate"
+    t.integer "estimate", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["due_date"], name: "index_tasks_on_due_date"

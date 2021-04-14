@@ -4,6 +4,8 @@ import configureStore from './store/store';
 import Root from './components/root';
 import {clearDropdown} from './actions/dropdown_actions';
 import {fetchAllLists} from './actions/list_actions';
+import {searchTasks} from './actions/task_actions';
+import {constructSearchParams} from './util/task_component_util';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     store = configureStore(preloadedState);
     store.dispatch(fetchAllLists());
+    // store.dispatch(searchTasks(constructSearchParams('all')));
     
   } else {
     store = configureStore();
