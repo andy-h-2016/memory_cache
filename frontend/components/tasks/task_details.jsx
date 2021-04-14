@@ -1,6 +1,5 @@
 import React from 'react';
 import { constructSearchParams, parseDate } from '../../util/task_component_util';
-import * as TaskAPIUtil from '../../util/task_api_util';
 
 class TaskDetails extends React.Component {
   constructor(props) {
@@ -14,9 +13,8 @@ class TaskDetails extends React.Component {
 
   componentDidMount() {
       let searchParams = constructSearchParams(this.props.match.params.listId);
-      TaskAPIUtil.fetchTasks(searchParams)
-        .then(tasks => {return this.props.receiveAllTasks(tasks)})
-        .then(() => {this.setState(this.props.task)});
+      this.props.searchTasks(searchParams)
+        .then(() => this.setState(this.props.task));
   
   }
 

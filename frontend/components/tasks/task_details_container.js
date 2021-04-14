@@ -27,8 +27,7 @@ const mapSTP = (state, ownProps)  => {
 
 const mapDTP = dispatch => ({
   searchTasks: searchParams => dispatch(searchTasks(searchParams)),
-  updateTask: task => dispatch(updateTask(task)),
-  receiveAllTasks: tasks => dispatch(receiveAllTasks(tasks))
+  updateTask: task => dispatch(updateTask(task))
 });
 
 
