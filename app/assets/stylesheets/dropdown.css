@@ -2,32 +2,15 @@
 	position: absolute;
 	/* leave positioning (i.e. top, left, etc.) to the more specific classes (such as .list-actions) */
 
+	width: max-content;
 	background-color: var(--off-white);
 	color: black;
 
-	border-radius: 1px;
+	border-radius: 2px;
 	border: 1px solid transparent;
-	width: max-content;
+  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.05);
+
 	z-index: 9999;
-}
-
-.dropdown a {
-	display: block;
-	padding: 5px 12px 5px 10px;
-	min-height: 20px;
-	border-radius: 0px;
-}
-
-.dropdown a:hover {
-	background-color: var(--hover-highlight-blue);
-}
-
-.add-property-button {
-  position: relative;
-}
-
-.add-property-dropdown {
-  width: 200px;
 }
 
 .dropdown-option {
@@ -37,12 +20,25 @@
 .dropdown-link {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  background-color: lightblue;
+
+  width: 100%;  
+	padding: 5px 12px 5px 10px;
+	min-height: 20px;
+	border-radius: 0px;
   
-  font-size: 11px;
+  font-size: 12px;
 }
 
-.dropdown-link span {
-  background-color: lightcoral;
+.dropdown-link:hover {
+	background-color: var(--hover-highlight-blue);
 }
+
+.add-property-button {
+  position: relative;
+}
+
+.add-property-dropdown {
+  width: 150px;
+}
+
+

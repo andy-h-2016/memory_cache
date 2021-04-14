@@ -73,12 +73,12 @@ class ListSidebar extends React.Component {
             {/* DROPDOWN MENU ATTACHED TO EACH LIST LINK */}
             <i className="far fa-caret-square-down list-button down-arrow-button" onClick={(e) => this.toggleDropdown(list.id, e)}></i>
             <ul className={`dropdown list-actions ${dropdownStatus}`}>
-              <li>
-                <a onClick={(e) => this.openRenameListForm(list.id, e)}>Rename list</a>
+              <li className='dropdown-option'>
+                <a className='dropdown-link' onClick={(e) => this.openRenameListForm(list.id, e)}>Rename list</a>
               </li>
 
-              <li>
-                <a onClick={(e) => this.handleDelete(list, e)}>Delete list</a>
+              <li className='dropdown-option'>
+                <a className='dropdown-link' onClick={(e) => this.handleDelete(list, e)}>Delete list</a>
               </li>
             </ul>
         </li>

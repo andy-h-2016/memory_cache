@@ -65,16 +65,16 @@ class TaskIndex extends React.Component {
     let char;
     switch(property) {
       case 'dueDate':
-        char = '^';
+        char = ' ^';
         break
       case 'list':
-        char = '#()';
+        char = ' #()';
         break
       case 'priority':
-        char = '!';
+        char = ' !';
         break
       case 'estimate':
-        char = '=';
+        char = ' =';
         break
       default:
         char = '';

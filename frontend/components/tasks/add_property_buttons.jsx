@@ -9,8 +9,12 @@ const ICONS = {
 }
 
 const today = new Date();
-const tomorrow = today.setDate(today.getDate() + 1);
-const nextWeek = today.setDate(today.getDate() + 7);
+const [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()]
+const tomorrow = new Date(year, month, day + 1)
+const nextWeek = new Date(year, month, day + 7)
+const todayString = today.toISOString();
+const tomorrowString = tomorrow.toISOString();
+const nextWeekString = nextWeek.toISOString();
 
 const AddPropertyButtons = ({insertModChar, insertPropertyValues}) => {
 
@@ -26,9 +30,23 @@ const AddPropertyButtons = ({insertModChar, insertPropertyValues}) => {
 
       <ul className={`dropdown add-property-dropdown`}>
         <li className='dropdown-option'>
-          <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, today)}>
+          <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, todayString)}>
             <span>Today</span>
             <span>{today.toDateString().slice(4,11)}</span>
+          </a>
+        </li>
+
+        <li className='dropdown-option'>
+          <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, tomorrowString)}>
+            <span>Tomorrow</span>
+            <span>{tomorrow.toDateString().slice(4,11)}</span>
+          </a>
+        </li>
+
+          <li className='dropdown-option'>
+          <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, nextWeekString)}>
+            <span>Next Week</span>
+            <span>{nextWeek.toDateString().slice(4,11)}</span>
           </a>
         </li>
 
