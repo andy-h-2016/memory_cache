@@ -36,14 +36,13 @@ export const constructSearchParams = (urlParams) => {
 }
 
 export const parseInput = input => {
-  let titleMatch = input.match(/(.+)\s\W/);
-  let title = titleMatch ? titleMatch[1] : input;
-
+  let titleMatch = input.match(/(.+)\s\W/) || input.match(/[\W\S]\S+\s(?!\W\S+\s)(.+)/)
+  let title = titleMatch[1];
   let task = {title};
   let dueDateMatch = input.match(/\^(.*)/);
   if (dueDateMatch) {
     let dueDate = dueDateMatch[1].split('-');
-    task['dueDate'] = dueDate;
+    task.dueDate = dueDate;
   };
 
   let listMatch = input.match(/#\((.+)\)/);
@@ -51,7 +50,19 @@ export const parseInput = input => {
     let listTitle = listMatch[1];
     let listObj = this.props.lists.find(list => list.title === listTitle);
     let listId = listObj.id;
-    task['listId'] = listId; 
+    task.listId = listId; 
+  }
+
+  let priorityMatch = input.match(/!([1-4])/);
+  if (priorityMatch) {
+    let priority = priorityMatch[1];
+    task.priority = priority;
+  }
+
+  let estimateMatch = input.match(/=(\d+)/);
+  if (estimateMatch) {
+    let estimate = estimateMatch[1];
+    task.estimate = estimate;
   }
 
   return task;

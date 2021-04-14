@@ -8,6 +8,8 @@ class TaskDetails extends React.Component {
 
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.completeTask = this.completeTask.bind(this);
     this.inputRef = {};
   }
 
@@ -29,6 +31,12 @@ class TaskDetails extends React.Component {
     this.setState({[field]: e.currentTarget.value});
   }
 
+  completeTask(e) {
+    e.preventDefault();
+    this.state.complete = true;
+    this.handleSubmit(e);
+  }
+
   handleSubmit(e, field) {
     e.preventDefault();
     const task = Object.assign({}, this.state);
@@ -37,7 +45,14 @@ class TaskDetails extends React.Component {
     task.listId = this.props.listsByTitle[task.listTitle];
     this.props.updateTask(task);
 
-    this.inputRef[field].blur();
+    if (field) {
+      this.inputRef[field].blur();
+    }
+  }
+
+  handleDelete(e) {
+    e.preventDefault();
+    this.props.deleteTask(this.props.task);
   }
 
   render() {
@@ -95,6 +110,9 @@ class TaskDetails extends React.Component {
             {rows}
           </tbody>
         </table>
+
+        <button onClick={this.handleDelete}>Delete</button>
+        <button onClick={this.completeTask}>Complete</button>
 
       </div>
 
