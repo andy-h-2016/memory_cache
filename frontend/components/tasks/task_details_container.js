@@ -1,14 +1,12 @@
 import {connect} from 'react-redux';
 import TaskDetails from './task_details';
-import {searchTasks, updateTask, receiveAllTasks} from '../../actions/task_actions';
-import { fetchAllLists } from '../../actions/list_actions';
+import {searchTasks, updateTask, deleteTask} from '../../actions/task_actions';
 
 const mapSTP = (state, ownProps)  => {
   const taskProps = state.entities.tasks ? state.entities.tasks[ownProps.match.params.taskId] : '';
   let listTitle;
   let task;
-  // console.log('taskProps', taskProps)
-  // console.log('state', state)
+
   if (taskProps) {
     if (taskProps.listId && state.entities.lists[taskProps.listId]) {
       listTitle = state.entities.lists[taskProps.listId].title;
@@ -34,7 +32,6 @@ const mapSTP = (state, ownProps)  => {
 const mapDTP = dispatch => ({
   searchTasks: searchParams => dispatch(searchTasks(searchParams)),
   updateTask: task => dispatch(updateTask(task)),
-  fetchAllLists: () => dispatch(fetchAllLists())
 });
 
 

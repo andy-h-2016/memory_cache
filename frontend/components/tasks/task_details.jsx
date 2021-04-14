@@ -41,7 +41,6 @@ class TaskDetails extends React.Component {
   }
 
   render() {
-    // console.log('task', this.props.task)
     const editableProperties = ['listTitle', 'dueDate', 'priority', 'estimate']
     const rows = editableProperties.map(property => {
       let header = property;

@@ -1,4 +1,5 @@
 class Api::ListsController < ApplicationController
+  caches_action :index
 
 
   def index

@@ -6,3 +6,24 @@
   border: 1px solid transparent;
   width: 42vw;
 }
+
+.complete-tabs {
+  width: 184px;
+  height: 28px;
+  position: relative;
+  left: calc(42vw - 184px);
+  background-color: darkblue;
+}
+
+.tasks-index-row {
+  border: 1px dotted lightgrey;
+  min-height: 33px;
+  display: flex;
+  align-items: center;
+}
+
+.task-link {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

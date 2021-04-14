@@ -2,13 +2,14 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import { constructSearchParams, parseInput } from '../../util/task_component_util';
 
+const MIN_NUM_OF_ROWS = 15;
 
 class TaskIndex extends React.Component {
   //props: tasks from 
   constructor(props) {
     super(props);
     this.state = {input: ""};
-    // this.constructSearchParams = this.constructSearchParams.bind(this);
+    
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.urlParams = this.props.match.params.listId;
@@ -44,30 +45,41 @@ class TaskIndex extends React.Component {
       return <div></div>;
     }
 
-    const tasksList = this.props.tasks.map(task => {
-      return (
-        <li key={`task ${task.id}`}>
-          <NavLink to={`${this.props.match.url}/${task.id}`}>
-            {task.title} | {task.dueDate}
+    const tasksList = [];
+    this.props.tasks.forEach(task => {
+      tasksList.push(
+        <li className='tasks-index-row' key={`task ${task.id}`}>
+          <NavLink className='task-link' to={`${this.props.match.url}/${task.id}`}>
+            <span>{task.title}</span>
+            <span>{task.dueDate}</span>
           </NavLink>
         </li>
-      );
+      )
     });
 
-    return (
-      <div className='tasks-index'>
-        <div className="complete-tabs"></div> {/* Incomplete vs Completed tabs will be NavLinks */}
-        <div className="task-buttons"></div> {/* task buttons will be separate component */}
-        <form>
-          <input onChange={this.update} type="text" placeholder="Add a task..." value={this.state.input}/>
-          <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
-        </form>
+    const numAdditionalRows = MIN_NUM_OF_ROWS - tasksList.length;
+    for (let i = 0; i < numAdditionalRows; i++) {
+      tasksList.push(<li className='tasks-index-row' key={`empty-${i}`}></li>)
+    }
 
-        <ul className='list-of-tasks'>
+    return (
+      <section className='tasks-index-pane'>
+        <div className="complete-tabs"></div> {/* Incomplete vs Completed tabs will be NavLinks */}
+
+        <ul className='tasks-index'>
+          <li className="tasks-index-row task-buttons"></li> {/* task buttons will be separate component */}
+          <li className="tasks-index-row" key='form'>
+            <form>
+              <input onChange={this.update} type="text" placeholder="Add a task..." value={this.state.input}/>
+              <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
+            </form>
+          </li>
+          
           {tasksList}
         </ul>
-        {/* <Route path="/list/:listId/:taskId" component={TaskDetails}/> */}
-      </div>
+        
+      </section>
+        
 
     );
   }
