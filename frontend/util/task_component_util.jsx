@@ -36,7 +36,7 @@ export const constructSearchParams = (urlParams) => {
 }
 
 export const parseInput = input => {
-  let titleMatch = input.match(/(.+)\s\W/) || input.match(/[\W\S]\S+\s(?!\W\S+\s)(.+)/)
+  let titleMatch = input.match(/(.+)\s\W/) //|| input.match(/[\W\S]\S+\s(?!\W\S+\s)(.+)/)
   let title = titleMatch[1];
   let task = {title};
   let dueDateMatch = input.match(/\^(.*)/);

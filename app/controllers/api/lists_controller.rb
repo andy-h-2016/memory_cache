@@ -4,7 +4,6 @@ class Api::ListsController < ApplicationController
   # cache_sweeper :list_sweeper
 
   def index
-    debugger
     @lists = List.where(user_id: current_user.id)
     render :index
     
