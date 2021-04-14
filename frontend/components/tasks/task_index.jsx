@@ -13,8 +13,11 @@ class TaskIndex extends React.Component {
     
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.insertChar = this.insertChar.bind(this);
+    this.insertModChar = this.insertModChar.bind(this);
+    this.insertPropertyValues = this.insertPropertyValues.bind(this);
+
     this.urlParams = this.props.match.params.listId;
+    this.inputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -28,10 +31,25 @@ class TaskIndex extends React.Component {
       let searchParams = constructSearchParams(this.urlParams);
       this.props.searchTasks(searchParams);
     }
+    
   }
 
   update(e) {
-    this.setState({input: e.currentTarget.value})
+    let input = e.currentTarget.value;
+    this.setState({input: input});
+
+    let lastChar = input[input.length - 1];
+    switch(true) {
+      case lastChar === '^':
+        break
+      case input.match(/#\(\)$/):
+        
+        break
+      case lastChar === '!':
+        break
+      case lastChar === '=':
+        break
+    }
   }
 
   handleSubmit(e) {
@@ -42,7 +60,7 @@ class TaskIndex extends React.Component {
     this.props.createTask(task);
   }
 
-  insertChar(e, property) {
+  insertModChar(e, property) {
     e.preventDefault();
     let char;
     switch(property) {
@@ -60,11 +78,17 @@ class TaskIndex extends React.Component {
         break
       default:
         char = '';
-    } 
+    }
 
-    console.log('task index state', this.state.input);
-    this.setState({input: `${this.state.input}${char}`})
+    this.setState({input: `${this.state.input}${char}`});
+    this.inputRef.current.focus();    
   }
+
+  insertPropertyValues(e, values) {
+    e.preventDefault();
+
+    this.setState({input: `${this.state.input}${values}`})
+  } 
 
   render() {
     if (!this.props.tasks) {
@@ -88,6 +112,10 @@ class TaskIndex extends React.Component {
       tasksList.push(<li className='tasks-index-row empty-row' key={`empty-${i}`}></li>)
     }
 
+    // let dropdownStatus = this.props.dropdown === list.id ? "" : "hidden" 
+
+    
+
     return (
       <section className='tasks-index-pane'>
         <div className="complete-tabs"></div> {/* Incomplete vs Completed tabs will be NavLinks */}
@@ -96,8 +124,18 @@ class TaskIndex extends React.Component {
           <li className="tasks-index-row task-buttons"></li> {/* task buttons will be separate component */}
           <li className="tasks-index-row form-row" key='form'>
             <form className='add-task-form'>
-              <input className='add-task-input' onChange={this.update} type="text" placeholder="Add a task..." value={this.state.input}/>
-              <AddPropertyButtons insertChar={this.insertChar}/>
+              <input 
+                className='add-task-input'
+                ref={this.inputRef}
+                onChange={this.update} 
+                type="text" 
+                placeholder="Add a task..." 
+                value={this.state.input}
+              />
+
+
+              <AddPropertyButtons insertModChar={this.insertModChar} insertPropertyValues={this.insertPropertyValues}/>
+              
               <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
             </form>
           </li>

@@ -14,9 +14,9 @@ class TaskDetails extends React.Component {
   }
 
   componentDidMount() {
-      let searchParams = constructSearchParams(this.props.match.params.listId);
-        this.props.searchTasks(searchParams)
-          .then(() => this.setState(this.props.task));
+    let searchParams = constructSearchParams(this.props.match.params.listId);
+      this.props.searchTasks(searchParams)
+        .then(() => this.setState(this.props.task));
   }
 
   componentDidUpdate(prevProps) {

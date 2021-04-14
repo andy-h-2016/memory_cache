@@ -2,13 +2,11 @@ import {connect} from 'react-redux';
 import TaskIndex from './task_index';
 import {searchTasks, createTask} from '../../actions/task_actions';
 
-const mapSTP = (state, ownProps) => (Object.assign(
-  {},
-  {tasks: Object.values(state.entities.tasks)},
-  {lists: Object.values(state.entities.lists)}
-));
-  
-
+const mapSTP = (state, ownProps) => ({
+  tasks: Object.values(state.entities.tasks),
+  lists: Object.values(state.entities.lists),
+  dropdown: state.ui.dropdown
+});
 
 const mapDTP = dispatch => ({
   searchTasks: searchParams => dispatch(searchTasks(searchParams)),

@@ -37,11 +37,12 @@ export const constructSearchParams = (urlParams) => {
 
 export const parseInput = input => {
   let titleMatch = input.match(/(.+)\s\W/) //|| input.match(/[\W\S]\S+\s(?!\W\S+\s)(.+)/)
-  let title = titleMatch[1];
+
+  let title = titleMatch ? titleMatch[1] : input;
   let task = {title};
   let dueDateMatch = input.match(/\^(.*)/);
   if (dueDateMatch) {
-    let dueDate = dueDateMatch[1].split('-');
+    let dueDate = parseDate(dueDateMatch[1])
     task.dueDate = dueDate;
   };
 
@@ -69,17 +70,18 @@ export const parseInput = input => {
 }
 
 export const parseDate = dateString => {
-  const YYYYMMDD = /(\d{4}[-\/][0-1]?\d[-\/][0-3]?\d)\s*/;
+  
+  const YYYYMMDD_Dash = /(\d{4}-[0-1]?\d-[0-3]?\d)\s*/;
+  const YYYYMMDD_Slash = /(\d{4}\/[0-1]?\d\/[0-3]?\d)\s*/;
 
-  let match = dateString.match(YYYYMMDD);
-  if (match) {
-    return match[1].split('-');
-  }
 
-  // switch(true) {
-  //   case dateString.match(YYYYMMDD):
-  //     return dateString.match(YYYYMMDD)[1].split('-');
-  //   case dateString === 'never':
-  //     return null
-  // }
+  let matchDash = dateString.match(YYYYMMDD_Dash);
+  let matchSlash = dateString.match(YYYYMMDD_Slash);
+  switch (true) {
+    case !!matchDash:
+      return matchDash[1].split('-');
+    case !!matchSlash:
+      return matchSlash[1].split('/');
+  } 
+
 }

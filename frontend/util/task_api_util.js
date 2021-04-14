@@ -7,13 +7,16 @@ export const fetchTasks = searchParams => (
   })
 );
 
-export const createTask = task => (
+export const createTask = task => {
+  console.log('task params', task)
+  return (
   $.ajax({
     url: 'api/tasks',
     method: 'POST',
     data: {task}
   })
 );
+}
 
 export const updateTask = task => {
   console.log('update params', task)
