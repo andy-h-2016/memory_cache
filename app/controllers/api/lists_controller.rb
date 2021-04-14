@@ -1,7 +1,11 @@
 class Api::ListsController < ApplicationController
+
+
   def index
     @lists = List.where(user_id: current_user.id)
     render :index
+    
+    expires_in 24.hours, public: true
   end
 
   def create

@@ -13,14 +13,13 @@ class TaskDetails extends React.Component {
 
   componentDidMount() {
       let searchParams = constructSearchParams(this.props.match.params.listId);
-      this.props.searchTasks(searchParams)
-        .then(() => this.setState(this.props.task));
-  
+        this.props.searchTasks(searchParams)
+          .then(() => this.setState(this.props.task));
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.task) {
-      this.setState(this.props.task)
+      this.setState(this.props.task);
     } else if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
       this.setState(this.props.task);
     }
@@ -34,20 +33,17 @@ class TaskDetails extends React.Component {
     e.preventDefault();
     const task = Object.assign({}, this.state);
     
-    if (field === 'dueDate') {
-      task.dueDate = parseDate(task.dueDate);
-    }
-    
+    task.dueDate = parseDate(task.dueDate);
+    task.listId = this.props.listsByTitle[task.listTitle];
     this.props.updateTask(task);
 
     this.inputRef[field].blur();
   }
 
   render() {
-    const {task, list} = this.props;    
-    const editableProperties = ['list', 'dueDate', 'priority', 'estimate']
+    // console.log('task', this.props.task)
+    const editableProperties = ['listTitle', 'dueDate', 'priority', 'estimate']
     const rows = editableProperties.map(property => {
-      // property.match(/.*[A-Z]+/)
       let header = property;
       let htmlClass = property;
       switch (property) {
@@ -55,35 +51,47 @@ class TaskDetails extends React.Component {
           header = 'due';
           htmlClass = 'due-date';
           break
+        case 'listTitle':
+          header = 'list';
+          htmlClass = 'list-title';
       }
 
       return (
-        <tr key={property}>
+        <tr key={property} className='task-detail-edit-form'>
           <th className={`property-name ${htmlClass}-header`}>{header}</th>
           <td className={`property-value ${htmlClass}-value`}>
-            <form>
+            <form className='task-detail-edit-form'>
               <input 
-                className={`task-detail-edit-form ${htmlClass}-input`} 
-                onChange={e => update(e, property)}
+                className={`task-detail-edit-input ${htmlClass}-input`} 
+                onChange={e => this.update(e, property)}
                 ref={el => this.inputRef[property] = el} 
                 type="text" 
                 value={this.state[property]}
               />
 
-              <input className='hidden-submit-button' onClick={e =>  handleSubmit(e, property)} type="submit"/>
+              <input className='hidden-submit-button' onClick={e => this.handleSubmit(e, property)} type="submit"/>
             </form>
           </td>
         </tr>
       )
-    })
+    });
 
     return (
       <div className="task-details-pane">
+        <form className="task-detail-edit-form">
+          <input 
+            className={`task-detail-edit-input title-input`} 
+            onChange={e =>this.update(e, 'title')}
+            ref={el => this.inputRef['title'] = el} 
+            type="text" 
+            value={this.state.title}
+          />
+
+          <input className='hidden-submit-button' onClick={e => this.handleSubmit(e, 'title')} type="submit"/>
+        </form>
         
 
-        <table className='task-details'>
-          <caption className='task-details-header'>{task.title}</caption>
-
+        <table className='task-details-table'>
           <tbody>
             {rows}
           </tbody>
