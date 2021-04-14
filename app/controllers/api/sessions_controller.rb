@@ -1,4 +1,7 @@
 class Api::SessionsController < ApplicationController
+
+  # cache_sweeper :list_sweeper
+
   def create
     @user = User.find_by_credentials(params[:user][:username], params[:user][:password])
     if @user

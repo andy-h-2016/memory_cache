@@ -1,12 +1,14 @@
 class Api::ListsController < ApplicationController
-  caches_action :index
+  # caches_action :index
 
+  # cache_sweeper :list_sweeper
 
   def index
+    debugger
     @lists = List.where(user_id: current_user.id)
     render :index
     
-    expires_in 24.hours, public: true
+    # expires_in 24.hours, public: true
   end
 
   def create

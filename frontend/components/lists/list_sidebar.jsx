@@ -13,11 +13,11 @@ class ListSidebar extends React.Component {
     this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
-  // componentDidMount() {
-  //   if (!this.props.list) {
-  //     this.props.fetchAllLists();
-  //   }
-  // }
+  componentDidMount() {
+    if (!this.props.list) {
+      this.props.fetchAllLists();
+    }
+  }
 
   openRenameListForm(listId, e) {
     e.preventDefault();
