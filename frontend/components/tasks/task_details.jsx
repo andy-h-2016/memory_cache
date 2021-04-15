@@ -26,11 +26,11 @@ class TaskDetails extends React.Component {
 
   componentDidUpdate(prevProps) {
     this.completed = this.props.location.pathname.includes("completed");
-    let completedPath = this.completed ? 'completed' : ''
+    let completedPath = this.completed ? '/completed' : ''
     if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
       this.setState(this.props.task);
     } else if (Object.values(prevProps.task).length > 0 && Object.values(this.props.task).length === 0) {
-      this.props.history.push(`/list/${this.props.match.params.listId}/${completedPath}`);
+      this.props.history.push(`/list/${this.props.match.params.listId}${completedPath}`);
     }
   }
 
