@@ -32,7 +32,7 @@ class TaskDetails extends React.Component {
     let completedPath = this.completed ? '/completed' : '';
     let taskWasHere = Object.values(prevProps.task).length > 0;
     let taskIsNotHere = Object.values(this.props.task).length === 0;
-    
+
     if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
       this._isMounted && this.setState(this.props.task);
     } else if (taskWasHere && taskIsNotHere) {
@@ -113,7 +113,7 @@ class TaskDetails extends React.Component {
               />
 
               <input
-                className="hidden-submit-button"
+                className="hidden"
                 onClick={(e) => this.handleSubmit(e, property)}
                 type="submit"
               />
@@ -135,7 +135,7 @@ class TaskDetails extends React.Component {
           />
 
           <input
-            className="hidden-submit-button"
+            className="hidden"
             onClick={(e) => this.handleSubmit(e, "title")}
             type="submit"
           />
@@ -145,8 +145,10 @@ class TaskDetails extends React.Component {
           <tbody>{rows}</tbody>
         </table>
 
-        <button onClick={this.handleDelete}>Delete</button>
-        <button onClick={this.toggleComplete}>{this.completed ? 'Uncomplete' : 'Complete'}</button>
+        <div className='button-container'>
+          <button className="toggle-complete-button" onClick={this.toggleComplete}>{this.completed ? 'Uncomplete' : 'Complete'}</button>
+          <button className="delete-button" onClick={this.handleDelete}>Delete</button>
+        </div>
       </div>
     );
   }

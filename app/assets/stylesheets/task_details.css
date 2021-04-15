@@ -1,5 +1,7 @@
 .task-details-pane {
   width: 42vw;
+  height: 100vh;
+  font-size: 13px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   background-color: var(--off-white);
@@ -8,12 +10,7 @@
 
 .task-details-table {
   width: 100%;
-}
-
-.title-input {
-  font-size: 28px;
   margin-bottom: 14px;
-  width: 100%;
 }
 
 .task-detail-edit-form {
@@ -23,20 +20,24 @@
 .task-detail-edit-input {
   width: 100%;
   border: transparent;
-  font-size: 16px; 
+  padding: 4px;
+}
+
+.title-input {
+  margin-block: 18px; 
+  padding-left: 1.5vw; 
+  font-size: 24px;
+
+  width: 100%;
 }
 
 .property-name {
-  padding-left: 43px;
+  padding-left: 3vw;
   padding-right: 5px;
   padding-block: 1px;
   width: 110px;
   
   color: #999;
   text-align: left;
-  font-size: 13px;
 }
 
-.hidden-submit-button {
-  display: none;
-}

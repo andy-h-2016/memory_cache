@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 import { constructSearchParams, parseInput } from '../../util/task_component_util';
 import AddPropertyButtons from './add_property_buttons';
 
-const MIN_NUM_OF_ROWS = 15;
+const MIN_NUM_OF_ROWS = 20;
 
 class TaskIndex extends React.Component {
   //props: tasks from 
@@ -139,52 +139,55 @@ class TaskIndex extends React.Component {
         <ul className='tasks-index'>
           {/* task buttons will be separate component */}
           {/* <li className="tasks-index-row task-buttons"></li>  */}
-          <li className="tasks-index-row complete-tabs">
-            <NavLink 
-              to={this.props.location.pathname.replace(/\/completed.*/, '')}
-              className="complete-tab-link"
-              exact={true} >
-              Incomplete
-            </NavLink>
+          <div className="scrollbar-container">
+            <li className="tasks-index-row complete-tabs">
+              <NavLink 
+                to={this.props.location.pathname.replace(/\/completed.*/, '')}
+                className="complete-tab-link"
+                exact={true} >
+                Incomplete
+              </NavLink>
 
-            <NavLink 
-              to={`/list/${this.props.match.params.listId}/completed`} 
-              className="complete-tab-link" >
-              Complete
-            </NavLink>
-          </li> 
+              <NavLink 
+                to={`/list/${this.props.match.params.listId}/completed`} 
+                className="complete-tab-link" >
+                Complete
+              </NavLink>
+            </li> 
 
-          <li className="tasks-index-row instructions">
-            Type in your task, then use the buttons below to add details.
-          </li>
+            <li className="tasks-index-row instructions">
+              Type in your task, then use the buttons below to add details.
+            </li>
 
-          <li className="tasks-index-row form-row" key='form'>
-            <form className='add-task-form'>
-              <input 
-                className='add-task-input'
-                ref={this.inputRef}
-                onChange={this.update} 
-                type="text" 
-                placeholder="Add a task..." 
-                value={this.state.input}
-              />
-
-
-              <AddPropertyButtons 
-                dropdown={this.props.dropdown}
-                lists={this.props.lists}
-
-                insertModChar={this.insertModChar}
-                insertPropertyValues={this.insertPropertyValues}
-                activateDropdown={this.activateDropdown}
-                clearDropdown={this.clearDropdown}
+            <li className="tasks-index-row form-row" key='form'>
+              <form className='add-task-form'>
+                <input 
+                  className='add-task-input'
+                  ref={this.inputRef}
+                  onChange={this.update} 
+                  type="text" 
+                  placeholder="Add a task..." 
+                  value={this.state.input}
                 />
-              
-              <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
-            </form>
-          </li>
-          
-          {tasksList}
+
+
+                <AddPropertyButtons 
+                  dropdown={this.props.dropdown}
+                  lists={this.props.lists}
+
+                  insertModChar={this.insertModChar}
+                  insertPropertyValues={this.insertPropertyValues}
+                  activateDropdown={this.activateDropdown}
+                  clearDropdown={this.clearDropdown}
+                  />
+                
+                <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
+              </form>
+            </li>
+            
+            {tasksList}
+
+          </div>
 
         </ul>
         
