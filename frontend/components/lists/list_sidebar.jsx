@@ -92,7 +92,7 @@ class ListSidebar extends React.Component {
 
         <section className="all-lists">
           <ul className="lists-index standard-lists">
-            <li className="list-link-container lists-header" key="all-tasks">
+            <li className="list-link-container" key="all-tasks">
               <NavLink 
                 className="list-link" 
                 to={`/list/all`} 
@@ -130,9 +130,9 @@ class ListSidebar extends React.Component {
 
           <ul className="lists-index user-generated-lists">
             <li className="list-link-container" key="lists-header">
-              <a className="list-link lists-header">Lists</a>
+              <p className="list-link lists-header">Lists</p>
               <i className="far fa-plus-square list-button plus-button" onClick={this.openCreateListForm}></i>
-              <i className="far fa-caret-square-down list-button down-arrow-button" onClick={(e) => preventDefault()}></i>
+              {/* <i className="far fa-caret-square-down list-button down-arrow-button" onClick={(e) => preventDefault()}></i> */}
             </li>
 
             {listLinks}

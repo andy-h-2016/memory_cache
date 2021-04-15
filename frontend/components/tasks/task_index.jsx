@@ -60,8 +60,14 @@ class TaskIndex extends React.Component {
     this.props.createTask(task);
   }
 
+  toggleDropdown(e, dropdown) {
+    e.stopPropagation();
+    this.props.activateDropdown(dropdown);
+  }
+
   insertModChar(e, property) {
     e.preventDefault();
+    e.stopPropagation();
     let char;
     switch(property) {
       case 'dueDate':
@@ -80,6 +86,7 @@ class TaskIndex extends React.Component {
         char = '';
     }
 
+    this.props.activateDropdown(property)
     this.setState({input: `${this.state.input}${char}`});
     this.inputRef.current.focus();    
   }
@@ -134,7 +141,13 @@ class TaskIndex extends React.Component {
               />
 
 
-              <AddPropertyButtons insertModChar={this.insertModChar} insertPropertyValues={this.insertPropertyValues}/>
+              <AddPropertyButtons 
+                insertModChar={this.insertModChar}
+                insertPropertyValues={this.insertPropertyValues}
+                dropdown={this.props.dropdown}
+                activateDropdown={this.activateDropdown}
+                clearDropdown={this.clearDropdown}
+                />
               
               <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
             </form>

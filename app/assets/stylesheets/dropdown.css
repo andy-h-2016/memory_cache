@@ -33,12 +33,18 @@
 	background-color: var(--hover-highlight-blue);
 }
 
-.add-property-button {
+.button-dropdown-container {
   position: relative;
+}
+
+.add-property-buttons {
+  display: flex;
 }
 
 .add-property-dropdown {
   width: 150px;
+  left: 0;
+  top: 100%;
 }
 
 

@@ -61,7 +61,8 @@
 }
 
 .plus-button {
-  right: 18px;
+  // right: 18px;
+  right: 3px;
 }
 
 .list-actions {
@@ -70,5 +71,8 @@
   right: 3px;
 }
 
-
+.lists-header:hover {
+  //disable list-link hover above.
+  background-color: inherit;
+}
 
