@@ -26,12 +26,11 @@ class TaskDetails extends React.Component {
 
   componentDidUpdate(prevProps) {
     this.completed = this.props.location.pathname.includes("completed");
-    let completedPath = this.completed ? '/completed' : ''
-    console.log('details', this.props)
+    let completedPath = this.completed ? 'completed' : ''
     if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
       this.setState(this.props.task);
     } else if (Object.values(prevProps.task).length > 0 && Object.values(this.props.task).length === 0) {
-      this.props.history.push(`/list${completedPath}/${this.props.match.params.listId}`);
+      this.props.history.push(`/list/${this.props.match.params.listId}/${completedPath}`);
     }
   }
 
@@ -53,12 +52,14 @@ class TaskDetails extends React.Component {
     task.listId = this.props.listsByTitle[task.listTitle];
     this.props.updateTask(task)
     .then(() => {
+        console.log('updated', this.props)
+
         let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
         this.props.searchTasks(searchParams)
-          .then(() => {
-            console.log('searchParams', searchParams);
-            this.setState(this.props.task)
-        });
+        //   .then(() => {
+        //     console.log('searchParams', searchParams);
+        //     this.setState(this.props.task)
+        // });
       });
 
     if (field) {

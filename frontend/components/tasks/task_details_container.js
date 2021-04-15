@@ -13,7 +13,6 @@ const mapSTP = (state, ownProps)  => {
     } else {
       listTitle = 'Inbox';
     }
-    
     task = Object.assign({}, taskProps, {listTitle})
     
   } else {
@@ -22,11 +21,7 @@ const mapSTP = (state, ownProps)  => {
   
   let listsByTitle = {};
   Object.values(state.entities.lists).forEach(list => listsByTitle[list.title] = list.id);
-  // console.log('ownProps', ownProps)
-  // console.log('taskProps', taskProps)
-  // console.log('task', task)
-  // console.log('listsByTitle', listsByTitle)
-  
+
   return ({
     task,
     listsByTitle
