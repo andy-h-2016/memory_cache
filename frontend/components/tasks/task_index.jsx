@@ -75,7 +75,15 @@ class TaskIndex extends React.Component {
         break
       case 'list':
         char = ' #()';
-        break
+        this.props.activateDropdown(property)
+        this.setState({input: `${this.state.input}${char}`}, () => {
+          this.inputRef.current.focus();
+  
+          //move cursor to 2nd to last position to be inside the #()
+          const cursorPosition = this.state.input.length - 1; 
+          this.inputRef.current.setSelectionRange(cursorPosition, cursorPosition)
+        });
+        return
       case 'priority':
         char = ' !';
         break
@@ -91,10 +99,13 @@ class TaskIndex extends React.Component {
     this.inputRef.current.focus();    
   }
 
-  insertPropertyValues(e, values) {
+  insertPropertyValues(e, values, property) {
     e.preventDefault();
+    const input = property === 'list' 
+      ? this.state.input.replace(/#\(\)/, `#(${values})`) 
+      : this.state.input.concat(values);
 
-    this.setState({input: `${this.state.input}${values}`})
+    this.setState({input})
   } 
 
   render() {

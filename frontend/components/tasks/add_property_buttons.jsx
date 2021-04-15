@@ -70,7 +70,7 @@ const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, list
           {
             dropdownProps[property].map((lineItemProp, idx) => (
             <li key={`${property}-dropdown-${idx}`} className='dropdown-option'>
-              <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, lineItemProp[0])}>
+              <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, lineItemProp[0], property)}>
                 <span key={`${property}-span-1`}>{lineItemProp[1]}</span>
                 <span key={`${property}-span-2`}>{lineItemProp[2]}</span>
               </a>
