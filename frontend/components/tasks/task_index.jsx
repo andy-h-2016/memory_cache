@@ -108,7 +108,7 @@ class TaskIndex extends React.Component {
         <li className='tasks-index-row task-row' key={`task ${task.id}`}>
           <NavLink className='task-link' to={`${this.props.match.url}/${task.id}`}>
             <span>{task.title}</span>
-            <span>{task.dueDate}</span>
+            <span className="due-date">{task.dueDate}</span>
           </NavLink>
         </li>
       )
@@ -142,9 +142,11 @@ class TaskIndex extends React.Component {
 
 
               <AddPropertyButtons 
+                dropdown={this.props.dropdown}
+                lists={this.props.lists}
+
                 insertModChar={this.insertModChar}
                 insertPropertyValues={this.insertPropertyValues}
-                dropdown={this.props.dropdown}
                 activateDropdown={this.activateDropdown}
                 clearDropdown={this.clearDropdown}
                 />

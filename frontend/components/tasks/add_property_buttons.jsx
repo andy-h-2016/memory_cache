@@ -24,44 +24,59 @@ const todaySlice = today.toDateString().slice(4,11);
 const tomorrowSlice = tomorrow.toDateString().slice(4,11);
 const nextWeekSlice = nextWeek.toDateString().slice(4,11);
 
-const DROPDOWN_PROPS = {
-  dueDate: [
-    [todayInput, todayString, todaySlice],
-    [tomorrowInput, tomorrowString, tomorrowSlice],
-    [nextWeekInput, nextWeekString, nextWeekSlice]
-  ]
-}
-
 
 // THE ACTUAL COMPONENT
-const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown}) => {
+const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, lists}) => {
+
+  const listArr = lists.map(list => [list.id, list.title]);
+
+  const dropdownProps = {
+    dueDate: [
+      [todayInput, todayString, todaySlice],
+      [tomorrowInput, tomorrowString, tomorrowSlice],
+      [nextWeekInput, nextWeekString, nextWeekSlice]
+    ],
+    priority: [
+      [1, 'Priority 1'],
+      [2, 'Priority 2'],
+      [3, 'Priority 3'],
+      [4, 'Priority 4']
+    ],
+    estimate: [
+      [2, '2 minutes'],
+      [5, '5 minutes'],
+      [10, '10 minutes'],
+      [10, '10 minutes'],
+      [15, '15 minutes'],
+      [30, '30 minutes'],
+      [60, '1 hour']
+    ],
+    list: listArr
+  }
 
   const buttons = PROPERTIES.map(property => {
-    property = 'dueDate'; //for testing purposes only. Delete later!!
     let dropdownStatus = dropdown === property ? "" : "hidden";
     
     return(
       <div className='button-dropdown-container'>
         <button
-          key={property} 
+          key={`${property}-button`} 
           className="add-property-button" 
           dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(ICONS[property])}}
-          onClick={e => insertModChar(e, property)}
-        >
+          onClick={e => insertModChar(e, property)} >
         </button>
 
         <ul className={`dropdown add-property-dropdown ${dropdownStatus}`}>
           {
-            DROPDOWN_PROPS[property].map(lineItemProp => {
-            <li className='dropdown-option'>
+            dropdownProps[property].map(lineItemProp => (
+            <li key={`${property}-dropdown`} className='dropdown-option'>
               <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, lineItemProp[0])}>
-                <span>{lineItemProp[1]}</span>
-                <span>{lineItemProp[2]}</span>
+                <span key={`${property}-span-1`}>{lineItemProp[1]}</span>
+                <span key={`${property}-span-2`}>{lineItemProp[2]}</span>
               </a>
             </li>
-
-            }) 
-          }
+            ))
+          };
         </ul>
 
         {/* <ul className={`dropdown add-property-dropdown ${dropdownStatus}`}>

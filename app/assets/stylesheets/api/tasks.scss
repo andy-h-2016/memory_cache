@@ -29,6 +29,7 @@
 .task-link {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
@@ -62,5 +63,10 @@
 
 .add-task-input:focus {
   border-color: lightskyblue;
+}
+
+.due-date {
+  font-size: 11px;
+  width: 70px;
 }
 
