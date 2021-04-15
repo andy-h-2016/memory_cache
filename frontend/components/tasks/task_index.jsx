@@ -120,8 +120,6 @@ class TaskIndex extends React.Component {
       completedParam = 'completed/';
     }
 
-
-    console.log('rendering, props:', this.props)
     const tasksList = [];
     this.props.tasks.forEach(task => {
       tasksList.push(
@@ -138,10 +136,6 @@ class TaskIndex extends React.Component {
     for (let i = 0; i < numAdditionalRows; i++) {
       tasksList.push(<li className='tasks-index-row empty-row' key={`empty-${i}`}></li>)
     }
-
-    // let dropdownStatus = this.props.dropdown === list.id ? "" : "hidden" 
-
-    
 
     return (
       <section className='tasks-index-pane'>
@@ -179,11 +173,10 @@ class TaskIndex extends React.Component {
           </li>
           
           {tasksList}
+          
         </ul>
         
       </section>
-        
-
     );
   }
 }

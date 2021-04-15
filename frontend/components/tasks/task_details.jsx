@@ -16,9 +16,12 @@ class TaskDetails extends React.Component {
 
     this.completed = this.props.location.pathname.includes("completed");
     this.inputRef = {};
+
+    this._isMounted = false;
   }
 
   componentDidMount() {
+    this._isMounted = true;
     let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
     this.props.searchTasks(searchParams)
       .then(() => this.setState(this.props.task));
@@ -28,10 +31,14 @@ class TaskDetails extends React.Component {
     this.completed = this.props.location.pathname.includes("completed");
     let completedPath = this.completed ? '/completed' : ''
     if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
-      this.setState(this.props.task);
+      this._isMounted && this.setState(this.props.task);
     } else if (Object.values(prevProps.task).length > 0 && Object.values(this.props.task).length === 0) {
-      this.props.history.push(`/list/${this.props.match.params.listId}${completedPath}`);
+      this._isMounted && this.props.history.push(`/list/${this.props.match.params.listId}${completedPath}`);
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   update(e, field) {
@@ -50,16 +57,16 @@ class TaskDetails extends React.Component {
     
     task.dueDate = parseDate(task.dueDate);
     task.listId = this.props.listsByTitle[task.listTitle];
-    this.props.updateTask(task)
+    this._isMounted && this.props.updateTask(task)
     .then(() => {
         console.log('updated', this.props)
 
         let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
-        this.props.searchTasks(searchParams)
-        //   .then(() => {
-        //     console.log('searchParams', searchParams);
-        //     this.setState(this.props.task)
-        // });
+        this._isMounted && this.props.searchTasks(searchParams)
+          .then(() => {
+            console.log('searchParams', searchParams);
+            this._isMounted && this.setState(this.props.task)
+        });
       });
 
     if (field) {
@@ -75,6 +82,7 @@ class TaskDetails extends React.Component {
   }
 
   render() {
+    console.log('details props', this.props)
     if (Object.values(this.state).length === 0) {
       return null;
     }
