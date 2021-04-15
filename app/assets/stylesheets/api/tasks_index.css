@@ -1,12 +1,3 @@
-// Place all the styles related to the api/tasks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-// .tasks-index-pane {
-//   visibility: hidden;
-//   overflow: auto;
-// }
-
 
 .scrollbar-container {
   overflow: auto;
@@ -76,10 +67,6 @@
   padding: 5px;
 }
 
-.add-task-input:focus {
-  border-color: lightskyblue;
-}
-
 .due-date {
   font-size: 11px;
   width: 70px;
@@ -90,8 +77,8 @@
 }
 
 .complete-tabs {
-  // position: relative;
-  // left: calc(42vw - 184px);
+  /* position: relative;
+  left: calc(42vw - 184px); */
   padding-top: 20px;
   padding-bottom: 0px;
   background-color: white;
@@ -111,7 +98,7 @@
 }
 
 .complete-tab-link {
-  // box-sizing: content-box;
+  /* box-sizing: content-box; */
 
   padding-inline: 5px;
   padding-top: 5px;

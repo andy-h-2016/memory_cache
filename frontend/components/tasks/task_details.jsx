@@ -146,8 +146,13 @@ class TaskDetails extends React.Component {
         </table>
 
         <div className='button-container'>
-          <button className="toggle-complete-button" onClick={this.toggleComplete}>{this.completed ? 'Uncomplete' : 'Complete'}</button>
-          <button className="delete-button" onClick={this.handleDelete}>Delete</button>
+          <button 
+            className={`modal-button ${this.completed ? 'action-button' : 'complete-button'}`} 
+            onClick={this.toggleComplete} >
+              {this.completed ? 'Uncomplete' : 'Complete'}
+          </button>
+
+          <button className="modal-button delete-button" onClick={this.handleDelete}>Delete</button>
         </div>
       </div>
     );
