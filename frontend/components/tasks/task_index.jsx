@@ -131,15 +131,35 @@ class TaskIndex extends React.Component {
       tasksList.push(<li className='tasks-index-row empty-row' key={`empty-${i}`}></li>)
     }
 
+    console.log('task index props', this.props)
     return (
       <section className='tasks-index-pane'>
-        <div className="complete-tabs">
-          <NavLink to={this.props.location.pathname.replace(/\/completed.*/, '')}>Incomplete</NavLink>
-          <NavLink to={this.props.match.url.concat('/completed')}>Complete</NavLink>
-        </div> 
+        
 
         <ul className='tasks-index'>
-          <li className="tasks-index-row task-buttons"></li> {/* task buttons will be separate component */}
+          {/* task buttons will be separate component */}
+          {/* <li className="tasks-index-row task-buttons"></li>  */}
+          <li className="tasks-index-row complete-tabs">
+            <NavLink 
+              to={this.props.location.pathname.replace(/\/completed.*/, '')}
+              className="complete-tab-link"
+              exact={true}
+            >
+              Incomplete
+            </NavLink>
+
+            <NavLink 
+              to={`/list/${this.props.match.params.listId}/completed`} 
+              className="complete-tab-link"
+            >
+              Complete
+            </NavLink>
+          </li> 
+
+          <li className="tasks-index-row instructions">
+            Type in your task, then use the buttons below to add details.
+          </li>
+
           <li className="tasks-index-row form-row" key='form'>
             <form className='add-task-form'>
               <input 

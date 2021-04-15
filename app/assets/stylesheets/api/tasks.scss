@@ -3,27 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .tasks-index {
   background-color: var(--off-white);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   border: 1px solid transparent;
   width: 42vw;
   font-size: 14px;
 }
 
-.complete-tabs {
-  width: 184px;
-  height: 28px;
-  position: relative;
-  left: calc(42vw - 184px);
-  background-color: white;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
 .tasks-index-row {
-  border: 1px dotted var(--border-grey);
+  border-top: 1px dotted var(--border-grey);
+  border-bottom: 1px dotted var(--border-grey);
   min-height: 33px;
   display: flex;
   align-items: center;
@@ -76,8 +65,39 @@
   width: 70px;
 }
 
+.instructions {
+  font-weight: 700;
+}
+
+.complete-tabs {
+  // position: relative;
+  // left: calc(42vw - 184px);
+  padding-top: 20px;
+  background-color: white;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  font-size: 13px;
+}
+
+.complete-tab-link {
+  padding-left: 10px;
+}
+
+.complete-tab-link.active {
+  font-weight: 700;
+  border-bottom: 1px solid white;
+  // padding-bottom: 15px;
+}
+
 .completed {
   text-decoration: line-through;
   color: green
 }
-
