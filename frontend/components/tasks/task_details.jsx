@@ -29,10 +29,14 @@ class TaskDetails extends React.Component {
 
   componentDidUpdate(prevProps) {
     this.completed = this.props.location.pathname.includes("completed");
-    let completedPath = this.completed ? '/completed' : ''
+    let completedPath = this.completed ? '/completed' : '';
+    let taskWasHere = Object.values(prevProps.task).length > 0;
+    let taskIsNotHere = Object.values(this.props.task).length === 0;
+    
     if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
       this._isMounted && this.setState(this.props.task);
-    } else if (Object.values(prevProps.task).length > 0 && Object.values(this.props.task).length === 0) {
+    } else if (taskWasHere && taskIsNotHere) {
+      //this conditional runs when the task is no longer in the current list (either after moving, completing, or deleting the task)
       this._isMounted && this.props.history.push(`/list/${this.props.match.params.listId}${completedPath}`);
     }
   }
@@ -59,12 +63,9 @@ class TaskDetails extends React.Component {
     task.listId = this.props.listsByTitle[task.listTitle];
     this._isMounted && this.props.updateTask(task)
     .then(() => {
-        console.log('updated', this.props)
-
         let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
         this._isMounted && this.props.searchTasks(searchParams)
           .then(() => {
-            console.log('searchParams', searchParams);
             this._isMounted && this.setState(this.props.task)
         });
       });
@@ -72,8 +73,6 @@ class TaskDetails extends React.Component {
     if (field) {
       this.inputRef[field].blur();
     }
-
-      
   }
 
   handleDelete(e) {
@@ -82,7 +81,6 @@ class TaskDetails extends React.Component {
   }
 
   render() {
-    console.log('details props', this.props)
     if (Object.values(this.state).length === 0) {
       return null;
     }

@@ -23,14 +23,11 @@ class TaskIndex extends React.Component {
 
   componentDidMount() {
     let searchParams = constructSearchParams(this.urlParams, this.completed);
-    console.log('mounting - firing searchTasks', this.urlParams, this.completed)
     this.props.searchTasks(searchParams);
   } 
         
   componentDidUpdate(prevProps) {
-    console.log('prev props', prevProps)
-    console.log('prev urlParams', this.urlParams)
-    console.log('prev completed', this.completed)
+   
 
     this.urlParams = this.props.match.params.listId
     let differentListId = this.urlParams !== prevProps.match.params.listId;
@@ -39,10 +36,7 @@ class TaskIndex extends React.Component {
     let differentCompletedKey = this.completed !== prevProps.location.pathname.includes('completed');
     if (differentListId || differentCompletedKey) {
       let searchParams = constructSearchParams(this.urlParams, this.completed);
-      console.log('sending ajax request after index updates. Search Params:', searchParams)
-      console.log('props', this.props)
-      console.log('urlParams', this.urlParams)
-      console.log('completed', this.completed)
+ 
       this.props.searchTasks(searchParams);
     }
   }
@@ -173,7 +167,7 @@ class TaskIndex extends React.Component {
           </li>
           
           {tasksList}
-          
+
         </ul>
         
       </section>

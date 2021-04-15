@@ -49,7 +49,6 @@ export const deleteList = list => dispatch => {
   return ListAPIUtil.deleteList(list.id)
     .then(
       removedList => {
-        console.log(removedList)
         return dispatch(removeList(removedList.id))},
       errors => dispatch(receiveErrors(errors))
     );

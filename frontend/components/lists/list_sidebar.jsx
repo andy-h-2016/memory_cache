@@ -36,7 +36,8 @@ class ListSidebar extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     this.props.clearDropdown();
-    this.props.deleteList(list);
+    this.props.deleteList(list)
+      .then(() => this.props.history.push(`/list/all`));
   }
 
   toggleDropdown(dropdown, e) {

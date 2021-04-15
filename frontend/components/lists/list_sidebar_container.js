@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {fetchAllLists, deleteList} from '../../actions/list_actions';
 import {activateDropdown, clearDropdown} from '../../actions/dropdown_actions';
 import {openModal} from '../../actions/modal_actions';
+import {withRouter} from 'react-router-dom';
 
 
 const mapSTP = state => ({
@@ -18,4 +19,4 @@ const mapDTP = dispatch => ({
   openModal: (modalType, formId) => dispatch(openModal(modalType, formId))
 });
 
-export default connect(mapSTP, mapDTP)(ListSideBar);
+export default connect(mapSTP, mapDTP)(withRouter(ListSideBar));
