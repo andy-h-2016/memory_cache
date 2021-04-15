@@ -28,7 +28,7 @@ const nextWeekSlice = nextWeek.toDateString().slice(4,11);
 // THE ACTUAL COMPONENT
 const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, lists}) => {
 
-  const listArr = lists.map(list => [list.id, list.title]);
+  const listArr = lists.map(list => [list.title, list.title]);
 
   const dropdownProps = {
     dueDate: [
@@ -58,9 +58,9 @@ const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, list
     let dropdownStatus = dropdown === property ? "" : "hidden";
     
     return(
-      <div className='button-dropdown-container'>
+      <div key={`${property}-button-container`} className='button-dropdown-container'>
         <button
-          key={`${property}-button`} 
+           
           className="add-property-button" 
           dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(ICONS[property])}}
           onClick={e => insertModChar(e, property)} >
@@ -68,43 +68,19 @@ const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, list
 
         <ul className={`dropdown add-property-dropdown ${dropdownStatus}`}>
           {
-            dropdownProps[property].map(lineItemProp => (
-            <li key={`${property}-dropdown`} className='dropdown-option'>
+            dropdownProps[property].map((lineItemProp, idx) => (
+            <li key={`${property}-dropdown-${idx}`} className='dropdown-option'>
               <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, lineItemProp[0])}>
                 <span key={`${property}-span-1`}>{lineItemProp[1]}</span>
                 <span key={`${property}-span-2`}>{lineItemProp[2]}</span>
               </a>
             </li>
             ))
-          };
+          }
         </ul>
-
-        {/* <ul className={`dropdown add-property-dropdown ${dropdownStatus}`}>
-          <li className='dropdown-option'>
-            <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, todayInput)}>
-              <span>Today</span>
-              <span>{today.toDateString().slice(4,11)}</span>
-            </a>
-          </li>
-
-          <li className='dropdown-option'>
-            <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, tomorrowInput)}>
-              <span>Tomorrow</span>
-              <span>{tomorrow.toDateString().slice(4,11)}</span>
-            </a>
-          </li>
-
-          <li className='dropdown-option'>
-            <a className='dropdown-link' onClick={(e) => insertPropertyValues(e, nextWeekInput)}>
-              <span>Next Week</span>
-              <span>{nextWeek.toDateString().slice(4,11)}</span>
-            </a>
-          </li>
-        </ul> */}
       </div >
     );
   });
-  
   
   return(
     <div className='add-property-buttons'>
@@ -112,6 +88,5 @@ const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, list
     </div>
   )
 };
-
 
 export default AddPropertyButtons

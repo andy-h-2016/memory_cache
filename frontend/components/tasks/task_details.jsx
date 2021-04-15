@@ -56,6 +56,10 @@ class TaskDetails extends React.Component {
   }
 
   render() {
+    if (Object.values(this.state).length === 0) {
+      return null;
+    }
+
     const editableProperties = ['listTitle', 'dueDate', 'priority', 'estimate']
     const rows = editableProperties.map(property => {
       let header = property;
