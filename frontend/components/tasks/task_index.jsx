@@ -143,15 +143,13 @@ class TaskIndex extends React.Component {
             <NavLink 
               to={this.props.location.pathname.replace(/\/completed.*/, '')}
               className="complete-tab-link"
-              exact={true}
-            >
+              exact={true} >
               Incomplete
             </NavLink>
 
             <NavLink 
               to={`/list/${this.props.match.params.listId}/completed`} 
-              className="complete-tab-link"
-            >
+              className="complete-tab-link" >
               Complete
             </NavLink>
           </li> 
