@@ -1,17 +1,17 @@
 import React from 'react';
 
 
-export const constructSearchParams = (urlParams) => {
+export const constructSearchParams = (urlParams, complete) => {
   let today;
-
+  complete ||= false; //if it's undefined, it's false
   switch(true) {
     case /\d/.test(urlParams):
       // regex check if urlParams is a number
-      return {listId: urlParams};
+      return {listId: urlParams, complete};
     case urlParams === "all":
-      return {complete: false};
+      return {complete};
     case urlParams === "inbox":
-      return {custom: 'inbox'};
+      return {custom: 'inbox', complete};
     case urlParams === "today":
       today = new Date();
       return ({
@@ -19,7 +19,8 @@ export const constructSearchParams = (urlParams) => {
           today.getFullYear(),
           today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
           today.getDate()
-        ]
+        ],
+        complete
       });
     case urlParams === "tomorrow":
       today = new Date();
@@ -28,17 +29,18 @@ export const constructSearchParams = (urlParams) => {
           today.getFullYear(),
           today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
           today.getDate() + 1
-        ]
+        ],
+        complete
       });
     case urlParams === "this-week":
-      return {custom: 'this-week'};
+      return {custom: 'this-week', complete};
   }
 }
 
-export const parseInput = input => {
-  let titleMatch = input.match(/(.+)\s\W/) //|| input.match(/[\W\S]\S+\s(?!\W\S+\s)(.+)/)
-
-  let title = titleMatch ? titleMatch[1] : input;
+export const parseInput = (input, lists) => {
+  // let titleMatch = input.match(/(.+)\s\W/) //|| input.match(/[\W\S]\S+\s(?!\W\S+\s)(.+)/)
+  let titleMatch = input.match(/((?:\w|\s)+)(?:\s\W)?/)
+  let title = titleMatch[1]
   let task = {title};
   let dueDateMatch = input.match(/\^(.*)/);
   if (dueDateMatch) {
@@ -49,7 +51,7 @@ export const parseInput = input => {
   let listMatch = input.match(/#\((.+)\)/);
   if (listMatch) {
     let listTitle = listMatch[1];
-    let listObj = this.props.lists.find(list => list.title === listTitle);
+    let listObj = lists.find(list => list.title === listTitle);
     let listId = listObj.id;
     task.listId = listId; 
   }

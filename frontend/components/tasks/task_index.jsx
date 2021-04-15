@@ -17,45 +17,37 @@ class TaskIndex extends React.Component {
     this.insertPropertyValues = this.insertPropertyValues.bind(this);
 
     this.urlParams = this.props.match.params.listId;
+    this.completed = this.props.location.pathname.includes('completed');
     this.inputRef = React.createRef();
   }
 
   componentDidMount() {
-    let searchParams = constructSearchParams(this.urlParams);
+    let searchParams = constructSearchParams(this.urlParams, this.completed);
     this.props.searchTasks(searchParams);
+    console.log('mounting')
   } 
         
   componentDidUpdate(prevProps) {
     this.urlParams = this.props.match.params.listId
-    if (this.urlParams !== prevProps.match.params.listId) {
-      let searchParams = constructSearchParams(this.urlParams);
+    let differentListId = this.urlParams !== prevProps.match.params.listId;
+
+    this.completed = this.props.location.pathname.includes('completed');
+    let differentCompletedKey = this.completed !== prevProps.location.pathname.includes('completed');
+    if (differentListId || differentCompletedKey) {
+      let searchParams = constructSearchParams(this.urlParams, this.completed);
       this.props.searchTasks(searchParams);
     }
-    
   }
 
   update(e) {
     let input = e.currentTarget.value;
     this.setState({input: input});
-
-    let lastChar = input[input.length - 1];
-    switch(true) {
-      case lastChar === '^':
-        break
-      case input.match(/#\(\)$/):
-        
-        break
-      case lastChar === '!':
-        break
-      case lastChar === '=':
-        break
-    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    let task = parseInput(this.state.input);
+    let task = parseInput(this.state.input, this.props.lists);
     this.setState({input: ''});
     this.props.createTask(task);
   }
@@ -73,6 +65,12 @@ class TaskIndex extends React.Component {
       case 'dueDate':
         char = ' ^';
         break
+      case 'priority':
+        char = ' !';
+        break
+      case 'estimate':
+        char = ' =';
+        break
       case 'list':
         char = ' #()';
         this.props.activateDropdown(property)
@@ -83,13 +81,7 @@ class TaskIndex extends React.Component {
           const cursorPosition = this.state.input.length - 1; 
           this.inputRef.current.setSelectionRange(cursorPosition, cursorPosition)
         });
-        return
-      case 'priority':
-        char = ' !';
-        break
-      case 'estimate':
-        char = ' =';
-        break
+        return //terminate the function so that the lines below don't run if this case runs.
       default:
         char = '';
     }
@@ -101,7 +93,7 @@ class TaskIndex extends React.Component {
 
   insertPropertyValues(e, values, property) {
     e.preventDefault();
-    const input = property === 'list' 
+    const input = (property === 'list') 
       ? this.state.input.replace(/#\(\)/, `#(${values})`) 
       : this.state.input.concat(values);
 
@@ -113,12 +105,21 @@ class TaskIndex extends React.Component {
       return <div></div>;
     }
 
+    let completedClass = '';
+    let completedParam = '';
+    if (this.completed) {
+      completedClass = 'completed';
+      completedParam = 'completed/';
+    }
+
+
+    console.log(this.props)
     const tasksList = [];
     this.props.tasks.forEach(task => {
       tasksList.push(
-        <li className='tasks-index-row task-row' key={`task ${task.id}`}>
+        <li className="tasks-index-row task-row" key={`task ${task.id}`}>
           <NavLink className='task-link' to={`${this.props.match.url}/${task.id}`}>
-            <span>{task.title}</span>
+            <span className={`${completedClass}`}>{task.title}</span>
             <span className="due-date">{task.dueDate}</span>
           </NavLink>
         </li>
@@ -136,7 +137,10 @@ class TaskIndex extends React.Component {
 
     return (
       <section className='tasks-index-pane'>
-        <div className="complete-tabs"></div> {/* Incomplete vs Completed tabs will be NavLinks */}
+        <div className="complete-tabs">
+          <NavLink to={this.props.location.pathname.replace(/\/completed.*/, '')}>Incomplete</NavLink>
+          <NavLink to={this.props.match.url.concat('/completed')}>Complete</NavLink>
+        </div> 
 
         <ul className='tasks-index'>
           <li className="tasks-index-row task-buttons"></li> {/* task buttons will be separate component */}

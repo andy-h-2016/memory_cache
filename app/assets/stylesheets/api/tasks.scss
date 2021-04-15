@@ -13,7 +13,13 @@
   height: 28px;
   position: relative;
   left: calc(42vw - 184px);
-  background-color: darkblue;
+  background-color: white;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .tasks-index-row {
@@ -68,5 +74,10 @@
 .due-date {
   font-size: 11px;
   width: 70px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: green
 }
 

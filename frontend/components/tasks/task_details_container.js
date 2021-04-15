@@ -6,23 +6,27 @@ const mapSTP = (state, ownProps)  => {
   const taskProps = state.entities.tasks ? state.entities.tasks[ownProps.match.params.taskId] : '';
   let listTitle;
   let task;
-
+  
   if (taskProps) {
     if (taskProps.listId && state.entities.lists[taskProps.listId]) {
       listTitle = state.entities.lists[taskProps.listId].title;
     } else {
       listTitle = 'Inbox';
     }
-
+    
     task = Object.assign({}, taskProps, {listTitle})
-
+    
   } else {
     task = {};
   }
-
+  
   let listsByTitle = {};
   Object.values(state.entities.lists).forEach(list => listsByTitle[list.title] = list.id);
-
+  // console.log('ownProps', ownProps)
+  // console.log('taskProps', taskProps)
+  // console.log('task', task)
+  // console.log('listsByTitle', listsByTitle)
+  
   return ({
     task,
     listsByTitle

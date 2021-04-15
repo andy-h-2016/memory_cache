@@ -6,14 +6,23 @@ import ListSidebarContainer from './lists/list_sidebar_container';
 import TaskIndexContainer from './tasks/task_index_container';
 import TaskDetailsContainer from './tasks/task_details_container';
 import Modal from './modal/modal';
+import { Switch } from 'react-router';
 
 const App = (props) => (
   <div className="app" onClick={props.clearDropdown}>
     <Modal />
     <NavBar />
     <ListSidebarContainer/>
-    <ProtectedRoute path="/list/:listId" component={TaskIndexContainer}/>
-    <ProtectedRoute path="/list/:listId/:taskId" component={TaskDetailsContainer}/>
+
+    <Switch>
+      <ProtectedRoute path="/list/:listId/completed" component={TaskIndexContainer}/>
+      <ProtectedRoute path="/list/:listId" component={TaskIndexContainer}/>
+    </Switch>
+
+    <Switch>
+      <ProtectedRoute path="/list/:listId/completed/:taskId" component={TaskDetailsContainer}/>
+      <ProtectedRoute path="/list/:listId/:taskId" component={TaskDetailsContainer}/>
+    </Switch>
   </div>
 );
 

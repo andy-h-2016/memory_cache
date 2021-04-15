@@ -1,5 +1,8 @@
-import React from 'react';
-import { constructSearchParams, parseDate } from '../../util/task_component_util';
+import React from "react";
+import {
+  constructSearchParams,
+  parseDate,
+} from "../../util/task_component_util";
 
 class TaskDetails extends React.Component {
   constructor(props) {
@@ -9,31 +12,36 @@ class TaskDetails extends React.Component {
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.completeTask = this.completeTask.bind(this);
+    this.toggleComplete = this.toggleComplete.bind(this);
+
+    this.completed = this.props.location.pathname.includes("completed");
     this.inputRef = {};
   }
 
   componentDidMount() {
-    let searchParams = constructSearchParams(this.props.match.params.listId);
-      this.props.searchTasks(searchParams)
-        .then(() => this.setState(this.props.task));
+    let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
+    this.props.searchTasks(searchParams)
+      .then(() => this.setState(this.props.task));
   }
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.task) {
+    this.completed = this.props.location.pathname.includes("completed");
+    let completedPath = this.completed ? '/completed' : ''
+    console.log('details', this.props)
+    if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
       this.setState(this.props.task);
-    } else if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
-      this.setState(this.props.task);
+    } else if (Object.values(prevProps.task).length > 0 && Object.values(this.props.task).length === 0) {
+      this.props.history.push(`/list${completedPath}/${this.props.match.params.listId}`);
     }
   }
 
   update(e, field) {
-    this.setState({[field]: e.currentTarget.value});
+    this.setState({ [field]: e.currentTarget.value });
   }
 
-  completeTask(e) {
+  toggleComplete(e) {
     e.preventDefault();
-    this.state.complete = true;
+    this.state.complete = !this.state.complete;
     this.handleSubmit(e);
   }
 
@@ -43,11 +51,21 @@ class TaskDetails extends React.Component {
     
     task.dueDate = parseDate(task.dueDate);
     task.listId = this.props.listsByTitle[task.listTitle];
-    this.props.updateTask(task);
+    this.props.updateTask(task)
+    .then(() => {
+        let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
+        this.props.searchTasks(searchParams)
+          .then(() => {
+            console.log('searchParams', searchParams);
+            this.setState(this.props.task)
+        });
+      });
 
     if (field) {
       this.inputRef[field].blur();
     }
+
+      
   }
 
   handleDelete(e) {
@@ -60,67 +78,70 @@ class TaskDetails extends React.Component {
       return null;
     }
 
-    const editableProperties = ['listTitle', 'dueDate', 'priority', 'estimate']
-    const rows = editableProperties.map(property => {
+    const editableProperties = ["listTitle", "dueDate", "priority", "estimate"];
+    const rows = editableProperties.map((property) => {
       let header = property;
       let htmlClass = property;
       switch (property) {
-        case 'dueDate':
-          header = 'due';
-          htmlClass = 'due-date';
-          break
-        case 'listTitle':
-          header = 'list';
-          htmlClass = 'list-title';
+        case "dueDate":
+          header = "due";
+          htmlClass = "due-date";
+          break;
+        case "listTitle":
+          header = "list";
+          htmlClass = "list-title";
       }
 
       return (
-        <tr key={property} className='task-detail-edit-form'>
+        <tr key={property} className="task-detail-edit-form">
           <th className={`property-name ${htmlClass}-header`}>{header}</th>
           <td className={`property-value ${htmlClass}-value`}>
-            <form className='task-detail-edit-form'>
-              <input 
-                className={`task-detail-edit-input ${htmlClass}-input`} 
-                onChange={e => this.update(e, property)}
-                ref={el => this.inputRef[property] = el} 
-                type="text" 
+            <form className="task-detail-edit-form">
+              <input
+                className={`task-detail-edit-input ${htmlClass}-input`}
+                onChange={(e) => this.update(e, property)}
+                ref={(el) => (this.inputRef[property] = el)}
+                type="text"
                 value={this.state[property]}
               />
 
-              <input className='hidden-submit-button' onClick={e => this.handleSubmit(e, property)} type="submit"/>
+              <input
+                className="hidden-submit-button"
+                onClick={(e) => this.handleSubmit(e, property)}
+                type="submit"
+              />
             </form>
           </td>
         </tr>
-      )
+      );
     });
 
     return (
       <div className="task-details-pane">
         <form className="task-detail-edit-form">
-          <input 
-            className={`task-detail-edit-input title-input`} 
-            onChange={e =>this.update(e, 'title')}
-            ref={el => this.inputRef['title'] = el} 
-            type="text" 
+          <input
+            className={`task-detail-edit-input title-input`}
+            onChange={(e) => this.update(e, "title")}
+            ref={(el) => (this.inputRef["title"] = el)}
+            type="text"
             value={this.state.title}
           />
 
-          <input className='hidden-submit-button' onClick={e => this.handleSubmit(e, 'title')} type="submit"/>
+          <input
+            className="hidden-submit-button"
+            onClick={(e) => this.handleSubmit(e, "title")}
+            type="submit"
+          />
         </form>
-        
 
-        <table className='task-details-table'>
-          <tbody>
-            {rows}
-          </tbody>
+        <table className="task-details-table">
+          <tbody>{rows}</tbody>
         </table>
 
         <button onClick={this.handleDelete}>Delete</button>
-        <button onClick={this.completeTask}>Complete</button>
-
+        <button onClick={this.toggleComplete}>{this.completed ? 'Uncomplete' : 'Complete'}</button>
       </div>
-
-    )
+    );
   }
 }
 

@@ -31,9 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     store = configureStore(preloadedState);
-    store.dispatch(fetchAllLists());
-    // store.dispatch(searchTasks(constructSearchParams('all')));
-    
+    store.dispatch(fetchAllLists());    
   } else {
     store = configureStore();
   }

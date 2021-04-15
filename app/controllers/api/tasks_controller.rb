@@ -62,20 +62,23 @@ class Api::TasksController < ApplicationController
 
   def custom_params
     type = params[:task][:custom]
+    complete = params[:task][:complete]
     case type
     when 'inbox'
       # finding the uncategorized tasks
       conditions = [
-        'list_id IS NULL and user_id=?',
-        current_user.id
+        'list_id IS NULL AND user_id=? AND complete=?',
+        current_user.id,
+        complete
       ]
     when 'this-week'
       #finding tasks due in the coming week
       conditions = [
-        'due_date BETWEEN ? and ? AND user_id=?',
+        'due_date BETWEEN ? and ? AND user_id=? AND complete=?',
         DateTime.current,
         DateTime.current.advance(weeks: 1),
-        current_user.id
+        current_user.id,
+        complete
       ]
     else
       #if custom does not match the above, it is not trustworthy, delete it.
