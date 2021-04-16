@@ -16,11 +16,11 @@ const Root = ({store}) => (
       
       <Switch>
         <ProtectedRoute path="/list" component={AppContainer} />
+        <AuthRoute path="/login" component={LoginFormContainer}/>
+        <AuthRoute path="/signup" component={SignupFormContainer}/>
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>
-        <AuthRoute path="/login" component={LoginFormContainer}/>
-        <AuthRoute path="/signup" component={SignupFormContainer}/>
         <Route component={NotFound} />
       </Switch>
 

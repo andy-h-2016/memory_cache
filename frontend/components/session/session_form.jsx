@@ -22,16 +22,19 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
     this.props.submit(this.state);
   }
 
   demoLogin(e) {
     e.preventDefault;
+    e.stopPropagation();
     this.props.submit({username: 'hagrid', password: 'nevermore'});
   }
   
 
   render() {
+    console.log(this.props)
     let emailField = null;
     let firstNameField = null;
     let lastNameField = null;
@@ -95,6 +98,8 @@ class SessionForm extends React.Component {
       <section className="session-page">
         <section className="decoration-half">
           <img className='session-logo' src={window.transparentLogoURL} alt=""/>
+
+          <p className='tagline'>The smart to-do app for busy people.</p>
 
           <div className="motivational-quote">
             <p className="quote-content">
