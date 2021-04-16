@@ -1,6 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import {AuthRoute, ProtectedRoute} from '../util/route_util';
 
 import AppContainer from './app_container';
@@ -16,7 +16,9 @@ const Root = ({store}) => (
       
       <Switch>
         <ProtectedRoute path="/list" component={AppContainer} />
-        <AuthRoute exact path="/" component={Splash} />
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
         <AuthRoute path="/login" component={LoginFormContainer}/>
         <AuthRoute path="/signup" component={SignupFormContainer}/>
         <Route component={NotFound} />
