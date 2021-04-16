@@ -35,12 +35,15 @@ class SessionForm extends React.Component {
     let emailField = null;
     let firstNameField = null;
     let lastNameField = null;
-    let sessionLink;
+    let altLink;
+    let linkDisplay;
     let demoButton = null;
+    let divider;
+    let welcomeMessage;
 
     if (this.props.formType === "Sign Up") {
-      sessionLink = <Link onClick={this.clearErrors} to="/login" className="alt-link">Login</Link>
-
+      altLink = "/login";
+      linkDisplay = "Login"
       firstNameField = (
         <input 
           onChange={e => this.handleChange(e, "firstName")}
@@ -69,43 +72,80 @@ class SessionForm extends React.Component {
           placeholder="Email"
           value={this.state.email}
         />
-      );
+
+        );
+
+      welcomeMessage = "Sign up for free.";
+      divider = null;
+
     } else {
-      sessionLink = <Link onClick={this.clearErrors} to="signup" className="alt-link">Sign up for free</Link>
-      demoButton = <button onClick={this.demoLogin}>Demo Login</button>
+      altLink = "/signup";
+      linkDisplay = "Sign up for free"
+      demoButton = <button className='submit-button demo-button' onClick={this.demoLogin}>Demo Login</button>
+      welcomeMessage = "Been here before? Welcome back!"
+      divider = (
+        <div className='divider'>
+          <hr/>
+          <span>OR</span>
+        </div>
+      )
     }
 
     return (
-      <div className='session-page'>
-        <form className='session-form' onSubmit={this.handleSubmit}>
-          {firstNameField}
-          {lastNameField}
+      <section className="session-page">
+        <section className="decoration-half">
+          <img className='session-logo' src={window.transparentLogoURL} alt=""/>
 
-          <input
-            onChange={e => this.handleChange(e, "username")}
-            type="text" 
-            className="username-field" 
-            placeholder="Username"
-            value={this.state.username}           
-            />
+          <div className="motivational-quote">
+            <p className="quote-content">
+              “Start by doing what’s necessary; then do what’s possible; and 
+              suddenly you are doing the impossible.” 
+            </p>
 
-          {emailField}
+            <p className='quote-author'>
+              -Francis Of Assisi
+            </p>
 
-          <input 
-            onChange={e => this.handleChange(e, "password")}
-            type="password"
-            className="password-field"
-            placeholder="Password"
-            value={this.state.passwords}
-            />
+          </div>
+        </section>
 
-          <button className="submit-button" type="submit">{this.props.formType}</button>
+        <section className='session-half'>
 
-        </form>
+          <form className='session-form' >
+            <h2 className='welcome-message'>{welcomeMessage}</h2>
 
-        {sessionLink}
-        {demoButton}
-      </div>
+            {firstNameField}
+            {lastNameField}
+
+            <input
+              onChange={e => this.handleChange(e, "username")}
+              type="text" 
+              className="username-field" 
+              placeholder="Username"
+              value={this.state.username}           
+              />
+
+            {emailField}
+
+            <input 
+              onChange={e => this.handleChange(e, "password")}
+              type="password"
+              className="password-field"
+              placeholder="Password"
+              value={this.state.passwords}
+              />
+
+            <button className="submit-button" type="submit" onClick={this.handleSubmit}>{this.props.formType}</button>
+            <Link onClick={this.clearErrors} to={altLink} className="alt-link">{linkDisplay}</Link>
+
+            {divider}            
+
+            {demoButton}
+          </form>
+
+        </section>
+      </section>
+      
     )
   }
 }

@@ -89,7 +89,7 @@ class ListSidebar extends React.Component {
     //ACTUAL RETURN OF RENDER METHOD
     return (
       <div className="lists-sidebar">
-        <div className="logo">PLACE LOGO HERE</div>
+        <img className='list-logo' src={window.simpleLogoURL} alt=""/>
 
         <section className="all-lists">
           <ul className="lists-index standard-lists">

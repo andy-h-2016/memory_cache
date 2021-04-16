@@ -28,5 +28,3 @@ export const logout = () => dispatch => {
       errors => dispatch(receiveErrors(errors))
     ); 
 };
-
-export const demoLogin = () => login({username: 'hagrid', password: 'nevermore'});

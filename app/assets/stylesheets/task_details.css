@@ -6,6 +6,7 @@
   border-top-right-radius: 6px;
   background-color: var(--off-white);
   border-left: 2px solid lightgrey;
+  /* background-color: #1b81e7; */
 }
 
 .task-details-table {

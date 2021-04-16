@@ -6,7 +6,9 @@
   min-width: 100px;
   height: 100vh;
   font-size: 13px;
+  position: relative;
 }
+
 
 .selected {
   font-weight: 700;
@@ -75,3 +77,8 @@
   background-color: inherit;
 }
 
+.list-logo {
+  width: 100%;
+  position: relative;
+  right: 7px;
+}
