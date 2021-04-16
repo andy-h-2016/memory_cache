@@ -27,7 +27,7 @@ class SessionForm extends React.Component {
   }
 
   demoLogin(e) {
-    e.preventDefault;
+    e.preventDefault();
     e.stopPropagation();
     this.props.submit({username: 'hagrid', password: 'nevermore'});
   }
@@ -144,9 +144,9 @@ class SessionForm extends React.Component {
             <Link onClick={this.clearErrors} to={altLink} className="alt-link">{linkDisplay}</Link>
 
             {divider}            
-
             {demoButton}
           </form>
+           
 
         </section>
       </section>
