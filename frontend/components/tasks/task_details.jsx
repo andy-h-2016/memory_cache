@@ -86,6 +86,7 @@ class TaskDetails extends React.Component {
     }
 
     const editableProperties = ["listTitle", "dueDate", "priority", "estimate"];
+
     const rows = editableProperties.map((property) => {
       let header = property;
       let htmlClass = property;
@@ -143,7 +144,16 @@ class TaskDetails extends React.Component {
 
         <table className="task-details-table">
           <tbody>{rows}</tbody>
+          <caption 
+            className={
+              `estimate-label 
+              ${this.state.estimate >= 10
+                ? (this.state.estimate >= 100 ? 'three-digits' : 'two-digits') 
+                : 'one-digit'}`}>
+                  minutes
+          </caption>
         </table>
+
 
         <div className='button-container'>
           <button 

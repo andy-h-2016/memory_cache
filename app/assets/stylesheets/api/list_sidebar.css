@@ -8,6 +8,13 @@
   position: relative;
 }
 
+.lists-index {
+  border-bottom: 1px solid #cde4f8;
+  border-radius: 0px;
+  padding-block: 10px; 
+  margin-right: 5px;
+}
+
 .list-logo {
   width: 95%;
   margin-top: 5px;

@@ -12,24 +12,50 @@
 .task-details-table {
   width: 100%;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.estimate-label {
+  position: absolute;
+  bottom: 5px;
+}
+
+.three-digits {
+  left: 170px;
+}
+
+.two-digits {
+  left: 162px;
+}
+
+.one-digit {
+  left: 154px;
 }
 
 .task-detail-edit-form {
   width: 100%;
+
 }
 
 .task-detail-edit-input {
-  width: 100%;
+  width: 75%;
   border: transparent;
   padding: 4px;
+  cursor: pointer;
+
+}
+
+.task-detail-edit-input:focus {
+  cursor: text;
 }
 
 .title-input {
-  margin-block: 18px; 
-  padding-left: 3vw; 
+  margin-block: 18px;
+  margin-left: 3vw; 
+  /* padding-left: 3vw;  */
   font-size: 24px;
-
-  width: 100%;
+  /* box-sizing: content-box; */
+  width: 85%;
 }
 
 .property-name {
@@ -60,3 +86,4 @@
   /* border: 1px solid var(--button-grey); */
   border: transparent;
 }
+
