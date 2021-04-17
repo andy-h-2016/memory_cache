@@ -1,24 +1,29 @@
-# README
+**README.md**
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![alt text](./app/assets/images/logo_w_background.png)
 
-Things you may want to cover:
+**An app that remembers the little things for you.**
 
-* Ruby version
+# Introduction
+Turn Off The Stove is a Rails-React-Redux clone of Remember the Milk, a to-do list website. Users can create tasks, organize them into lists, and Turn Off The Stove will keep track of which tasks need to be done soon.
 
-* System dependencies
 
-* Configuration
+# Technologies Used
+* Ruby / Rails
+* React.js
+* Redux
+* AJAX
+* JBuilder
+* JavaScript
+* Webpack
+* HTML5 / CSS3
 
-* Database creation
+# Main Features
 
-* Database initialization
+### Tasks Query 
+Tasks are fetched depending on which list the user is viewing. The Today, Tomorrow, and This Week lists are built-in for each user. 
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+The app reads the `:listId` wildcard from the URL to construct its query. A user-generated list is represented by its numeric `id` while the standard built-in lists are identified by a keyword. 

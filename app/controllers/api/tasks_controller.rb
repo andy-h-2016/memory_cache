@@ -71,6 +71,20 @@ class Api::TasksController < ApplicationController
         current_user.id,
         complete
       ]
+    when 'today'
+      conditions = [
+        'due_date=? AND user_id=? AND complete=?',
+        DateTime.current,
+        current_user.id,
+        complete
+      ]
+    when 'tomorrow'
+      conditions = [
+        'due_date=? AND user_id=? AND complete=?',
+        DateTime.current.advance(days: 1),
+        current_user.id,
+        complete
+      ]
     when 'this-week'
       #finding tasks due in the coming week
       conditions = [

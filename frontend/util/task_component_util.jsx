@@ -7,35 +7,19 @@ export const constructSearchParams = (urlParams, complete) => {
   switch(true) {
     case /\d/.test(urlParams):
       // regex check if urlParams is a number
-      return {listId: urlParams, complete};
+      return {
+        listId: urlParams, 
+        complete
+      };
     case urlParams === "all":
       return {complete};
-    case urlParams === "inbox":
-      return {custom: 'inbox', complete};
-    case urlParams === "today":
-      today = new Date();
-      return ({
-        dueDate: [
-          today.getFullYear(),
-          today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
-          today.getDate()
-        ],
+    default:
+      return {
+        custom: urlParams, 
         complete
-      });
-    case urlParams === "tomorrow":
-      today = new Date();
-      return ({
-        dueDate: [
-          today.getFullYear(),
-          today.getMonth() + 1, //JS uses 0 index on months. Ruby does not.
-          today.getDate() + 1
-        ],
-        complete
-      });
-    case urlParams === "this-week":
-      return {custom: 'this-week', complete};
-  }
-}
+      }
+    }
+};
 
 export const parseInput = (input, lists) => {
   // let titleMatch = input.match(/(.+)\s\W/) //|| input.match(/[\W\S]\S+\s(?!\W\S+\s)(.+)/)
