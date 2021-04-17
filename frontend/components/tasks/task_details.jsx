@@ -57,10 +57,13 @@ class TaskDetails extends React.Component {
 
   handleSubmit(e, field) {
     e.preventDefault();
-    const task = Object.assign({}, this.state);
+    e.stopPropagation();
+    const task = Object.assign({}, this.state)
     
-    task.dueDate = parseDate(task.dueDate);
-    task.listId = this.props.listsByTitle[task.listTitle];
+    task.listId = this.props.listsByTitle[this.state.listTitle];
+    task.dueDate = parseDate(this.state.dueDate);
+    task.estimate = this.state.estimate.match(/(\d+)(?:\sminutes)?/)[1];
+
     this._isMounted && this.props.updateTask(task)
     .then(() => {
         let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
@@ -77,6 +80,7 @@ class TaskDetails extends React.Component {
 
   handleDelete(e) {
     e.preventDefault();
+    e.stopPropagation();
     this.props.deleteTask(this.props.task);
   }
 
@@ -144,14 +148,6 @@ class TaskDetails extends React.Component {
 
         <table className="task-details-table">
           <tbody>{rows}</tbody>
-          <caption 
-            className={
-              `estimate-label 
-              ${this.state.estimate >= 10
-                ? (this.state.estimate >= 100 ? 'three-digits' : 'two-digits') 
-                : 'one-digit'}`}>
-                  minutes
-          </caption>
         </table>
 
 

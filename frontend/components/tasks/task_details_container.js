@@ -13,7 +13,8 @@ const mapSTP = (state, ownProps)  => {
     } else {
       listTitle = 'Inbox';
     }
-    task = Object.assign({}, taskProps, {listTitle})
+    task = Object.assign({}, taskProps, {listTitle});
+    task.estimate = `${task.estimate} minutes`;
     
   } else {
     task = {};

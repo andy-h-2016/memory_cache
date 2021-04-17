@@ -95,7 +95,7 @@ class Api::TasksController < ApplicationController
         complete
       ]
     else
-      #if custom does not match the above, it is not trustworthy, delete it.
+      #if type does not match the above, it is not trustworthy, delete it.
       conditions = [];
     end
 

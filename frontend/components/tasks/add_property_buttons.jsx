@@ -16,9 +16,9 @@ const todayString = 'Today';
 const tomorrowString = 'Tomorrow';
 const nextWeekString = 'Next Week';
 
-const todayInput = today.toISOString();
-const tomorrowInput = tomorrow.toISOString();
-const nextWeekInput = nextWeek.toISOString();
+const todayInput = today.toISOString().slice(0,10);
+const tomorrowInput = tomorrow.toISOString().slice(0,10);
+const nextWeekInput = nextWeek.toISOString().slice(0,10);
 
 const todaySlice = today.toDateString().slice(4,11);
 const tomorrowSlice = tomorrow.toDateString().slice(4,11);
@@ -43,13 +43,13 @@ const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, list
       [4, 'Priority 4']
     ],
     estimate: [
-      [2, '2 minutes'],
-      [5, '5 minutes'],
-      [10, '10 minutes'],
-      [10, '10 minutes'],
-      [15, '15 minutes'],
-      [30, '30 minutes'],
-      [60, '1 hour']
+      ['2min', '2 minutes'],
+      ['5min', '5 minutes'],
+      ['10min', '10 minutes'],
+      ['10min', '10 minutes'],
+      ['15min', '15 minutes'],
+      ['30min', '30 minutes'],
+      ['60min', '1 hour']
     ],
     list: listArr
   }

@@ -48,6 +48,7 @@ class TaskIndex extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
 
     let task = parseInput(this.state.input, this.props.lists);
     this.setState({input: ''});
@@ -131,7 +132,6 @@ class TaskIndex extends React.Component {
       tasksList.push(<li className='tasks-index-row empty-row' key={`empty-${i}`}></li>)
     }
 
-    console.log('task index props', this.props)
     return (
       <section className='tasks-index-pane'>
         

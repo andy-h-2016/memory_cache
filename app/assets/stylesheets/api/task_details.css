@@ -6,30 +6,12 @@
   border-top-right-radius: 6px;
   background-color: var(--off-white);
   border-left: 2px solid lightgrey;
-  /* background-color: #1b81e7; */
 }
 
 .task-details-table {
   width: 100%;
   margin-bottom: 20px;
   position: relative;
-}
-
-.estimate-label {
-  position: absolute;
-  bottom: 10px;
-}
-
-.three-digits {
-  left: 170px;
-}
-
-.two-digits {
-  left: 162px;
-}
-
-.one-digit {
-  left: 154px;
 }
 
 .task-detail-edit-form {
@@ -42,7 +24,6 @@
   border: transparent;
   padding: 4px;
   cursor: pointer;
-
 }
 
 .task-detail-edit-input:focus {
@@ -52,10 +33,9 @@
 .title-input {
   margin-block: 18px;
   margin-left: 3vw; 
-  /* padding-left: 3vw;  */
   font-size: 24px;
-  /* box-sizing: content-box; */
   width: 85%;
+  overflow: visible;
 }
 
 .property-name {
