@@ -5,7 +5,7 @@ export const constructSearchParams = (urlParams, complete) => {
   let today;
   complete ||= false; //if it's undefined, it's false
   switch(true) {
-    case /\d/.test(urlParams):
+    case /\d+/.test(urlParams):
       // regex check if urlParams is a number
       return {
         listId: urlParams, 
