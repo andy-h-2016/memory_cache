@@ -1,6 +1,7 @@
 **README.md**
 
-![alt text](./app/assets/images/logo_w_background.png)
+<img src="./app/assets/images/logo_w_background.png" style="border: 1px solid blue"/>
+
 
 **An app that remembers the little things for you.**
 
@@ -8,7 +9,7 @@ Try the <a href="https://todo-placeholder.herokuapp.com/#/list/all">live demo!</
 
 # Introduction
 Turn Off The Stove is a Rails-React-Redux clone of Remember the Milk, a to-do list website. Users can create tasks, organize them into lists, and Turn Off The Stove will keep track of which tasks are coming up.
-<img src="./app/assets/images/overview.png" />
+<img src="./app/assets/images/overview.png" style="border: 1px solid blue"/>
 
 
 
@@ -30,15 +31,15 @@ Turn Off The Stove is a Rails-React-Redux clone of Remember the Milk, a to-do li
 ### Tasks Query 
 Tasks are fetched depending on which list the user is viewing. The Today, Tomorrow, and This Week lists are built-in for each user. All queries only fetch items belonging to the current user to ensure separation of users. 
 
-![alt text](./app/assets/images/tasks_query_snapshot.png)
 
+<img src="./app/assets/images/tasks_query_snapshot.png" style="border: 1px solid blue"/>
+<br/>
 
 The app reads the `:listId` wildcard from the URL to construct its query. A user-generated list is represented by its numeric `id` while the standard built-in lists are identified by a keyword. 
 
-<img src="./app/assets/images/id_url_snapshot.png" height="31" />
-<br />
-<img src="./app/assets/images/this_week_url_snapshot.png" height="32" />
-<br />
+`todo-placeholder.herokuapp.com/#/list/3`
+
+`todo-placeholder.herokuapp.com/#/list/this-week`
 
 
 The React component constructs query parameters and sends it to the Rails controller in an AJAX request. For the built-in lists (e.g. This Week), the controller fires a different query structure based on a `custom` parameter. The `complete` parameter is also included to filter between complete and incomplete tasks. Below is the Rails code that converts the payload from the AJAX request into a format recognizeable by the ActiveRecord API:
@@ -92,23 +93,26 @@ def custom_params
 
   ### Task Creation
   Users are able to create tasks and attach properties on them such as due dates and time estimates. If no properties are specified at the time, default values are used:
-  <img src="./app/assets/images/default_output.png" />
+  <img src="./app/assets/images/default_output.png" style="border: 1px solid blue" />
   <br />
 
   At the time of creation, users can input special modifier characters to signal a property to add. Below would be the notation to set a due date of April 24, with an estimate of 10 minutes, at priority 2.
-  <img src="./app/assets/images/input_1.png" />
+  <img src="./app/assets/images/input_1.png" style="border: 1px solid blue" />
   <br />
+
 
   The user can just use the buttons below to insert the modifier characters, and even some preset values:
-  <img src="./app/assets/images/input_2.png" />
+  <img src="./app/assets/images/input_2.png" style="border: 1px solid blue" />
   <br />
+
 
   which is especially handy for dates and lists.
-  <img src="./app/assets/images/input_3.png" />
+  <img src="./app/assets/images/input_3.png" style="border: 1px solid blue" />
   <br />
 
+
   Ta-da!
-  <img src="./app/assets/images/output.png" />
+  <img src="./app/assets/images/output.png" style="border: 1px solid blue" />
 
 
 Regex pattern matching is utilized to parse the modifier characters and translate them into a format recognizable by the Rails controller's strong params:
