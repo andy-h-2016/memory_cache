@@ -106,6 +106,7 @@ class TaskIndex extends React.Component {
     }
 
     let completedClass = '';
+    let completedParam = '';
     if (this.completed) {
       completedClass = 'completed';
       completedParam = 'completed/';
