@@ -4,6 +4,8 @@
 
 **An app that remembers the little things for you.**
 
+Try the <a href="https://todo-placeholder.herokuapp.com/#/list/all">live demo!</a>
+
 # Introduction
 Turn Off The Stove is a Rails-React-Redux clone of Remember the Milk, a to-do list website. Users can create tasks, organize them into lists, and Turn Off The Stove will keep track of which tasks are coming up.
 <img src="./app/assets/images/overview.png" />
