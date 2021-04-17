@@ -23,7 +23,7 @@ Turn Off The Stove is a Rails-React-Redux clone of Remember the Milk, a to-do li
 ### Tasks Query 
 Tasks are fetched depending on which list the user is viewing. The Today, Tomorrow, and This Week lists are built-in for each user. 
 
-![alt text](.app/assets/images/tasks_query_snapshot.png)
+![alt text](./app/assets/images/tasks_query_snapshot.png)
 
 
 The app reads the `:listId` wildcard from the URL to construct its query. A user-generated list is represented by its numeric `id` while the standard built-in lists are identified by a keyword. 
