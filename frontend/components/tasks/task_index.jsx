@@ -27,8 +27,6 @@ class TaskIndex extends React.Component {
   } 
         
   componentDidUpdate(prevProps) {
-   
-
     this.urlParams = this.props.match.params.listId
     let differentListId = this.urlParams !== prevProps.match.params.listId;
 
@@ -36,7 +34,6 @@ class TaskIndex extends React.Component {
     let differentCompletedKey = this.completed !== prevProps.location.pathname.includes('completed');
     if (differentListId || differentCompletedKey) {
       let searchParams = constructSearchParams(this.urlParams, this.completed);
- 
       this.props.searchTasks(searchParams);
     }
   }
@@ -109,7 +106,6 @@ class TaskIndex extends React.Component {
     }
 
     let completedClass = '';
-    let completedParam = '';
     if (this.completed) {
       completedClass = 'completed';
       completedParam = 'completed/';
@@ -124,12 +120,12 @@ class TaskIndex extends React.Component {
             <span className="due-date">{task.dueDate}</span>
           </NavLink>
         </li>
-      )
+      );
     });
 
     const numAdditionalRows = MIN_NUM_OF_ROWS - tasksList.length;
     for (let i = 0; i < numAdditionalRows; i++) {
-      tasksList.push(<li className='tasks-index-row empty-row' key={`empty-${i}`}></li>)
+      tasksList.push(<li className='tasks-index-row empty-row' key={`empty-${i}`}></li>);
     }
 
     return (
@@ -137,8 +133,6 @@ class TaskIndex extends React.Component {
         
 
         <ul className='tasks-index'>
-          {/* task buttons will be separate component */}
-          {/* <li className="tasks-index-row task-buttons"></li>  */}
           <div className="scrollbar-container">
             <li className="tasks-index-row complete-tabs">
               <NavLink 
@@ -170,7 +164,6 @@ class TaskIndex extends React.Component {
                   value={this.state.input}
                 />
 
-
                 <AddPropertyButtons 
                   dropdown={this.props.dropdown}
                   lists={this.props.lists}
@@ -186,11 +179,8 @@ class TaskIndex extends React.Component {
             </li>
             
             {tasksList}
-
           </div>
-
         </ul>
-        
       </section>
     );
   }

@@ -61,46 +61,48 @@ class Api::TasksController < ApplicationController
   end
 
   def custom_params
-    type = params[:task][:custom]
-    complete = params[:task][:complete]
-    case type
-    when 'inbox'
-      # finding the uncategorized tasks
-      conditions = [
-        'list_id IS NULL AND user_id=? AND complete=?',
-        current_user.id,
-        complete
-      ]
-    when 'today'
-      conditions = [
-        'due_date=? AND user_id=? AND complete=?',
-        DateTime.current,
-        current_user.id,
-        complete
-      ]
-    when 'tomorrow'
-      conditions = [
-        'due_date=? AND user_id=? AND complete=?',
-        DateTime.current.advance(days: 1),
-        current_user.id,
-        complete
-      ]
-    when 'this-week'
-      #finding tasks due in the coming week
-      conditions = [
-        'due_date BETWEEN ? and ? AND user_id=? AND complete=?',
-        DateTime.current,
-        DateTime.current.advance(weeks: 1),
-        current_user.id,
-        complete
-      ]
-    else
-      #if type does not match the above, it is not trustworthy, delete it.
-      conditions = [];
-    end
+  #params from the body of the AJAX request
+  type = params[:task][:custom]
+  complete = params[:task][:complete]
+  
+  case type
+  when 'inbox'
+    # finding the uncategorized tasks
+    conditions = [
+      'list_id IS NULL AND user_id=? AND complete=?',
+      current_user.id,
+      complete
+    ]
+  when 'today'
+    conditions = [
+      'due_date=? AND user_id=? AND complete=?',
+      DateTime.current.to_date,
+      current_user.id,
+      complete
+    ]
+  when 'tomorrow'
+    conditions = [
+      'due_date=? AND user_id=? AND complete=?',
+      DateTime.current.advance(days: 1).to_date,
+      current_user.id,
+      complete
+    ]
+  when 'this-week'
+    #finding tasks due in the coming week
+    conditions = [
+      'due_date BETWEEN ? and ? AND user_id=? AND complete=?',
+      DateTime.current.to_date,
+      DateTime.current.advance(weeks: 1).to_date,
+      current_user.id,
+      complete
+    ]
+  else
+    #if type does not match the above, it is not trustworthy, delete it.
+    conditions = [];
+  end
 
-    #create the query using the conditions created by the case-when block above
-    ActiveRecord::Base.send(:sanitize_sql_array, conditions)
+  #create the search params using the conditions created by the case-when block above. This will feed into the Task.where() query.
+  ActiveRecord::Base.send(:sanitize_sql_array, conditions)
   end
 
 end

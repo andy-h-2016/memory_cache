@@ -14,6 +14,6 @@ class Task < ApplicationRecord
   after_initialize :ensure_due_date
 
   def ensure_due_date
-    self.due_date ||= DateTime.current
+    self.due_date ||= DateTime.current.to_date
   end
 end

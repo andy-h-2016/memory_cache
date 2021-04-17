@@ -60,7 +60,7 @@ const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, list
     return(
       <div key={`${property}-button-container`} className='button-dropdown-container'>
         <button
-           
+          type='button'
           className="add-property-button" 
           dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(ICONS[property])}}
           onClick={e => insertModChar(e, property)} >

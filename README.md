@@ -5,7 +5,10 @@
 **An app that remembers the little things for you.**
 
 # Introduction
-Turn Off The Stove is a Rails-React-Redux clone of Remember the Milk, a to-do list website. Users can create tasks, organize them into lists, and Turn Off The Stove will keep track of which tasks need to be done soon.
+Turn Off The Stove is a Rails-React-Redux clone of Remember the Milk, a to-do list website. Users can create tasks, organize them into lists, and Turn Off The Stove will keep track of which tasks are coming up.
+<img src="./app/assets/images/overview.png" />
+
+
 
 
 # Technologies Used
@@ -39,46 +42,48 @@ The app reads the `:listId` wildcard from the URL to construct its query. A user
 The React component constructs query parameters and sends it to the Rails controller in an AJAX request. For the built-in lists (e.g. This Week), the controller fires a different query structure based on a `custom` parameter. The `complete` parameter is also included to filter between complete and incomplete tasks. Below is the Rails code that converts the payload from the AJAX request into a format recognizeable by the ActiveRecord API:
 ```ruby
 def custom_params
-    type = params[:task][:custom]
-    complete = params[:task][:complete]
-    case type
-    when 'inbox'
-      # finding the uncategorized tasks
-      conditions = [
-        'list_id IS NULL AND user_id=? AND complete=?',
-        current_user.id,
-        complete
-      ]
-    when 'today'
-      conditions = [
-        'due_date=? AND user_id=? AND complete=?',
-        DateTime.current,
-        current_user.id,
-        complete
-      ]
-    when 'tomorrow'
-      conditions = [
-        'due_date=? AND user_id=? AND complete=?',
-        DateTime.current.advance(days: 1),
-        current_user.id,
-        complete
-      ]
-    when 'this-week'
-      #finding tasks due in the coming week
-      conditions = [
-        'due_date BETWEEN ? and ? AND user_id=? AND complete=?',
-        DateTime.current,
-        DateTime.current.advance(weeks: 1),
-        current_user.id,
-        complete
-      ]
-    else
-      #if type does not match the above, it is not trustworthy, delete it.
-      conditions = [];
-    end
+  #params from the body of the AJAX request
+  type = params[:task][:custom]
+  complete = params[:task][:complete]
 
-    #create the query using the conditions created by the case-when block above
-    ActiveRecord::Base.send(:sanitize_sql_array, conditions)
+  case type
+  when 'inbox'
+    # finding the uncategorized tasks
+    conditions = [
+      'list_id IS NULL AND user_id=? AND complete=?',
+      current_user.id,
+      complete
+    ]
+  when 'today'
+    conditions = [
+      'due_date=? AND user_id=? AND complete=?',
+      DateTime.current.to_date,
+      current_user.id,
+      complete
+    ]
+  when 'tomorrow'
+    conditions = [
+      'due_date=? AND user_id=? AND complete=?',
+      DateTime.current.advance(days: 1).to_date,
+      current_user.id,
+      complete
+    ]
+  when 'this-week'
+    #finding tasks due in the coming week
+    conditions = [
+      'due_date BETWEEN ? and ? AND user_id=? AND complete=?',
+      DateTime.current.to_date,
+      DateTime.current.advance(weeks: 1).to_date,
+      current_user.id,
+      complete
+    ]
+  else
+    #if type does not match the above, it is not trustworthy, delete it.
+    conditions = [];
+  end
+
+  #create the search params using the conditions created by the case-when block above. This will feed into the Task.where() query.
+  ActiveRecord::Base.send(:sanitize_sql_array, conditions)
   end
   ```
 
@@ -104,7 +109,7 @@ def custom_params
   <img src="./app/assets/images/output.png" />
 
 
-RegEx pattern matching is utilized to translate the user's input into key-value pairs recognizable by the Rails controller's strong params:
+Regex pattern matching is utilized to parse the modifier characters and translate them into a format recognizable by the Rails controller's strong params:
 ``` javascript
 export const parseInput = (input, lists) => {
   let titleMatch = input.match(/((?:\w|\s)+)(?:\s\W)?/)
@@ -142,19 +147,14 @@ export const parseInput = (input, lists) => {
 }
 ```
 
+# Future Plans
+* Be able to search for tasks based on title or other properties
+* Allow for subtasks and notes to be added to each task
+* Display summaries for each list (# completed vs incompleted, overdue, etc.)
+* Create recurring tasks
 
 
-
-
-
-
-
-
-
-
-
-# Special Mentions
+---
+### Attributions
 
 Vector art in the logo was created by <a href="https://www.freepik.com/vectors/water">brgfx (www.freepik.com)</a>
-
-The folks at <a href="https://www.regexone.com">RegexOne</a> who created interactive tutorials to walk you step-by-step through the most common selector types and how to use them. Also, the folks at <a href="https://regex101.com">regular expressions 101</a> who put together an online regex editor that visualizes what the regex is matching and capturing. 
