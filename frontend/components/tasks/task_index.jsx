@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import { constructSearchParams, parseInput } from '../../util/task_component_util';
 import AddPropertyButtons from './add_property_buttons';
+import TasksSummary from './tasks_summary'
 
 const MIN_NUM_OF_ROWS = 20;
 
@@ -106,7 +107,6 @@ class TaskIndex extends React.Component {
     }
 
     let completedClass = '';
-    let completedParam = '';
     if (this.completed) {
       completedClass = 'completed';
       completedParam = 'completed/';
@@ -130,59 +130,65 @@ class TaskIndex extends React.Component {
     }
 
     return (
-      <section className='tasks-index-pane'>
-        
+      <React.Fragment>
 
-        <ul className='tasks-index'>
-          <div className="scrollbar-container">
-            <li className="tasks-index-row complete-tabs">
-              <NavLink 
-                to={this.props.location.pathname.replace(/\/completed.*/, '')}
-                className="complete-tab-link"
-                exact={true} >
-                Incomplete
-              </NavLink>
+        <section className='tasks-index-pane'>
+          
 
-              <NavLink 
-                to={`/list/${this.props.match.params.listId}/completed`} 
-                className="complete-tab-link" >
-                Complete
-              </NavLink>
-            </li> 
+          <ul className='tasks-index'>
+            <div className="scrollbar-container">
+              <li className="tasks-index-row complete-tabs">
+                <NavLink 
+                  to={this.props.location.pathname.replace(/\/completed.*/, '')}
+                  className="complete-tab-link"
+                  exact={true} >
+                  Incomplete
+                </NavLink>
 
-            <li className="tasks-index-row instructions">
-              Type in your task, then use the buttons below to add details.
-            </li>
+                <NavLink 
+                  to={`/list/${this.props.match.params.listId}/completed`} 
+                  className="complete-tab-link" >
+                  Complete
+                </NavLink>
+              </li> 
 
-            <li className="tasks-index-row form-row" key='form'>
-              <form className='add-task-form'>
-                <input 
-                  className='add-task-input'
-                  ref={this.inputRef}
-                  onChange={this.update} 
-                  type="text" 
-                  placeholder="Add a task..." 
-                  value={this.state.input}
-                />
+              <li className="tasks-index-row instructions">
+                Type in your task, then use the buttons below to add details.
+              </li>
 
-                <AddPropertyButtons 
-                  dropdown={this.props.dropdown}
-                  lists={this.props.lists}
-
-                  insertModChar={this.insertModChar}
-                  insertPropertyValues={this.insertPropertyValues}
-                  activateDropdown={this.activateDropdown}
-                  clearDropdown={this.clearDropdown}
+              <li className="tasks-index-row form-row" key='form'>
+                <form className='add-task-form'>
+                  <input 
+                    className='add-task-input'
+                    ref={this.inputRef}
+                    onChange={this.update} 
+                    type="text" 
+                    placeholder="Add a task..." 
+                    value={this.state.input}
                   />
-                
-                <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
-              </form>
-            </li>
-            
-            {tasksList}
-          </div>
-        </ul>
-      </section>
+
+                  <AddPropertyButtons 
+                    dropdown={this.props.dropdown}
+                    lists={this.props.lists}
+
+                    insertModChar={this.insertModChar}
+                    insertPropertyValues={this.insertPropertyValues}
+                    activateDropdown={this.activateDropdown}
+                    clearDropdown={this.clearDropdown}
+                    />
+                  
+                  <button onClick={this.handleSubmit} className='modal-button action-button'>Add Task</button>  
+                </form>
+              </li>
+              
+              {tasksList}
+            </div>
+          </ul>
+        </section>
+
+        <TasksSummary tasks={this.props.tasks} />
+      </React.Fragment>
+
     );
   }
 }
