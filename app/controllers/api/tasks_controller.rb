@@ -97,8 +97,14 @@ class Api::TasksController < ApplicationController
       complete
     ]
   else
-    #if type does not match the above, it is not trustworthy, delete it.
-    conditions = [];
+    #if type does not match the above, it is from the search bar.
+    search_term = type;
+    conditions = [
+      'title LIKE ? AND user_id=? AND complete=?',
+      "%#{search_term}%",
+      current_user.id,
+      complete
+    ];
   end
 
   #create the search params using the conditions created by the case-when block above. This will feed into the Task.where() query.

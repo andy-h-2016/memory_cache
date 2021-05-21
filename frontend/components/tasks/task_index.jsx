@@ -24,6 +24,7 @@ class TaskIndex extends React.Component {
 
   componentDidMount() {
     let searchParams = constructSearchParams(this.urlParams, this.completed);
+    console.log('params', searchParams)
     this.props.searchTasks(searchParams);
   } 
         
