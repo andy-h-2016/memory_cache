@@ -1,4 +1,5 @@
 import React from 'react';
+import {Route} from 'react-router-dom';
 import GreetingsContainer from './greetings_container';
 import SearchBar from './search_bar';
 
@@ -12,7 +13,7 @@ class NavBar extends React.Component {
     return (
       <nav>
         <GreetingsContainer />
-        <SearchBar />
+        <Route component={SearchBar}/>
       </nav>
 
     )

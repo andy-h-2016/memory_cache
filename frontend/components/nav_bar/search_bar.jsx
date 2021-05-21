@@ -1,15 +1,23 @@
 import React from 'react';
+import {constructSearchParams, parseInput} from '../../util/task_component_util';
 
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
+const SearchBar = ({match, location, history}) => {
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const searchTerm = e.target[0].value;
+    history.push(`/list/${searchTerm}`);
   }
 
-  render() {
-    return (
-      <div></div>
-    )
-  }
+
+  return (
+    <form onSubmit={submitSearch}>
+      <input name="search-params" type="text" />
+    </form>
+  )
 }
+
 
 export default SearchBar;
