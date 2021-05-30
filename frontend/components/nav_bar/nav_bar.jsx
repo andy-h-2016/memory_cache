@@ -1,22 +1,15 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import GreetingsContainer from './greetings_container';
 import SearchBar from './search_bar';
 
-class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const NavBar = ({currentUser, logout}) => {
 
-  render() {
-
-    return (
-      <nav>
-        <GreetingsContainer />
-      </nav>
-
-    )
-  }
+  return (
+  <div className="nav">
+    <Route component={SearchBar}/>
+    <button id="logout-button" className="modal-button cancel-button" onClick={logout}>Log Out</button>
+  </div>
+  )
 }
 
 export default NavBar;

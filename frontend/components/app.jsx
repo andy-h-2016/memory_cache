@@ -1,7 +1,7 @@
 import React from 'react';
 import {ProtectedRoute} from '../util/route_util';
 
-import NavBar from './nav_bar/nav_bar';
+import NavBarContainer from './nav_bar/nav_bar_container';
 import ListSidebarContainer from './lists/list_sidebar_container';
 import TaskIndexContainer from './tasks/task_index_container';
 import TaskDetailsContainer from './tasks/task_details_container';
@@ -11,7 +11,7 @@ import { Switch, Route } from 'react-router';
 const App = (props) => (
   <div className="app" onClick={props.clearDropdown}>
     <Modal />
-    <NavBar />
+    <NavBarContainer />
     <ListSidebarContainer/>
 
     <Switch>
