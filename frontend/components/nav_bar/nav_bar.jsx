@@ -13,7 +13,6 @@ class NavBar extends React.Component {
     return (
       <nav>
         <GreetingsContainer />
-        <Route component={SearchBar}/>
       </nav>
 
     )

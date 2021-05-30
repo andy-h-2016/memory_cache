@@ -13,8 +13,9 @@ const SearchBar = ({match, location, history}) => {
 
 
   return (
-    <form onSubmit={submitSearch}>
-      <input name="search-params" type="text" />
+    <form className="searchbar" onSubmit={submitSearch}>
+      <input className="search-params" name="search-params" type="text" />
+      <i className="fas fa-search"></i>
     </form>
   )
 }
