@@ -16,13 +16,17 @@ const TasksSummary = ({tasks}) => {
     let dueDate = new Date(task.dueDate);
     if (today > dueDate) {overdueTaskCount += 1}
   }
-
+  console.log('PROPS FOR TASKS SUMMARY: ', tasks)
+  
   return (
     <section className="tasks-summary-pane">
-      <div>{`${taskCount} tasks`}</div>
-      <div>{`${estimateTotal} min estimated`}</div>
-      <div>{`${overdueTaskCount} overdue`}</div>
-      <div>{`${completedTaskCount} completed`}</div>
+      <h2 className="list-header"></h2>
+      <div className="tasks-summary">
+        <div>{`${taskCount} tasks`}</div>
+        <div>{`${estimateTotal} min estimated`}</div>
+        <div>{`${overdueTaskCount} overdue`}</div>
+        <div>{`${completedTaskCount} completed`}</div>
+      </div>
     </section>
   );
   
