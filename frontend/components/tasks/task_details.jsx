@@ -131,11 +131,7 @@ class TaskDetails extends React.Component {
     });
 
     return (
-      // <div className="task-details-pane">
-      <div 
-        className="task-details-pane" 
-        // style={{width: `${this.props.windowDimensions.width}px`}}
-      >
+      <div className="task-details-pane">
         <form className="task-detail-edit-form">
           <input
             className={`task-detail-edit-input title-input`}

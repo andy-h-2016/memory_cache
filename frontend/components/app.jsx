@@ -9,19 +9,6 @@ import Modal from './modal/modal';
 import { Switch, Route } from 'react-router';
 
 const App = (props) => {
-  let rightPaneWidth;
-
-  const calculateRightPaneWidth = () => {
-    const listSidebarWidth = document.querySelector('.lists-sidebar').offsetWidth;
-    const tasksIndexWidth = document.querySelector('.tasks-index-pane').offsetWidth;
-    rightPaneWidth = window.offsetWidth - listSidebarWidth - tasksIndexWidth;
-  }
-
-  // calculate Right Pane Width upon initialization of page.
-  // calculateRightPaneWidth();
-  // Event listener to recalculate pane width upon resizing of window
-  // window.addEventListener('resize', calculateRightPaneWidth);
-
   return (
     <div className="app" onClick={props.clearDropdown}>
       <Modal />
@@ -36,7 +23,7 @@ const App = (props) => {
       <Switch>
         <ProtectedRoute path="/list/:listId/completed/:taskId" component={TaskDetailsContainer}/>
         <Route path="/list/:listId/completed"></Route> {/* Render nothing on the side */}
-        <ProtectedRoute path="/list/:listId/:taskId" component={TaskDetailsContainer} otherProps={{width: rightPaneWidth}}/>
+        <ProtectedRoute path="/list/:listId/:taskId" component={TaskDetailsContainer}/>
       </Switch>
     </div>
   )
