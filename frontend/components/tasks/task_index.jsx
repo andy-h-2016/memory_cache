@@ -49,7 +49,7 @@ class TaskIndex extends React.Component {
     e.preventDefault();
     e.stopPropagation();
 
-    let task = parseInput(this.state.input, this.props.lists);
+    let task = parseInput(this.state.input, Object.values(this.props.lists));
     this.setState({input: ''});
     this.props.createTask(task);
   }
@@ -170,7 +170,7 @@ class TaskIndex extends React.Component {
 
                   <AddPropertyButtons 
                     dropdown={this.props.dropdown}
-                    lists={this.props.lists}
+                    lists={Object.values(this.props.lists)}
 
                     insertModChar={this.insertModChar}
                     insertPropertyValues={this.insertPropertyValues}
@@ -187,7 +187,10 @@ class TaskIndex extends React.Component {
           </ul>
         </section>
 
-        <TasksSummary tasks={this.props.tasks} />
+        <TasksSummary 
+          tasks={this.props.tasks} 
+          listTitle={this.props.lists[this.urlParams] ?
+            this.props.lists[this.urlParams].title : `Search: ${this.urlParams}`} />
       </React.Fragment>
 
     );

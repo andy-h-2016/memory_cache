@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TasksSummary = ({tasks}) => {
+const TasksSummary = ({tasks, listTitle}) => {
 
   const taskCount = tasks.length;
   let estimateTotal = 0;
@@ -19,7 +19,7 @@ const TasksSummary = ({tasks}) => {
   
   return (
     <section className="tasks-summary-pane">
-      <h2 className="list-header"></h2>
+      <h2 className="list-header">{listTitle}</h2>
       <div className="tasks-summary">
         <div>{`${taskCount} tasks`}</div>
         <div>{`${estimateTotal} min estimated`}</div>
