@@ -18,9 +18,6 @@ class TaskDetails extends React.Component {
     this.inputRef = {};
 
     this._isMounted = false;
-
-    const listSidebarWidth = document.querySelector('.lists-sidebar').offsetWdith
-    const tasksIndexWidth = document.querySelector('.tasks-index-pane').offsetWdith
   }
 
   componentDidMount() {
@@ -39,11 +36,6 @@ class TaskDetails extends React.Component {
 
     if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
       this._isMounted && this.setState(this.props.task);
-      this.listSidebarWidth = document.querySelector('.lists-sidebar').offsetWidth;
-      this.tasksIndexWidth = document.querySelector('.tasks-index-pane').offsetWidth;
-
-      console.log('sidebarWIdth', this.listSidebarWidth)
-      console.log('indexWidth', this.tasksIndexWidth)
 
     } else if (taskWasHere && taskIsNotHere) {
       //this conditional runs when the task is no longer in the current list (either after moving, completing, or deleting the task)
@@ -139,7 +131,11 @@ class TaskDetails extends React.Component {
     });
 
     return (
-      <div className="task-details-pane" style={{width: `${window.innerWidth - this.listSidebarWidth - this.tasksIndexWidth}`}}>
+      // <div className="task-details-pane">
+      <div 
+        className="task-details-pane" 
+        // style={{width: `${this.props.windowDimensions.width}px`}}
+      >
         <form className="task-detail-edit-form">
           <input
             className={`task-detail-edit-input title-input`}

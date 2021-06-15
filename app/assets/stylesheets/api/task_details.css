@@ -1,5 +1,5 @@
 .task-details-pane {
-  position: fixed;
+  position: absolute;
   top: 50px;
   right: 0;
   z-index: 3;
@@ -9,7 +9,7 @@
   -webkit-transform: translate3d(100%, 0, 0); */
 
 
-  width: 42.5vw;
+  width: calc(45vw - 33px);
   height: 100vh;
   font-size: 15px;
   border-top-left-radius: 6px;

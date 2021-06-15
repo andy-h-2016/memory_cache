@@ -8,23 +8,38 @@ import TaskDetailsContainer from './tasks/task_details_container';
 import Modal from './modal/modal';
 import { Switch, Route } from 'react-router';
 
-const App = (props) => (
-  <div className="app" onClick={props.clearDropdown}>
-    <Modal />
-    <NavBarContainer />
-    <ListSidebarContainer/>
+const App = (props) => {
+  let rightPaneWidth;
 
-    <Switch>
-      <ProtectedRoute path="/list/:listId/completed" component={TaskIndexContainer}/>
-      <ProtectedRoute path="/list/:listId" component={TaskIndexContainer}/>
-    </Switch>
+  const calculateRightPaneWidth = () => {
+    const listSidebarWidth = document.querySelector('.lists-sidebar').offsetWidth;
+    const tasksIndexWidth = document.querySelector('.tasks-index-pane').offsetWidth;
+    rightPaneWidth = window.offsetWidth - listSidebarWidth - tasksIndexWidth;
+  }
 
-    <Switch>
-      <ProtectedRoute path="/list/:listId/completed/:taskId" component={TaskDetailsContainer}/>
-      <Route path="/list/:listId/completed"></Route> {/* Render nothing on the side */}
-      <ProtectedRoute path="/list/:listId/:taskId" component={TaskDetailsContainer}/>
-    </Switch>
-  </div>
-);
+  // calculate Right Pane Width upon initialization of page.
+  // calculateRightPaneWidth();
+  // Event listener to recalculate pane width upon resizing of window
+  // window.addEventListener('resize', calculateRightPaneWidth);
+
+  return (
+    <div className="app" onClick={props.clearDropdown}>
+      <Modal />
+      <NavBarContainer />
+      <ListSidebarContainer/>
+
+      <Switch>
+        <ProtectedRoute path="/list/:listId/completed" component={TaskIndexContainer}/>
+        <ProtectedRoute path="/list/:listId" component={TaskIndexContainer}/>
+      </Switch>
+
+      <Switch>
+        <ProtectedRoute path="/list/:listId/completed/:taskId" component={TaskDetailsContainer}/>
+        <Route path="/list/:listId/completed"></Route> {/* Render nothing on the side */}
+        <ProtectedRoute path="/list/:listId/:taskId" component={TaskDetailsContainer} otherProps={{width: rightPaneWidth}}/>
+      </Switch>
+    </div>
+  )
+};
 
 export default App;

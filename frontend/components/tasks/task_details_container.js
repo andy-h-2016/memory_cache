@@ -6,10 +6,13 @@ const mapSTP = (state, ownProps)  => {
   const taskProps = state.entities.tasks ? state.entities.tasks[ownProps.match.params.taskId] : '';
   let listTitle;
   let task;
+  let windowDimensions = ownProps.otherProps;
+  console.log('ownProps',ownProps)
   
   if (taskProps) {
     if (taskProps.listId && state.entities.lists[taskProps.listId]) {
       listTitle = state.entities.lists[taskProps.listId].title;
+
     } else {
       listTitle = 'Inbox';
     }
@@ -25,7 +28,8 @@ const mapSTP = (state, ownProps)  => {
 
   return ({
     task,
-    listsByTitle
+    listsByTitle,
+    windowDimensions
   });
 }
 
