@@ -4,6 +4,7 @@ import { constructSearchParams, parseInput } from '../../util/task_component_uti
 import AddPropertyButtons from './add_property_buttons';
 import TasksSummary from './tasks_summary'
 
+const standardLists = ['all', 'inbox', 'today', 'tomorrow', 'this-week'];
 const MIN_NUM_OF_ROWS = 20;
 
 class TaskIndex extends React.Component {
@@ -17,25 +18,25 @@ class TaskIndex extends React.Component {
     this.insertModChar = this.insertModChar.bind(this);
     this.insertPropertyValues = this.insertPropertyValues.bind(this);
 
-    this.urlParams = this.props.match.params.listId;
+    this.currentListTitle = this.props.match.params.listId;
     this.completed = this.props.location.pathname.includes('completed');
     this.inputRef = React.createRef();
   }
 
   componentDidMount() {
-    let searchParams = constructSearchParams(this.urlParams, this.completed);
+    let searchParams = constructSearchParams(this.currentListTitle, this.completed);
     console.log('params', searchParams)
     this.props.searchTasks(searchParams);
   } 
         
   componentDidUpdate(prevProps) {
-    this.urlParams = this.props.match.params.listId
-    let differentListId = this.urlParams !== prevProps.match.params.listId;
+    this.currentListTitle = this.props.match.params.listId
+    let differentListId = this.currentListTitle !== prevProps.match.params.listId;
 
     this.completed = this.props.location.pathname.includes('completed');
     let differentCompletedKey = this.completed !== prevProps.location.pathname.includes('completed');
     if (differentListId || differentCompletedKey) {
-      let searchParams = constructSearchParams(this.urlParams, this.completed);
+      let searchParams = constructSearchParams(this.currentListTitle, this.completed);
       this.props.searchTasks(searchParams);
     }
   }
@@ -130,6 +131,16 @@ class TaskIndex extends React.Component {
       tasksList.push(<li className='tasks-index-row empty-row' key={`empty-${i}`}></li>);
     }
 
+    let listTitle;
+    if (this.props.lists[this.currentListTitle] !== undefined) {
+      listTitle = this.props.lists[this.currentListTitle].title;
+    } else if (standardLists.includes(this.currentListTitle)) {
+      //capitalize the standard list title
+      listTitle = this.currentListTitle[0].toUpperCase() + this.currentListTitle.substring(1);
+    } else {
+      listTitle = `Search: ${this.currentListTitle}`;
+    }
+
     return (
       <React.Fragment>
 
@@ -189,8 +200,7 @@ class TaskIndex extends React.Component {
 
         <TasksSummary 
           tasks={this.props.tasks} 
-          listTitle={this.props.lists[this.urlParams] ?
-            this.props.lists[this.urlParams].title : `Search: ${this.urlParams}`} />
+          listTitle={listTitle} />
       </React.Fragment>
 
     );
