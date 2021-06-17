@@ -1,3 +1,6 @@
+.tasks-index-pane {
+  z-index: 10;
+}
 
 .scrollbar-container {
   overflow: auto;

@@ -1,7 +1,7 @@
 .task-details-pane {
   position: absolute;
   top: 50px;
-  right: 0;
+  right: 1vw;
   z-index: 3;
 
   /* transition: 0.5s;
@@ -9,7 +9,7 @@
   -webkit-transform: translate3d(100%, 0, 0); */
 
 
-  width: calc(45vw - 33px);
+  width: calc(44vw - 33px);
   height: 100vh;
   font-size: 15px;
   border-top-left-radius: 6px;

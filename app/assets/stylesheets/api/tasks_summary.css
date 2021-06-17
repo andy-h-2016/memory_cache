@@ -1,10 +1,16 @@
 .tasks-summary-pane {
   font-size: 18px;
   background-color: #e4eef8;
+  width: calc(42vw);
+  border-top-left-radius: 0px;
+
+  position: relative;
+  left: -5px;
+  /* transform: translate(-20px); */
 }
 
 .tasks-summary-pane-contents {
-  margin: 20px 10px;
+  margin: 40px 30px;
 }
 
 .list-header {
