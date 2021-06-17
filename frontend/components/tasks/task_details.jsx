@@ -13,7 +13,7 @@ class TaskDetails extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
-    
+
     this.completed = this.props.location.pathname.includes("completed");
     this.inputRef = {};
 
@@ -90,7 +90,8 @@ class TaskDetails extends React.Component {
       return null;
     }
 
-    // const offscreen = this._isMounted ? '' : 'offscreen';
+    const offscreen = this._isMounted ? '' : 'offscreen';
+
     const editableProperties = ["listTitle", "dueDate", "priority", "estimate"];
 
     const rows = editableProperties.map((property) => {
@@ -131,7 +132,7 @@ class TaskDetails extends React.Component {
     });
 
     return (
-      <div className="task-details-pane">
+      <div className={`task-details-pane ${offscreen}`}>
         <form className="task-detail-edit-form">
           <input
             className={`task-detail-edit-input title-input`}
