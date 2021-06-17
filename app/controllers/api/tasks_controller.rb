@@ -48,7 +48,9 @@ class Api::TasksController < ApplicationController
   end
 
   private
+  #strong params
   def task_params
+    # if due_date params exists, convert from JS date format to Ruby date format
     if params[:task][:due_date]
       year, month, day = params[:task][:due_date].map(&:to_i)
       params[:task][:due_date] = DateTime.new(year, month, day)
