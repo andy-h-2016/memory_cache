@@ -4,8 +4,8 @@ import React from 'react';
 export const constructSearchParams = (urlParams, complete) => {
   complete ||= false; //if it's undefined, it's false
   switch(true) {
+    // regex check if urlParams is a number; number refers to user-generated list
     case /\d+/.test(urlParams):
-      // regex check if urlParams is a number
       return {
         listId: urlParams, 
         complete

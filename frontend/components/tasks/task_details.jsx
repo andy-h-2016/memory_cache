@@ -25,6 +25,7 @@ class TaskDetails extends React.Component {
     let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
     this.props.searchTasks(searchParams)
       .then(() => this.setState(this.props.task));
+    
   }
 
   componentDidUpdate(prevProps) {
@@ -35,6 +36,7 @@ class TaskDetails extends React.Component {
 
     if (this.props.match.params.taskId !== prevProps.match.params.taskId) {
       this._isMounted && this.setState(this.props.task);
+
     } else if (taskWasHere && taskIsNotHere) {
       //this conditional runs when the task is no longer in the current list (either after moving, completing, or deleting the task)
       this._isMounted && this.props.history.push(`/list/${this.props.match.params.listId}${completedPath}`);

@@ -5,7 +5,8 @@ import {activateDropdown, clearDropdown} from '../../actions/dropdown_actions';
 
 const mapSTP = (state, ownProps) => ({
   tasks: Object.values(state.entities.tasks),
-  lists: Object.values(state.entities.lists),
+  // lists: Object.values(state.entities.lists),
+  lists: state.entities.lists,
   dropdown: state.ui.dropdown
 });
 
