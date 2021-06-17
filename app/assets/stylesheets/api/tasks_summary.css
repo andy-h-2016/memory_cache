@@ -1,7 +1,8 @@
 .tasks-summary-pane {
   font-size: 18px;
   background-color: #e4eef8;
-  width: calc(42vw);
+  /* width: 42vw; */
+  width: 43%;
   border-top-left-radius: 0px;
 
   position: relative;
@@ -10,7 +11,7 @@
 }
 
 .tasks-summary-pane-contents {
-  margin: 40px 30px;
+  padding: 40px 30px;
 }
 
 .list-header {

@@ -1,15 +1,16 @@
 .lists-sidebar {
-  margin-left: 15px;
-  margin-right: 3px;
-  width: 13vw;
-  min-width: 100px;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  /* width: 13vw;
+  min-width: 100px; */
+  width: 12vw;
   height: 100vh;
   font-size: 13px;
   position: relative;
 }
 
 .lists-index {
-  border-bottom: 1px solid #cde4f8;
+  border-bottom: 1px solid #bee1ff;
   border-radius: 0px;
   padding-block: 10px; 
   margin-right: 5px;
@@ -33,7 +34,7 @@
 
 .list-link {
   display: block;
-  padding-left: 15px;
+  padding-left: 3px;
   padding-right: 7px;
   padding-block: 5px;
 }

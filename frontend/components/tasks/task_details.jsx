@@ -13,7 +13,7 @@ class TaskDetails extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
-
+    
     this.completed = this.props.location.pathname.includes("completed");
     this.inputRef = {};
 
@@ -25,7 +25,6 @@ class TaskDetails extends React.Component {
     let searchParams = constructSearchParams(this.props.match.params.listId, this.completed);
     this.props.searchTasks(searchParams)
       .then(() => this.setState(this.props.task));
-    
   }
 
   componentDidUpdate(prevProps) {
@@ -91,6 +90,7 @@ class TaskDetails extends React.Component {
       return null;
     }
 
+    // const offscreen = this._isMounted ? '' : 'offscreen';
     const editableProperties = ["listTitle", "dueDate", "priority", "estimate"];
 
     const rows = editableProperties.map((property) => {
