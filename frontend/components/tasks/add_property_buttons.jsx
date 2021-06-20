@@ -1,12 +1,21 @@
 import React from 'react';
 import DOMPurify from 'dompurify';
 const PROPERTIES = ['dueDate', 'estimate', 'priority', 'list'];
+const HOVER_LABELS = {
+  dueDate: 'due\ndate', 
+  estimate: 'time\nestimate',
+  priority: 'priority',
+  list: 'list'
+};
+
 const ICONS = {
   dueDate: '<i class="fas fa-calendar-day"></i>',
   estimate: '<i class="far fa-clock"></i>',
   priority: '<i class="fas fa-exclamation"></i>',
   list: '<i class="fas fa-list-alt"></i>'
 }
+
+
 const today = new Date();
 const [year, month, day] = [today.getFullYear(), today.getMonth(), today.getDate()]
 const tomorrow = new Date(year, month, day + 1);
@@ -59,9 +68,11 @@ const AddPropertyButtons = ({insertModChar, insertPropertyValues, dropdown, list
     
     return(
       <div key={`${property}-button-container`} className='button-dropdown-container'>
+
         <button
           type='button'
           className="add-property-button" 
+          data-hover-label={`${HOVER_LABELS[property]}`}
           dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(ICONS[property])}}
           onClick={e => insertModChar(e, property)} >
         </button>

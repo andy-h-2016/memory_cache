@@ -33,18 +33,70 @@
 	background-color: var(--hover-highlight-blue);
 }
 
-.button-dropdown-container {
-  position: relative;
+.add-property-dropdown {
+  width: 150px;
+  /* left: 0;
+  top: 100%; */
 }
 
 .add-property-buttons {
   display: flex;
+  margin-block: 5px;
+  margin-left: 5px;
 }
 
-.add-property-dropdown {
-  width: 150px;
-  left: 0;
-  top: 100%;
+.add-property-button {
+  border: none;
+  background-color: transparent;
+  width: var(--add-property-button-width);
+  height: var(--add-property-button-height);
+  margin-right: 4px;
+
+  color:rgb(100, 100, 100);
+  position: relative;
+  font-size: 16px;
+
 }
 
+
+/* change color of icons on hover */
+.add-property-button:hover {
+  color:rgb(0, 0, 0);
+}
+
+
+/* tooltip pop-up on hover */
+.add-property-button:hover:before {
+  content: attr(data-hover-label);
+  white-space: pre;
+
+  color: white;
+
+  position: absolute;
+  top: calc(var(--add-property-button-height) + 4px);
+  left: calc(var(--add-property-button-width) / 2 - 28px);
+  background-color: rgb(50, 50, 50);
+
+  width: 50px;
+  padding-inline: 3px;
+  padding-block: 4px;
+  border-radius: 4px;
+
+  font-size: 12px;
+
+  z-index: 100;
+}
+
+/* arrow for tooltip */
+.add-property-button:hover:after {
+  content: "";
+  position: absolute;
+  top: calc(var(--add-property-button-height) - var(--tooltip-arrow-height));
+  left: calc(var(--add-property-button-width) / 2);
+  transform:translateX(-50%);
+
+  border: var(--tooltip-arrow-height) solid black;
+  border-color: transparent transparent rgb(50, 50, 50) transparent;
+
+}
 

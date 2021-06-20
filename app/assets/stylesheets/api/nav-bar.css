@@ -27,12 +27,13 @@
   opacity: 30%;
   padding-left: 25px;
   font-size: 14px;
+  padding-block: 6px;
 }
 
 .fa-search {
   position: absolute;
   left: 5px;
-  top: 4px;
+  top: 8px;
 
   color: white;
   opacity: 100%;

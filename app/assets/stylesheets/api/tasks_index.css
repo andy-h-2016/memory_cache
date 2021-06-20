@@ -44,17 +44,8 @@
   width: 100%;
 }
 
-.add-property-buttons {
-  margin-block: 5px;
-}
 
-.add-property-button {
-  border: none;
-  background-color: transparent;
-  width: 22px;
-  height: 18px;
-  margin-right: 4px;
-}
+
 
 .add-task-form {
   width: 100%;
