@@ -2,7 +2,7 @@ import React from "react";
 import {
   constructSearchParams,
   parseDate,
-} from "../../util/task_component_util";
+} from "../../../util/task_component_util";
 
 class TaskDetails extends React.Component {
   constructor(props) {

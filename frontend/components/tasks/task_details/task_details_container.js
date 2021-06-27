@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import TaskDetails from './task_details';
-import {searchTasks, updateTask, deleteTask} from '../../actions/task_actions';
+import {searchTasks, updateTask, deleteTask} from '../../../actions/task_actions';
 
 const mapSTP = (state, ownProps)  => {
   const taskProps = state.entities.tasks ? state.entities.tasks[ownProps.match.params.taskId] : '';
