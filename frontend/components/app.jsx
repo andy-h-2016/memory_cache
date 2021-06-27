@@ -3,7 +3,7 @@ import {ProtectedRoute} from '../util/route_util';
 
 import NavBarContainer from './nav_bar/nav_bar_container';
 import ListSidebarContainer from './lists/list_sidebar_container';
-import TaskIndexContainer from './tasks/task_index_container';
+import TaskIndexContainer from './tasks/task_index/task_index_container';
 import TaskDetailsContainer from './tasks/task_details/task_details_container';
 import Modal from './modal/modal';
 import { Switch, Route } from 'react-router';

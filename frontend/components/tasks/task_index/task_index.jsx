@@ -1,8 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import { constructSearchParams, parseInput } from '../../util/task_component_util';
+import { constructSearchParams, parseInput } from '../../../util/task_component_util';
 import AddPropertyButtons from './add_property_buttons';
-import TasksSummary from './tasks_summary'
+import TasksSummary from '../tasks_summary'
 
 const standardLists = ['all', 'inbox', 'today', 'tomorrow', 'this-week'];
 const MIN_NUM_OF_ROWS = 20;
