@@ -1,7 +1,8 @@
 .task-details-pane {
   position: absolute;
-  top: 50px;
-  right: 1.1vw;
+  top: 51px;
+  /* right: 1.1vw; */
+  left: var(--tasks-details-left-position);
 
   transition: 0.5s;
   transform: translate3d(0%, 0, 0);

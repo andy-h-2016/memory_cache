@@ -1,9 +1,9 @@
 .lists-sidebar {
-  margin-left: 1vw;
-  margin-right: 1vw;
+  margin-left: calc(var(--list-sidebar-margin) / 2);
+  margin-right: calc(var(--list-sidebar-margin) / 2);
   /* width: 13vw;
   min-width: 100px; */
-  width: 12vw;
+  width: var(--list-sidebar-width);
   height: 100vh;
   font-size: 13px;
   position: relative;
@@ -34,7 +34,7 @@
 
 .list-link {
   display: block;
-  padding-left: 3px;
+  padding-left: 7px;
   padding-right: 7px;
   padding-block: 5px;
 }
@@ -44,6 +44,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-radius: 0px;
 }
 
 .list-link:hover {

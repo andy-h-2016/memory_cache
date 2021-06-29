@@ -1,7 +1,7 @@
 .tasks-index-pane {
   z-index: 10;
   /* width:50%; */
-  width: 42%;
+  width: var(--tasks-index-pane-width);
 }
 
 .scrollbar-container {

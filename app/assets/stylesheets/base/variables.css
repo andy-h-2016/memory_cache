@@ -2,4 +2,11 @@
   --add-property-button-height: 18px;
   --add-property-button-width: 26px;
   --tooltip-arrow-height: 6px;
+
+  --list-sidebar-width: 12vw;
+  --list-sidebar-margin: 2vw;
+  --tasks-index-pane-width: 42vw;
+  --tasks-details-left-position: calc(
+      var(--list-sidebar-width) + var(--list-sidebar-margin) + var(--tasks-index-pane-width)
+    );
 }
