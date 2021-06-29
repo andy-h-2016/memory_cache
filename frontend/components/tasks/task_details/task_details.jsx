@@ -2,7 +2,7 @@ import React from "react";
 import {
   constructSearchParams,
   parseDate,
-} from "../../util/task_component_util";
+} from "../../../util/task_component_util";
 
 class TaskDetails extends React.Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class TaskDetails extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
+    this.closePanel = this.closePanel.bind(this);
 
     this.completed = this.props.location.pathname.includes("completed");
     this.inputRef = {};
@@ -54,6 +55,17 @@ class TaskDetails extends React.Component {
     e.preventDefault();
     this.state.complete = !this.state.complete;
     this.handleSubmit(e);
+  }
+
+  closePanel(e) {
+    e.preventDefault();
+    const currentLocation = this.props.location.pathname;
+    const taskIdMatch = currentLocation.match(/(\d+)$/);
+    const taskId = `/${taskIdMatch[1]}`;
+
+    //Remove taskId wildcard from the url
+    const taskIndexURL = currentLocation.replace(taskId, '');
+    this.props.history.push(taskIndexURL);
   }
 
   handleSubmit(e, field) {
@@ -133,6 +145,10 @@ class TaskDetails extends React.Component {
 
     return (
       <div className={`task-details-pane ${offscreen}`}>
+        
+        <i className="fas fa-times close-button" onClick={this.closePanel}></i>
+
+
         <form className="task-detail-edit-form">
           <input
             className={`task-detail-edit-input title-input`}

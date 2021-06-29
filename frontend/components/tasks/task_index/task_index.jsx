@@ -1,8 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import { constructSearchParams, parseInput } from '../../util/task_component_util';
+import { constructSearchParams, parseInput } from '../../../util/task_component_util';
 import AddPropertyButtons from './add_property_buttons';
-import TasksSummary from './tasks_summary'
+import TasksSummary from '../tasks_summary'
 
 const standardLists = ['all', 'inbox', 'today', 'tomorrow', 'this-week'];
 const MIN_NUM_OF_ROWS = 20;
@@ -107,11 +107,8 @@ class TaskIndex extends React.Component {
       return <div></div>;
     }
 
-    let completedClass = '';
-    if (this.completed) {
-      completedClass = 'completed';
-      completedParam = 'completed/';
-    }
+    const completedClass = this.completed ? 'completed' : '';
+    
 
     const tasksList = [];
     this.props.tasks.forEach(task => {
@@ -200,6 +197,7 @@ class TaskIndex extends React.Component {
         <TasksSummary 
           tasks={this.props.tasks} 
           listTitle={listTitle} />
+
       </React.Fragment>
 
     );

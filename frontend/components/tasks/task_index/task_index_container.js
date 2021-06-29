@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import TaskIndex from './task_index';
-import {searchTasks, createTask} from '../../actions/task_actions';
-import {activateDropdown, clearDropdown} from '../../actions/dropdown_actions';
+import {searchTasks, createTask} from '../../../actions/task_actions';
+import {activateDropdown, clearDropdown} from '../../../actions/dropdown_actions';
 
 const mapSTP = (state, ownProps) => ({
   tasks: Object.values(state.entities.tasks),
