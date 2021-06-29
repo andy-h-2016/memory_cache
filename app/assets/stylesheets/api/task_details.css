@@ -1,7 +1,6 @@
 .task-details-pane {
   position: absolute;
   top: 51px;
-  /* right: 1.1vw; */
   left: var(--tasks-details-left-position);
 
   transition: 0.5s;
@@ -9,7 +8,6 @@
   -webkit-transform: translate3d(0%, 0, 0);
 
 
-  /* width: calc(44vw - 33px); */
   width: 42.5vw;
   height: 100vh;
   font-size: 15px;
@@ -84,5 +82,10 @@
   color: rgb(231, 231, 231);
   /* border: 1px solid var(--button-grey); */
   border: transparent;
+}
+
+.details-close-button {
+  top: 8px;
+  right: 8px;
 }
 

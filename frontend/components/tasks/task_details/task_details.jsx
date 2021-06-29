@@ -146,7 +146,7 @@ class TaskDetails extends React.Component {
     return (
       <div className={`task-details-pane ${offscreen}`}>
         
-        <i className="fas fa-times close-button" onClick={this.closePanel}></i>
+        <i className="fas fa-times close-button details-close-button" onClick={this.closePanel}></i>
 
 
         <form className="task-detail-edit-form">
