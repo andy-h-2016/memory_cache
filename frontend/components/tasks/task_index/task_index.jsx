@@ -107,11 +107,8 @@ class TaskIndex extends React.Component {
       return <div></div>;
     }
 
-    let completedClass = '';
-    if (this.completed) {
-      completedClass = 'completed';
-      completedParam = 'completed/';
-    }
+    const completedClass = this.completed ? 'completed' : '';
+    
 
     const tasksList = [];
     this.props.tasks.forEach(task => {
@@ -200,6 +197,7 @@ class TaskIndex extends React.Component {
         <TasksSummary 
           tasks={this.props.tasks} 
           listTitle={listTitle} />
+
       </React.Fragment>
 
     );
