@@ -148,7 +148,6 @@ class TaskDetails extends React.Component {
         
         <i className="fas fa-times close-button details-close-button" onClick={this.closePanel}></i>
 
-
         <form className="task-detail-edit-form">
           <input
             className={`task-detail-edit-input title-input`}
