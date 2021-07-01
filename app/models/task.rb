@@ -11,6 +11,8 @@ class Task < ApplicationRecord
   belongs_to :list,
     optional: true
 
+  has_many :notes
+
   after_initialize :ensure_due_date
 
   def ensure_due_date
