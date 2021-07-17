@@ -154,9 +154,9 @@ export const parseInput = (input, lists) => {
 ```
 
 # Future Plans
-* ~~Be able to search for tasks based on title or other properties~~ **Done**
+* ~~Be able to search for tasks based on title or other properties~~ **(Done!)**
 * Allow for subtasks and notes to be added to each task
-* ~~Display summaries for each list (# completed vs incompleted, overdue, etc.)~~ **Done**
+* ~~Display summaries for each list (# completed vs incompleted, overdue, etc.)~~ **(Done!)**
 * Create recurring tasks
 
 
