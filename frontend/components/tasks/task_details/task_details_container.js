@@ -10,7 +10,6 @@ const mapSTP = (state, ownProps)  => {
   if (taskProps) {
     if (taskProps.listId && state.entities.lists[taskProps.listId]) {
       listTitle = state.entities.lists[taskProps.listId].title;
-
     } else {
       listTitle = 'Inbox';
     }
