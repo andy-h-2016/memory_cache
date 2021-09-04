@@ -1,5 +1,10 @@
 class Api::TasksController < ApplicationController
+  # caches_action :index
+  # cache_sweeper :task_sweeper
+
   def index
+    # expires_in 24.hours, public: true
+
     if params[:task][:custom]
       query = custom_params
       # query = inputs[:custom]
