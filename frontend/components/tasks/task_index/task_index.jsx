@@ -29,12 +29,16 @@ const TaskIndex = (props) => {
   }, [currentListTitle, completed]);
 
   useEffect(() => {
-    inputRef.current.focus();
-    const cursorPosition = (input.slice(input.length - 3) === '#()')
-      ? input.length - 1
-      : input.length;
+    if (input.slice(input.length - 3) === '#()') {
+      inputRef.current.focus();
+      const cursorPosition = input.length - 1;
+      inputRef.current.setSelectionRange(cursorPosition, cursorPosition);      
+    }
+    // const cursorPosition = (input.slice(input.length - 3) === '#()')
+    //   ? input.length - 1
+    //   : input.length;
 
-    inputRef.current.setSelectionRange(cursorPosition, cursorPosition);      
+    // inputRef.current.setSelectionRange(cursorPosition, cursorPosition);      
   }, [input])
 
   function update(e) {
@@ -61,7 +65,7 @@ const TaskIndex = (props) => {
       list: ' #()'
     };
     const char = propertyLegend[property];
-
+    inputRef.current.focus();
     dispatch(activateDropdown(property));
     setInput(`${input}${char}`);
   }
@@ -71,6 +75,7 @@ const TaskIndex = (props) => {
     const newInput = (property === 'list') 
       ? input.replace(/#\(\)/, `#(${values})`) 
       : input.concat(values);
+    inputRef.current.focus();
     setInput(newInput);
   }
 
